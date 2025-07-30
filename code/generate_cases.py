@@ -60,7 +60,7 @@ def wikimedia_search(query: str, language_code: str = 'en') -> str:
         search_query = query  # Use the input query
         number_of_results = 1
         headers = {
-            'User-Agent': 'abc david.shoresh@mail.huji.ac.il' # Replace with your app name and contact
+            'User-Agent': '***' # Replace with your app name and contact
         }
 
         base_url = 'https://api.wikimedia.org/core/v1/wikipedia/'
