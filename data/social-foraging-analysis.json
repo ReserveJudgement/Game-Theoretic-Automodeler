@@ -1,0 +1,703 @@
+[
+    [
+        {
+            "Game_Num": 0,
+            "Description": "Background:\n*   Joint brood care ('babysitting') \u2013 Communal care of broods is similar to cooperative breeding, but more commonly involves a number of reproductive pairs or mothers. Sometimes referred to as 'babysitting' or reciprocal cooperation, this system of parenting allows the genetic parents greater foraging freedom, and appears to be supported by the mutual benefits participating individuals acquire through reciprocal altruism. Reciprocal altruism involves individuals performing acts to increase the fitness of another individual, in the hope that the act will be reciprocated. It is not dependent on relatedness, and therefore, babysitting behaviour is often observed amongst non-kin. This form of alloparental care has been observed in reindeer and elk who display reciprocal allonursing and form 'nursery' herds, and vampire bats who display reciprocity in food sharing.\n\n\n\nInteraction of interest:\nVampire bats exhibit a remarkable form of reciprocal altruism, particularly in food sharing. Well-fed bats will regurgitate blood to group members who have failed to find a meal, preventing starvation. The dilemma for the donor bat is the immediate energetic cost of sharing its limited resource, while the benefit lies in ensuring the survival of group members who may reciprocate in the future, crucial for a species that can starve after just two consecutive nights without blood. This behavior relies on a long-term social bond and a system of 'remembered' favors.",
+            "Outcome": {
+                "Donor Bat": "Share Blood",
+                "Recipient Bat": "Request Food"
+            },
+            "Game": [
+                {
+                    "name": "Donor Bat",
+                    "actions": [
+                        "Share Blood",
+                        "Keep Blood"
+                    ],
+                    "utilities": {
+                        "Share Blood": {
+                            "Request Food": {
+                                "outcome": "The Donor Bat shares blood, incurring an immediate energetic cost. The Recipient Bat is saved from starvation, strengthening the social bond and ensuring the potential for future reciprocation, which is crucial for the Donor's long-term survival strategy.",
+                                "utility": 0.9
+                            },
+                            "Do Not Request Food": {
+                                "outcome": "The Donor Bat shares blood, incurring an immediate energetic cost, but the Recipient Bat, although in need, does not explicitly request food. This still provides a benefit to the Recipient (survival) and contributes to the long-term social bond, but may be slightly less efficient or recognized than an explicit request.",
+                                "utility": 0.5
+                            }
+                        },
+                        "Keep Blood": {
+                            "Request Food": {
+                                "outcome": "The Donor Bat keeps its blood, avoiding immediate energetic cost. However, the Recipient Bat, having requested food while in need, likely starves, which severely damages the social bond and eliminates any potential for future reciprocation. This undermines the crucial cooperative system for the species.",
+                                "utility": -1.0
+                            },
+                            "Do Not Request Food": {
+                                "outcome": "The Donor Bat keeps its blood, conserving resources. The Recipient Bat, being in need but not requesting food, starves. This failure to provide support damages the social bond and eliminates any potential for future reciprocation, harming the Donor's long-term cooperative strategy.",
+                                "utility": -0.7
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Recipient Bat",
+                    "actions": [
+                        "Request Food",
+                        "Do Not Request Food"
+                    ],
+                    "utilities": {
+                        "Request Food": {
+                            "Share Blood": {
+                                "outcome": "The Recipient Bat receives blood from the Donor Bat, saving it from starvation. This act strengthens the social bond and reinforces the cooperative system, ensuring the Recipient's immediate survival and potential for future reciprocation.",
+                                "utility": 1.0
+                            },
+                            "Keep Blood": {
+                                "outcome": "The Recipient Bat, having requested food while in need, does not receive blood from the Donor Bat and consequently starves. This severely damages the social bond and undermines the crucial cooperative system. However, the act of requesting might minimally preserve some aspect of the social contract compared to completely disengaging.",
+                                "utility": -0.9
+                            }
+                        },
+                        "Do Not Request Food": {
+                            "Share Blood": {
+                                "outcome": "The Recipient Bat does not request food, but the Donor Bat shares blood anyway. As the Recipient Bat was in need, this act provides a direct survival benefit, saving the Recipient from starvation, though perhaps weakening the social bond slightly compared to an explicit request for help.",
+                                "utility": 0.7
+                            },
+                            "Keep Blood": {
+                                "outcome": "The Recipient Bat does not request food, and the Donor Bat keeps its blood. As the Recipient Bat was in need and did not receive food, it consequently starves. This severely damages the social bond and undermines the crucial cooperative system.",
+                                "utility": -1.0
+                            }
+                        }
+                    }
+                }
+            ],
+            "Equilibria": {
+                "Support": [
+                    {
+                        "Donor Bat": {
+                            "Share Blood": 1.0,
+                            "Keep Blood": 0.0
+                        },
+                        "Recipient Bat": {
+                            "Request Food": 1.0,
+                            "Do Not Request Food": 0.0
+                        }
+                    }
+                ],
+                "Vertex": [
+                    {
+                        "Donor Bat": {
+                            "Share Blood": 1.0,
+                            "Keep Blood": 0.0
+                        },
+                        "Recipient Bat": {
+                            "Request Food": 1.0,
+                            "Do Not Request Food": 0.0
+                        }
+                    }
+                ],
+                "LemkeHawson": [
+                    {
+                        "Donor Bat": {
+                            "Keep Blood": 0.0,
+                            "Share Blood": 1.0
+                        },
+                        "Recipient Bat": {
+                            "Do Not Request Food": 0.0,
+                            "Request Food": 1.0
+                        }
+                    }
+                ],
+                "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+            },
+            "ProposedStudy": {
+                "Goal": "To test the predictive validity of the reciprocal altruism game model by determining if vampire bats modulate their food-sharing strategy based on the probability of future reciprocation, as manipulated by social familiarity.",
+                "Hypothesis": "Independent variable: Social familiarity between a potential donor bat and a recipient bat (familiar roost-mate vs. unfamiliar stranger). Dependent variable: The frequency of food-sharing events. Null Hypothesis (H0): The frequency of a well-fed bat sharing blood will not differ significantly whether the hungry recipient is a familiar roost-mate or an unfamiliar stranger. Hypothesis (H1): Well-fed bats will share blood significantly more frequently with familiar roost-mates than with unfamiliar strangers, as the latter offers a lower probability of future interaction and reciprocation, thus devaluing the 'Share Blood' strategy predicted by the model.",
+                "Type": "lab",
+                "Method": "A controlled experiment will be conducted using a captive colony of vampire bats (*Desmodus rotundus*). Individual bats will be identified with wing bands. The experiment consists of two conditions. In both conditions, a 'donor' bat is fed to satiation while a 'recipient' bat is fasted for one night (approx. 24 hours) to ensure it is hungry and will solicit food. Condition 1 (Familiar): The fed donor is placed in an observation arena with a fasted, familiar roost-mate. Condition 2 (Stranger): The fed donor is placed in the arena with a fasted bat from a separate, socially isolated colony. Interactions in the arena will be recorded for a standardized time period (e.g., 2 hours). The pairing and condition for each bat will be randomized and counterbalanced across multiple trials.",
+                "Instruments": "A captive colony of vampire bats sourced from at least two distinct populations. Climate-controlled vivarium with separate housing for different social groups. An observation arena equipped with infrared cameras and lighting for non-invasive nocturnal observation. A system for marking individual bats (e.g., non-injurious wing bands). A reliable source of food (e.g., defibrinated cattle blood) and a feeding apparatus that allows for controlled feeding of individual bats. Digital scales for monitoring bat weight. Software for behavioral coding and video analysis.",
+                "Data": "Observations will be recorded for each experimental trial. Data will be compiled into a tabular format (e.g., CSV file) with the following columns: Trial_ID, Donor_ID, Recipient_ID, Condition (Familiar/Stranger), Donor_Pre-Trial_Weight, Recipient_Pre-Trial_Weight, Solicitation_Frequency (number of times recipient licks donor's mouth), Sharing_Occurred (binary: 1 for yes, 0 for no), Latency_to_Share (time from introduction to sharing event, in seconds), Sharing_Duration (in seconds).",
+                "Ethics": "All procedures must be reviewed and approved by an Institutional Animal Care and Use Committee (IACUC). The fasting period will be limited to 24 hours, a duration that induces hunger but is well within the natural survival limits of the species and poses no long-term health risk. Any bat that does not receive a blood meal during a trial will be provided with a recovery meal immediately afterward. The captive environment will be enriched to promote natural behaviors and reduce stress. Introduction of strangers will be closely monitored to prevent excessive aggression. Handling will be minimized and performed by trained personnel."
+            }
+        },
+        {
+            "Game_Num": 1,
+            "Description": "Background:\n*   By performing this dance, successful foragers can share information about the direction and distance to patches of flowers yielding nectar and pollen, to water sources, or to new nest-site locations with other members of the colony.\n*   The waggle dance and the round dance are two forms of dance behaviour that are part of a continuous transition. As the distance between the resource and the hive increases, the round dance transforms into variations of a transitional dance, which, when communicating resources at even greater distances, becomes the waggle dance.\n*   In the case of Apis mellifera ligustica, the round dance is performed until the resource is about 10 metres away from the hive, transitional dances are performed when the resource is at a distance of 20 to 30 metres away from the hive, and finally, when it is located at distances greater than 40 metres from the hive, the waggle dance is performed.\n*   A waggle dance consists of one to 100 or more circuits, each of which consists of two phases: the waggle phase and the return phase. A worker bee's waggle dance involves running through a small figure-eight pattern: a waggle run (aka waggle phase) followed by a turn to the right to circle back to the starting point (aka return phase), another waggle run, followed by a turn and circle to the left, and so on in a regular alternation between right and left turns after waggle runs.\n*   The direction and duration of waggle runs are closely correlated with the direction and distance of the resource being advertised by the dancing bee. The resource can include the location of a food source or a potential nesting site.\n*   The distance between hive and recruitment target is encoded in the duration of the waggle runs. The farther the target, the longer the waggle phase. The more excited the bee is about the location, the more rapidly it will waggle, so it will grab the attention of the observing bees, and try to convince them.\n*   If multiple bees are doing the waggle dance, it's a competition to convince the observing bees to follow their lead, and competing bees may even disrupt other bees' dances or fight each other off.\n*   Depending on weather, other competitors, and food source characteristics, transmitted information may quickly degrade and become obsolete.\n*   As a result, foragers have been reported to be attached to their food sites and continue to revisit a single patch many times after it has become unprofitable.\n*   For example, the waggle dance plays a significantly larger role in foraging when food sources are not as abundant.\n*   In temperate habitats, for instance, honey bee colonies routinely perform the waggle dance but were still able to successfully forage when the location information provided by the dance was experimentally obscured. In tropical habitats, however, honey bee foraging is severely impaired if waggle dancing is prevented. This difference is thought to be due to the patchiness of resources in tropical environment versus the homogeneity of resources in temperate environments. In the tropics, food resources can come in the form of flowering trees which are rich in nectar but are scattered sparsely and bloom only briefly. Thus, in tropical zones information about forage location might be more valuable than in temperate zones.\n\n\nInteraction of interest:\nHoney bee colonies display complex social foraging through the waggle dance, where successful foragers communicate the location, distance, and quality of food sources (nectar and pollen) to nestmates. The dilemma for the colony is how to efficiently allocate foragers among multiple available resources, balancing the exploitation of known, high-quality patches with the exploration for new ones, especially when resource availability fluctuates. Individual bees must decide whether to follow a dance or embark on independent exploration, contributing to a collective decision-making process that optimizes colony-level foraging efficiency.",
+            "Outcome": {
+                "Dancer Bee": "Perform Waggle Dance",
+                "Observer Bee": "Follow a Dance"
+            },
+            "Game": [
+                {
+                    "name": "Dancer Bee",
+                    "actions": [
+                        "Perform Waggle Dance",
+                        "Perform Round Dance",
+                        "Perform Transitional Dance",
+                        "Disrupt Other Dances",
+                        "Fight Competing Bees"
+                    ],
+                    "utilities": {
+                        "Perform Waggle Dance": {
+                            "Follow a Dance": {
+                                "outcome": "Observer bee is successfully recruited to the advertised distant, high-quality resource, significantly increasing colony foraging efficiency.",
+                                "utility": 1.0
+                            },
+                            "Explore Independently": {
+                                "outcome": "Observer bee ignores the dance and explores independently. The dancer's effort to communicate is not immediately utilized for recruitment.",
+                                "utility": 0.1
+                            }
+                        },
+                        "Perform Round Dance": {
+                            "Follow a Dance": {
+                                "outcome": "Observer bee is successfully recruited to the advertised nearby resource, efficiently exploiting a close food source.",
+                                "utility": 0.8
+                            },
+                            "Explore Independently": {
+                                "outcome": "Observer bee ignores the dance and explores independently. The dancer's effort to communicate is not immediately utilized.",
+                                "utility": 0.1
+                            }
+                        },
+                        "Perform Transitional Dance": {
+                            "Follow a Dance": {
+                                "outcome": "Observer bee is successfully recruited to the advertised mid-distance resource, contributing to efficient resource exploitation.",
+                                "utility": 0.9
+                            },
+                            "Explore Independently": {
+                                "outcome": "Observer bee ignores the dance and explores independently. The dancer's effort to communicate is not immediately utilized.",
+                                "utility": 0.1
+                            }
+                        },
+                        "Disrupt Other Dances": {
+                            "Follow a Dance": {
+                                "outcome": "The disruption attempt fails, and the observer bee still follows a competing dance, meaning the Dancer Bee's effort was wasted and competition persists.",
+                                "utility": -0.2
+                            },
+                            "Explore Independently": {
+                                "outcome": "The disruption successfully prevents the observer from following a competitor's dance, encouraging independent exploration which might eventually lead to the Dancer Bee's preferred resource or a new, valuable one.",
+                                "utility": 0.4
+                            }
+                        },
+                        "Fight Competing Bees": {
+                            "Follow a Dance": {
+                                "outcome": "The fight fails to deter the observer, who still follows a competing dance. The Dancer Bee expends significant energy and risks injury for no beneficial outcome.",
+                                "utility": -0.5
+                            },
+                            "Explore Independently": {
+                                "outcome": "The fight successfully deters observers from following competing dances, pushing them towards independent exploration. This clears the field for the Dancer Bee's own recruitment efforts or for finding new resources.",
+                                "utility": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Observer Bee",
+                    "actions": [
+                        "Follow a Dance",
+                        "Explore Independently"
+                    ],
+                    "utilities": {
+                        "Follow a Dance": {
+                            "Perform Waggle Dance": {
+                                "outcome": "Observer bee successfully follows the dance to a distant, high-quality resource, contributing significantly to colony foraging efficiency.",
+                                "utility": 1.0
+                            },
+                            "Perform Round Dance": {
+                                "outcome": "Observer bee successfully follows the dance to a nearby resource, efficiently exploiting a close food source.",
+                                "utility": 0.8
+                            },
+                            "Perform Transitional Dance": {
+                                "outcome": "Observer bee successfully follows the dance to a mid-distance resource, contributing to efficient resource exploitation.",
+                                "utility": 0.9
+                            },
+                            "Disrupt Other Dances": {
+                                "outcome": "A dancer attempts to disrupt other dances, but the observer still successfully follows a dance, gaining information despite the disruption.",
+                                "utility": 0.8
+                            },
+                            "Fight Competing Bees": {
+                                "outcome": "A dancer engages in a fight, but the observer still successfully follows a dance, gaining information despite the conflict.",
+                                "utility": 0.6
+                            }
+                        },
+                        "Explore Independently": {
+                            "Perform Waggle Dance": {
+                                "outcome": "The dancer performs a waggle dance for a distant resource, but the observer chooses independent exploration, balancing the colony's need for new discoveries.",
+                                "utility": 0.5
+                            },
+                            "Perform Round Dance": {
+                                "outcome": "The dancer performs a round dance for a nearby resource, but the observer chooses independent exploration, contributing to the colony's search for new opportunities.",
+                                "utility": 0.5
+                            },
+                            "Perform Transitional Dance": {
+                                "outcome": "The dancer performs a transitional dance for a mid-distance resource, but the observer chooses independent exploration, potentially discovering new valuable sites.",
+                                "utility": 0.5
+                            },
+                            "Disrupt Other Dances": {
+                                "outcome": "A dancer successfully disrupts competing dances, which encourages the observer to explore independently, potentially leading to a new discovery or the disrupting bee's preferred resource.",
+                                "utility": 0.7
+                            },
+                            "Fight Competing Bees": {
+                                "outcome": "A dancer successfully fights off competing bees, pushing the observer towards independent exploration, clearing the field for new discoveries or the dominant bee's recruitment.",
+                                "utility": 0.7
+                            }
+                        }
+                    }
+                }
+            ],
+            "Equilibria": {
+                "Support": [
+                    {
+                        "Dancer Bee": {
+                            "Perform Waggle Dance": 1.0,
+                            "Perform Round Dance": 0.0,
+                            "Perform Transitional Dance": 0.0,
+                            "Disrupt Other Dances": 0.0,
+                            "Fight Competing Bees": 0.0
+                        },
+                        "Observer Bee": {
+                            "Follow a Dance": 1.0,
+                            "Explore Independently": 0.0
+                        }
+                    }
+                ],
+                "Vertex": [
+                    {
+                        "Dancer Bee": {
+                            "Perform Waggle Dance": 1.0,
+                            "Perform Round Dance": 0.0,
+                            "Perform Transitional Dance": 0.0,
+                            "Disrupt Other Dances": 0.0,
+                            "Fight Competing Bees": 0.0
+                        },
+                        "Observer Bee": {
+                            "Follow a Dance": 1.0,
+                            "Explore Independently": 0.0
+                        }
+                    }
+                ],
+                "LemkeHawson": [
+                    {
+                        "Dancer Bee": {
+                            "Disrupt Other Dances": 0.0,
+                            "Fight Competing Bees": 0.0,
+                            "Perform Round Dance": 0.0,
+                            "Perform Transitional Dance": 0.0,
+                            "Perform Waggle Dance": 1.0
+                        },
+                        "Observer Bee": {
+                            "Explore Independently": 0.0,
+                            "Follow a Dance": 1.0
+                        }
+                    }
+                ],
+                "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+            },
+            "ProposedStudy": {
+                "Goal": "To test if the foraging strategy of observer bees (following a dance vs. independent exploration) changes in response to environmental resource availability, thereby validating the utility-based predictions of the game model under conditions that alter the payoff of exploration.",
+                "Hypothesis": "The independent variable is the density and predictability of food resources in the environment. The dependent variable is the proportion of observer bees that choose to follow a waggle dance versus exploring independently. The null hypothesis (H0) is that the proportion of followers is independent of resource density. The alternative hypothesis (H1) is that the proportion of bees following a dance will be significantly higher in a resource-scarce, patchy environment compared to a resource-abundant, homogeneous environment, as the relative utility of following reliable information increases when independent exploration is less likely to succeed.",
+                "Type": "lab",
+                "Method": "Multiple honey bee colonies in observation hives will be placed within a large, enclosed flight cage to control all available food sources. Two experimental conditions will be established sequentially: 1) 'Abundant Environment': Numerous, easily discoverable artificial feeders with low-to-moderate sugar concentration will be distributed widely. 2) 'Scarce Environment': A single, difficult-to-find, high-concentration feeder will be provided. In each condition, a subset of foragers will be trained to the primary feeder(s), and their dances will be recorded. The behavioral responses of naive observer bees that interact with the dancers will be analyzed to determine if they subsequently leave the hive to follow the dance directions or perform other behaviors indicative of independent exploration.",
+                "Instruments": "Glass-walled observation hives, a large flight cage or greenhouse, artificial feeders with adjustable sucrose concentrations, bee marking kits (e.g., numbered tags, non-toxic paint pens), high-resolution video cameras, and video analysis software to quantify dance-following behavior.",
+                "Data": "Observational data will be collected for each experimental condition. For each observed waggle dance, the number of bees attending the dance and their subsequent actions will be recorded. The data will be structured in a table with columns: 'Colony_ID', 'Condition' (Abundant/Scarce), 'Dance_ID', 'Observer_Response' (coded as 'Follower' or 'Independent_Explorer'). The primary metric for analysis will be the ratio of Followers to Independent Explorers in each condition.",
+                "Ethics": "The experiment must ensure the overall health and welfare of the bee colonies. In the 'Scarce Environment' condition, baseline food stores must be sufficient to prevent colony starvation. Bee marking will use non-toxic, non-injurious methods. Handling will be minimized to reduce stress. The enclosed nature of the experiment prevents interference with the local ecosystem. Post-experiment, all colonies will be provided with ample resources to ensure their long-term survival."
+            }
+        },
+        {
+            "Game_Num": 2,
+            "Description": "Background:\nHere are the relevant passages from the provided text, without HTML formatting:\n\n*   A pack hunter or social predator is a predatory animal which hunts its prey by working together with other members of its species. Normally animals hunting in this way are closely related, and with the exceptions of chimpanzees where only males normally hunt, all individuals in a family group contribute to hunting. When hunting cooperation is across two or more species, the broader term cooperative hunting is commonly used.\n*   A well known pack hunter is the gray wolf; humans too can be considered pack hunters. Other pack hunting mammals include chimpanzees, dolphins including orcas, lions, dwarf and banded mongooses, as well as spotted hyenas. Avian social predators include the Harris's hawk, butcherbirds, three of four kookaburra species and many helmetshrikes. Other pack hunters include ants like army ants, the goldsaddle goatfish, and occasionally crocodilians.\n*   Around 80\u201395% of carnivores are solitary and hunt alone; the others including lions, wild dogs, spotted hyenas, chimpanzees, and humans hunt cooperatively, at least some of the time. Cooperative hunting has also been documented in birds of prey and large marine vertebrates such as groupers and moray eels. Cooperative hunting has been linked to the social organization of animal species and the evolution of sociality and thus provides a unique perspective to study group behavior.\n*   Division of labor, with each team member performing a subtask to complete an objective, is found in many species. It has been shown that animals that forage and hunt cooperatively in groups often adopt specialized roles during a hunting event, which can vary widely among different species.\n*   African wild dogs participate in an intense rally ceremony before hunting. Its function is to ensure that all the members are alert and ready to hunt. They then all trot together and participate in a chase during which they pursue and harass the prey. Despite their coordinated formation, there is no clear role specialization in this species, as all individuals perform essentially the same function.\n*   The fossa is the largest member of Madagascar euplerids. They are carnivorous, feeding mostly on small lemurs and tenrecs. Prey size may have been important for the evolution of cooperative hunting in fossa because one of their main sources of prey (larger lemurs) has recently gone extinct. Cooperative hunting was common to take down a prey of this size.\n*   Research at Lamalera village in Indonesia has shown how cooperative hunting can develop in pre-industrial societies. This village relies on traditional whale hunting techniques for its livelihood. Because whale hunting requires more than one individual, it benefits the villagers to hunt cooperatively.\n*   In Ta\u00ef, chimpanzee, individuals participate as a driver, blocker, chaser, or ambusher. Blockers and ambushing are thought to require much more cognitive effort in anticipating the future movements of the prey, and they are thus rewarded with a larger proportion of meat after a successful hunt.\n*   When an environment allows it, cooperative hunting can offer species a range of adaptive advantages not normally available through solitary hunting.\n*   There are two main goals to cooperative hunting in social carnivores: taking down large prey species through a coordinated effort and subsequently protecting their kill from scavengers.\n*   For example, as a result of cooperative hunting, aplomado falcons defend the nest together and share the food with offspring after the hunt. Cooperative hunting has thus proven to hold certain social groups together since it can be disadvantageous to hunt alone in particular situations.\n\n\nInteraction of interest:\nAfrican wild dogs are highly cooperative hunters, often targeting prey much larger than themselves through synchronized chases and coordinated attacks. After a successful hunt, food is shared among all pack members, including non-hunting pups, sick, or injured individuals. The dilemma for individual hunters is the risk and energy expenditure involved in a cooperative chase, knowing that the kill will be shared. This behavior necessitates a high degree of coordination and trust within the pack, where the collective benefit of securing large prey outweighs the individual cost of sharing the spoils.",
+            "Outcome": {
+                "African Wild Dog Hunter A": "Engage in Cooperative Hunt",
+                "African Wild Dog Hunter B": "Engage in Cooperative Hunt"
+            },
+            "Game": [
+                {
+                    "name": "African Wild Dog Hunter A",
+                    "actions": [
+                        "Engage in Cooperative Hunt",
+                        "Shirk from Hunt"
+                    ],
+                    "utilities": {
+                        "Engage in Cooperative Hunt": {
+                            "Engage in Cooperative Hunt": {
+                                "outcome": "Both hunters engage in the cooperative hunt, successfully taking down large prey. Food is shared among all pack members. African Wild Dog Hunter A benefits significantly from the collective effort, outweighing the individual cost of sharing.",
+                                "utility": 5.0
+                            },
+                            "Shirk from Hunt": {
+                                "outcome": "African Wild Dog Hunter A engages in the hunt alone, while African Wild Dog Hunter B shirks. The hunt for large prey, which requires cooperation, likely fails. Hunter A expends significant energy and faces risks with no reward.",
+                                "utility": -5.0
+                            }
+                        },
+                        "Shirk from Hunt": {
+                            "Engage in Cooperative Hunt": {
+                                "outcome": "African Wild Dog Hunter A shirks from the hunt, while African Wild Dog Hunter B engages. The hunt for large prey likely fails due to insufficient cooperation. Hunter A expends no energy but also obtains no food.",
+                                "utility": -1.0
+                            },
+                            "Shirk from Hunt": {
+                                "outcome": "Both hunters shirk from the hunt. No cooperative hunt takes place, resulting in no food being obtained and no energy being expended by either hunter. This collective failure is devastating for the pack.",
+                                "utility": -10.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "African Wild Dog Hunter B",
+                    "actions": [
+                        "Engage in Cooperative Hunt",
+                        "Shirk from Hunt"
+                    ],
+                    "utilities": {
+                        "Engage in Cooperative Hunt": {
+                            "Engage in Cooperative Hunt": {
+                                "outcome": "Both hunters engage in the cooperative hunt, successfully taking down large prey. Food is shared among all pack members. African Wild Dog Hunter B benefits significantly from the collective effort, outweighing the individual cost of sharing.",
+                                "utility": 5.0
+                            },
+                            "Shirk from Hunt": {
+                                "outcome": "African Wild Dog Hunter B engages in the hunt alone, while African Wild Dog Hunter A shirks. The hunt for large prey, which requires cooperation, likely fails. Hunter B expends significant energy and faces risks with no reward.",
+                                "utility": -5.0
+                            }
+                        },
+                        "Shirk from Hunt": {
+                            "Engage in Cooperative Hunt": {
+                                "outcome": "African Wild Dog Hunter B shirks from the hunt, while African Wild Dog Hunter A engages. The hunt for large prey likely fails due to insufficient cooperation. Hunter B expends no energy but also obtains no food.",
+                                "utility": -1.0
+                            },
+                            "Shirk from Hunt": {
+                                "outcome": "Both hunters shirk from the hunt. No cooperative hunt takes place, resulting in no food being obtained and no energy being expended by either hunter. This collective failure is devastating for the pack.",
+                                "utility": -10.0
+                            }
+                        }
+                    }
+                }
+            ],
+            "Equilibria": {
+                "Support": [
+                    {
+                        "African Wild Dog Hunter A": {
+                            "Engage in Cooperative Hunt": 1.0,
+                            "Shirk from Hunt": 0.0
+                        },
+                        "African Wild Dog Hunter B": {
+                            "Engage in Cooperative Hunt": 1.0,
+                            "Shirk from Hunt": 0.0
+                        }
+                    }
+                ],
+                "Vertex": [
+                    {
+                        "African Wild Dog Hunter A": {
+                            "Engage in Cooperative Hunt": 1.0,
+                            "Shirk from Hunt": 0.0
+                        },
+                        "African Wild Dog Hunter B": {
+                            "Engage in Cooperative Hunt": 1.0,
+                            "Shirk from Hunt": 0.0
+                        }
+                    }
+                ],
+                "LemkeHawson": [
+                    {
+                        "African Wild Dog Hunter A": {
+                            "Engage in Cooperative Hunt": 1.0,
+                            "Shirk from Hunt": 0.0
+                        },
+                        "African Wild Dog Hunter B": {
+                            "Engage in Cooperative Hunt": 1.0,
+                            "Shirk from Hunt": 0.0
+                        }
+                    }
+                ],
+                "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+            },
+            "ProposedStudy": {
+                "Goal": "To test the predictive accuracy of the Stag Hunt game model by investigating whether African wild dog hunting strategies shift from cooperation to solitary hunting when environmental conditions alter the payoffs associated with cooperation.",
+                "Hypothesis": "The independent variable is the predominant prey size (large vs. small) available in a pack's territory. The dependent variable is the frequency of cooperative hunting behavior. The null hypothesis is that prey size has no effect on the frequency of cooperation. The alternate hypothesis is that packs in environments with smaller, individually-huntable prey will exhibit a significantly lower frequency of cooperative hunting compared to packs in environments with large prey, as predicted by a change in the game's payoff matrix where solitary hunting becomes a viable strategy.",
+                "Type": "field",
+                "Method": "This is a comparative observational field study. Two or more populations of African wild dogs will be selected based on the prey composition in their territories: one where large prey (e.g., wildebeest, zebra) is dominant, necessitating cooperative hunting, and another where smaller prey (e.g., duiker, steenbok) that can be caught by a single hunter is abundant. Multiple individuals in each pack will be fitted with GPS/accelerometer collars to remotely identify hunting chases. Direct observation and camera traps will be used to record the number of participating hunters, their roles, and the outcome of the hunt for each prey type. The frequency of cooperative versus solitary hunting attempts will be compared across the different study sites.",
+                "Instruments": "GPS/accelerometer tracking collars, 4x4 vehicles for observation, high-powered binoculars, remote camera traps, data logging software for behavioral analysis, and statistical software. Access to pre-existing ecological data on prey density for site selection is also required.",
+                "Data": "Data will be collected for each hunting event. The dataset will be a table with columns for: 'Hunt_ID', 'Date', 'Pack_ID', 'Territory_Type' (Large_Prey vs. Small_Prey), 'Target_Prey_Species', 'Prey_Size_Category', 'Number_of_Hunters_Present', 'Number_of_Hunters_Cooperating', 'Hunt_Outcome' (Success/Fail). Individual behavior will be coded as 'Engaged' or 'Shirked' for focal animals.",
+                "Ethics": "All animal handling for the attachment of GPS collars must be performed by licensed veterinarians and trained wildlife professionals to minimize stress and injury, following approved protocols. The collars must be lightweight and designed for automatic drop-off. Observation will be conducted from a non-invasive distance to avoid altering the animals' natural behaviors or habituating them to humans. All necessary research permits from local wildlife authorities and institutional animal care and use committees must be secured prior to starting the study. The research aims to provide data that can aid in the conservation of this endangered species."
+            }
+        },
+        {
+            "Game_Num": 3,
+            "Description": "Background:\nCleaner fish are fish that show a specialist feeding strategy by providing a service to other species, referred to as clients, by removing dead skin, ectoparasites, and infected tissue from the surface or gill chambers. This example of cleaning symbiosis represents mutualism and cooperation behaviour, an ecological interaction that benefits both parties involved. However, the cleaner fish may consume mucus or tissue, thus creating a form of parasitism called cheating. The client animals are typically fish of a different species, but can also be aquatic reptiles (sea turtles and marine iguana), mammals (manatees and whales), or octopuses. A wide variety of fish including wrasse, cichlids, catfish, pipefish, lumpsuckers, and gobies display cleaning behaviors across the globe in fresh, brackish, and marine waters but specifically concentrated in the tropics due to high parasite density. Similar behaviour is found in other groups of animals, such as cleaner shrimps.\n\nThere are two types of cleaner fish, obligate full time cleaners and facultative part time cleaners where different strategies occur based on resources and local abundance of fish. Cleaning behaviour takes place in pelagic waters as well as designated locations called cleaner stations. Cleaner fish interaction durations and memories of reoccurring clients are influenced by the neuroendocrine system of the fish, involving hormones arginine vasotocin, Isotocin and serotonin.\n\nCheating parasitism occurs when the cleaner eats mucus or healthy tissue from the client. This can be harmful to the client as mucus is essential to prevent UV damage, and open wounds can increase the risk of infection. Cleaner fish maintain a balance between eating ectoparasites and mucus or tissue because of the respective nutritional benefits, sometimes despite the risk to the client. For example, the Caribbean cleaning goby (Elacatinus evelynae) will eat scales and mucus from the host during times of ectoparasite scarcity to supplement its diet. The symbiosis relationship between client and host does not break down because the abundance of these parasites varies significantly seasonally and spatially, and the overall benefit to the larger fish outweighs any cheating on by the smaller cleaner.\n\nCleaner fish (especially facultative cleaners) assess the value of possible clients when deciding whether to invest in a client or cheat and eat mucus or tissue. Observations of cleaner and client interactions have found that cleaners may provide the client with tactile stimulation as a way to establish a relationship and gain the client's 'trust'. This interaction costs the cleaner as it is time not spent feeding. This physical interaction demonstrates a cleaner fish's tradeoff. The cleaner minimizes feeding time to establish a memorable relationship with the client that also contributes to conflict management with a possibly predatory client.\n\n\nInteraction of interest:\nCleaner wrasse operate 'cleaning stations' on coral reefs, where they remove ectoparasites from a variety of 'client' fish. This is a mutually beneficial interaction, but cleaner wrasse can 'cheat' by biting off healthy mucus from the client, which is more palatable but detrimental to the client. The dilemma for the cleaner is to balance the immediate reward of a more nutritious bite with the long-term benefit of maintaining a client base by providing honest cleaning services. Clients, in turn, must decide whether to tolerate mild cheating or seek another cleaner, creating a dynamic of reputation and reciprocity.",
+            "Outcome": {
+                "Cleaner Wrasse": "Cheat",
+                "Client Fish": "Tolerate"
+            },
+            "Game": [
+                {
+                    "name": "Cleaner Wrasse",
+                    "actions": [
+                        "Provide Honest Cleaning",
+                        "Cheat"
+                    ],
+                    "utilities": {
+                        "Provide Honest Cleaning": {
+                            "Tolerate": {
+                                "outcome": "Cleaner Wrasse provides honest cleaning, client benefits and stays. Long-term mutualism maintained.",
+                                "utility": 2.0
+                            },
+                            "Seek Another Cleaner": {
+                                "outcome": "Cleaner Wrasse provides honest cleaning, but client leaves despite the service, possibly due to low parasite load or seeking other services.",
+                                "utility": -1.0
+                            }
+                        },
+                        "Cheat": {
+                            "Tolerate": {
+                                "outcome": "Cleaner Wrasse cheats by eating mucus, but client tolerates it. Cleaner gets immediate nutritional benefit and retains client.",
+                                "utility": 3.0
+                            },
+                            "Seek Another Cleaner": {
+                                "outcome": "Cleaner Wrasse cheats, and client leaves due to detrimental action. Cleaner loses client and reputation.",
+                                "utility": -3.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Client Fish",
+                    "actions": [
+                        "Tolerate",
+                        "Seek Another Cleaner"
+                    ],
+                    "utilities": {
+                        "Tolerate": {
+                            "Provide Honest Cleaning": {
+                                "outcome": "Client Fish tolerates, and Cleaner Wrasse provides honest cleaning. Client benefits from parasite removal and maintains a stable service relationship.",
+                                "utility": 3.0
+                            },
+                            "Cheat": {
+                                "outcome": "Client Fish tolerates cheating. Client suffers minor harm (mucus/tissue loss) but receives some parasite removal, and avoids the cost and uncertainty of finding a new cleaner. The overall benefit of cleaning is considered to outweigh the cost of cheating.",
+                                "utility": 1.5
+                            }
+                        },
+                        "Seek Another Cleaner": {
+                            "Provide Honest Cleaning": {
+                                "outcome": "Client Fish seeks another cleaner, even though the Cleaner Wrasse provided honest service. Client misses out on a good cleaning service and incurs search costs to find a new cleaner.",
+                                "utility": -2.0
+                            },
+                            "Cheat": {
+                                "outcome": "Client Fish seeks another cleaner because the Cleaner Wrasse cheated. Client avoids further harm from cheating but incurs search costs and uncertainty in finding a new cleaner.",
+                                "utility": 1.0
+                            }
+                        }
+                    }
+                }
+            ],
+            "Equilibria": {
+                "Support": [
+                    {
+                        "Cleaner Wrasse": {
+                            "Provide Honest Cleaning": 0.0,
+                            "Cheat": 1.0
+                        },
+                        "Client Fish": {
+                            "Tolerate": 1.0,
+                            "Seek Another Cleaner": 0.0
+                        }
+                    }
+                ],
+                "Vertex": [
+                    {
+                        "Cleaner Wrasse": {
+                            "Provide Honest Cleaning": 0.0,
+                            "Cheat": 1.0
+                        },
+                        "Client Fish": {
+                            "Tolerate": 1.0,
+                            "Seek Another Cleaner": 0.0
+                        }
+                    }
+                ],
+                "LemkeHawson": [
+                    {
+                        "Cleaner Wrasse": {
+                            "Cheat": 1.0,
+                            "Provide Honest Cleaning": 0.0
+                        },
+                        "Client Fish": {
+                            "Seek Another Cleaner": 0.0,
+                            "Tolerate": 1.0
+                        }
+                    }
+                ],
+                "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+            },
+            "ProposedStudy": {
+                "Goal": "To test the game model's prediction that a client fish's willingness to tolerate cheating is inversely related to the availability of alternative cleaning services.",
+                "Hypothesis": "Independent Variable: Density of available cleaner wrasse stations (Low vs. High), representing the client's 'search cost'. Dependent Variable: The probability that a client fish will leave ('Seek Another Cleaner') immediately following a 'Cheat' interaction. Null Hypothesis (H0): The density of cleaner stations has no effect on the client's response to being cheated. Hypothesis (H1): Client fish in a high-density environment (low search cost) will be significantly more likely to leave a cheating cleaner than clients in a low-density environment (high search cost).",
+                "Type": "lab",
+                "Method": "Set up two large, environmentally matched aquarium systems. In the 'Low Density' tank, establish a single cleaner station with a resident cleaner wrasse. In the 'High Density' tank, establish multiple (3-4) cleaner stations, each with a resident cleaner, within visual range of each other. Introduce client fish with a controlled, non-harmful parasite load to both tanks to stimulate cleaning-seeking behavior. Use underwater cameras to record all interactions. Code the cleaner's behavior as 'Honest Cleaning' or 'Cheat' (defined as a clear bite of mucus/tissue) and the client's subsequent response as 'Tolerate' (remains at the station) or 'Leave' (immediately swims away from the station).",
+                "Instruments": "Multiple large marine aquarium systems with full life support; live cleaner wrasse (e.g., Labroides dimidiatus); suitable client fish species; a controlled culture of non-lethal ectoparasites (e.g., gnathiid isopods) for infestation protocols; high-resolution underwater video cameras; behavioral scoring software; standard water quality testing kits.",
+                "Data": "For each cleaning interaction, record: [Timestamp, Tank_ID (High/Low_Density), Client_ID, Cleaner_Behavior (Honest/Cheat), Client_Response (Tolerate/Leave)]. Data will be aggregated to calculate the proportion of 'Leave' responses following 'Cheat' events in each condition. Statistical analysis will use logistic regression or a chi-square test to compare these proportions between the high- and low-density conditions.",
+                "Ethics": "All procedures must be approved by an Institutional Animal Care and Use Committee (IACUC). Parasite loads on client fish must be carefully managed to be non-detrimental and temporary, with fish health monitored throughout. Aquarium conditions must be maintained at optimal levels for all species. The number of animals used and the duration of the experiment should be minimized to achieve statistical power. All animals should be returned to high-quality, non-experimental holding conditions post-study."
+            }
+        },
+        {
+            "Game_Num": 6,
+            "Description": "Background:\n*   These ants exhibit a wide variety of behaviours, such as building rafts when they sense that water levels are rising. They also show necrophoric behaviour, where nestmates discard scraps or dead ants on refuse piles outside the nest. Foraging takes place on warm or hot days, although they may remain outside at night. Workers communicate by a series of semiochemicals and pheromones, which are used for recruitment, foraging, and defence. They are omnivores and eat dead mammals, arthropods, insects, seeds, and sweet substances such as honeydew from hemipteran insects with which they have developed relationships.\n*   Workers also show differentiated responses towards dead workers and pupae. Dead workers are usually taken away from the nest, whereas the pupae may take a day for a necrophoric response to occur.\n*   A number of insects, arachnids, and birds prey on these ants, especially when queens are trying to establish a new colony.\n\n\n\nInteraction of interest:\nMany ant species form a mutualistic relationship with aphids, often referred to as 'ant-aphid farming.' Ants protect the aphids from predators (like ladybugs) and parasites, and in return, consume the nutrient-rich honeydew secreted by the aphids. The dilemma for the ants is to invest sufficient energy in protecting their 'herd' to ensure a stable supply of honeydew without over-exploiting the aphids through excessive handling or collection. For aphids, it's about producing enough honeydew to maintain ant protection without excessively depleting their own energetic resources, balancing their reproductive output with their security.",
+            "Outcome": {
+                "Ants": "Provide_Protection_and_Harvest_Sustainably",
+                "Aphids": "Produce_Sufficient_Honeydew"
+            },
+            "Game": [
+                {
+                    "name": "Ants",
+                    "actions": [
+                        "Provide_Protection_and_Harvest_Sustainably",
+                        "Over_Exploit_Aphids",
+                        "Neglect_Aphids"
+                    ],
+                    "utilities": {
+                        "Provide_Protection_and_Harvest_Sustainably": {
+                            "Produce_Sufficient_Honeydew": {
+                                "outcome": "Ants provide protection and harvest sustainably; Aphids produce enough honeydew. This is the ideal mutualistic state, ensuring stable, long-term resource supply for ants.",
+                                "utility": 10.0
+                            },
+                            "Over_Produce_Honeydew": {
+                                "outcome": "Ants provide protection and harvest sustainably; Aphids over-produce honeydew. Ants benefit from higher yield, but aphids might be stressed, posing a risk to long-term stability despite ants' sustainable approach.",
+                                "utility": 8.0
+                            },
+                            "Under_Produce_Honeydew": {
+                                "outcome": "Ants provide protection and harvest sustainably; Aphids under-produce honeydew. Ants' efforts are not sufficiently rewarded, leading to an inefficient and strained relationship. Honeydew supply is low.",
+                                "utility": 3.0
+                            }
+                        },
+                        "Over_Exploit_Aphids": {
+                            "Produce_Sufficient_Honeydew": {
+                                "outcome": "Ants over-exploit; Aphids produce sufficient honeydew. Ants gain some immediate honeydew but damage the long-term relationship and health of the aphid colony, without significantly increasing immediate yield.",
+                                "utility": 4.0
+                            },
+                            "Over_Produce_Honeydew": {
+                                "outcome": "Ants over-exploit; Aphids over-produce honeydew. Ants get a very high immediate yield, but this is extremely unsustainable, leading to rapid depletion and likely collapse of the aphid colony, ending the resource entirely.",
+                                "utility": 0.0
+                            },
+                            "Under_Produce_Honeydew": {
+                                "outcome": "Ants over-exploit; Aphids under-produce honeydew. This combination leads to a swift and complete collapse of the aphid colony due to double stress, resulting in no long-term or even short-term benefit for the ants.",
+                                "utility": 0.0
+                            }
+                        },
+                        "Neglect_Aphids": {
+                            "Produce_Sufficient_Honeydew": {
+                                "outcome": "Ants neglect aphids; Aphids produce sufficient honeydew. Without ant protection, aphids are highly vulnerable to predators and parasites, leading to their likely demise and loss of the honeydew source for ants.",
+                                "utility": 1.0
+                            },
+                            "Over_Produce_Honeydew": {
+                                "outcome": "Ants neglect aphids; Aphids over-produce honeydew. Aphids' overproduction is wasted as they are quickly decimated by predators without protection. Ants gain no benefit and lose a potential resource.",
+                                "utility": 0.0
+                            },
+                            "Under_Produce_Honeydew": {
+                                "outcome": "Ants neglect aphids; Aphids under-produce honeydew. The aphid colony rapidly deteriorates and collapses due to both neglect and low productivity, resulting in no honeydew for the ants.",
+                                "utility": 0.0
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Aphids",
+                    "actions": [
+                        "Produce_Sufficient_Honeydew",
+                        "Over_Produce_Honeydew",
+                        "Under_Produce_Honeydew"
+                    ],
+                    "utilities": {
+                        "Produce_Sufficient_Honeydew": {
+                            "Provide_Protection_and_Harvest_Sustainably": {
+                                "outcome": "Aphids produce sufficient honeydew and receive consistent protection from ants who harvest sustainably. This is the ideal mutualistic state for aphids, balancing their energy, ensuring security, and supporting reproduction.",
+                                "utility": 9.0
+                            },
+                            "Over_Exploit_Aphids": {
+                                "outcome": "Aphids produce sufficient honeydew but are over-exploited by ants. While protected, they are severely stressed by excessive collection, impacting their health, growth, and long-term survival despite current production.",
+                                "utility": 3.0
+                            },
+                            "Neglect_Aphids": {
+                                "outcome": "Aphids produce sufficient honeydew but are neglected by ants. Without protection, the aphid colony is highly vulnerable to predators and parasites, leading to rapid decline and likely decimation.",
+                                "utility": 1.0
+                            }
+                        },
+                        "Over_Produce_Honeydew": {
+                            "Provide_Protection_and_Harvest_Sustainably": {
+                                "outcome": "Aphids over-produce honeydew, consuming excessive energetic resources, even while receiving sustainable protection from ants. This high internal cost impacts their own reproduction and long-term vitality, despite security.",
+                                "utility": 4.0
+                            },
+                            "Over_Exploit_Aphids": {
+                                "outcome": "Aphids over-produce honeydew and are simultaneously over-exploited by ants. This double drain on resources leads to rapid exhaustion, severe health decline, and swift collapse of the aphid colony.",
+                                "utility": 0.0
+                            },
+                            "Neglect_Aphids": {
+                                "outcome": "Aphids over-produce honeydew but are neglected by ants. Their excessive production is wasted as they are quickly decimated by predators and parasites without protection, leading to their demise with no benefit.",
+                                "utility": 0.0
+                            }
+                        },
+                        "Under_Produce_Honeydew": {
+                            "Provide_Protection_and_Harvest_Sustainably": {
+                                "outcome": "Aphids under-produce honeydew while ants provide protection and harvest sustainably. The aphids are secure but are not meeting the ants' expectations, risking the breakdown of the mutualistic relationship and potential loss of protection.",
+                                "utility": 2.0
+                            },
+                            "Over_Exploit_Aphids": {
+                                "outcome": "Aphids under-produce honeydew and are over-exploited by ants. This leads to an immediate and catastrophic collapse of the aphid colony due to severe resource depletion from both low production and over-collection.",
+                                "utility": 0.0
+                            },
+                            "Neglect_Aphids": {
+                                "outcome": "Aphids under-produce honeydew and are neglected by ants. The aphid colony rapidly deteriorates and collapses due to a combination of low productivity and lack of protection from external threats.",
+                                "utility": 0.0
+                            }
+                        }
+                    }
+                }
+            ],
+            "Equilibria": {
+                "Support": [
+                    {
+                        "Ants": {
+                            "Provide_Protection_and_Harvest_Sustainably": 1.0,
+                            "Over_Exploit_Aphids": 0.0,
+                            "Neglect_Aphids": 0.0
+                        },
+                        "Aphids": {
+                            "Produce_Sufficient_Honeydew": 1.0,
+                            "Over_Produce_Honeydew": 0.0,
+                            "Under_Produce_Honeydew": 0.0
+                        }
+                    }
+                ],
+                "Vertex": [
+                    {
+                        "Ants": {
+                            "Provide_Protection_and_Harvest_Sustainably": 1.0,
+                            "Over_Exploit_Aphids": 0.0,
+                            "Neglect_Aphids": 0.0
+                        },
+                        "Aphids": {
+                            "Produce_Sufficient_Honeydew": 1.0,
+                            "Over_Produce_Honeydew": 0.0,
+                            "Under_Produce_Honeydew": 0.0
+                        }
+                    }
+                ],
+                "LemkeHawson": [
+                    {
+                        "Ants": {
+                            "Neglect_Aphids": 0.0,
+                            "Over_Exploit_Aphids": 0.0,
+                            "Provide_Protection_and_Harvest_Sustainably": 1.0
+                        },
+                        "Aphids": {
+                            "Over_Produce_Honeydew": 0.0,
+                            "Produce_Sufficient_Honeydew": 1.0,
+                            "Under_Produce_Honeydew": 0.0
+                        }
+                    }
+                ],
+                "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+            },
+            "ProposedStudy": {
+                "Goal": "To test the predictive accuracy of the game theory model by manipulating a key environmental variable (predation risk) and observing if the ant-aphid strategies shift away from the baseline Nash equilibrium as predicted by the model's payoff structure.",
+                "Hypothesis": "The independent variable is predation risk (presence vs. absence of ladybug predators). The dependent variables are ant tending behavior and aphid honeydew production rate. The null hypothesis (H0) is that removing predation risk will not alter the observed strategies from the stable mutualism ('Provide_Protection_and_Harvest_Sustainably' and 'Produce_Sufficient_Honeydew'). The alternative hypothesis (H1) is that in the absence of predation risk, the value of ant protection decreases, leading aphids to shift towards 'Under_Produce_Honeydew' and ants to shift towards 'Neglect_Aphids'.",
+                "Type": "lab",
+                "Method": "Establish multiple controlled terrariums, each containing a host plant, a standardized aphid colony, and a foraging group of ants. The 'Control Group' terrariums will include a low density of a natural aphid predator (e.g., ladybugs) to represent baseline risk. The 'Experimental Group' terrariums will be identical but with predators completely excluded. Ant and aphid behaviors will be video-recorded and directly measured over several weeks to compare strategic choices between the groups.",
+                "Instruments": "Environmentally controlled terrariums; established colonies of a known mutualistic ant species and its corresponding aphid species; suitable host plants; a natural aphid predator (e.g., ladybugs); high-resolution video cameras and behavioral analysis software; calibrated micropipettes or filter paper and an analytical balance for quantifying honeydew production.",
+                "Data": "Data will be collected per replicate for both control and experimental groups. For ants: time spent on the host plant, frequency of tending aphids (antennation), and frequency of defensive actions against predators. For aphids: honeydew production rate (e.g., mass per aphid per hour) and population growth rate. This quantitative data will be used to classify observed behaviors into the discrete strategies defined by the game model for statistical comparison.",
+                "Ethics": "The study involves live animals and must adhere to ethical guidelines for invertebrate research. Ants, aphids, and predators will be sourced responsibly and housed in conditions that ensure their general welfare (e.g., stable temperature, humidity, and food supply). The number of organisms used will be minimized to the amount required for statistical significance. A humane plan for the disposition of the organisms post-experiment, such as returning them to the main lab colonies or euthanasia via freezing, will be established."
+            }
+        }
+    ],
+    "Of course. As a game theorist, I will provide a thorough analysis of the provided games.\n\n### **Executive Summary and Overall Analysis**\n\nThe provided set of five games models a fascinating array of cooperative and mutualistic interactions in the animal kingdom. All are two-player, non-zero-sum, normal-form games. A striking commonality is that they predominantly model scenarios of **coordination** and **mutualism**, where collective action yields superior outcomes to individualistic or uncoordinated behavior.\n\nKey overarching findings include:\n\n1.  **Predominance of Cooperative Equilibria:** Four of the five games (Vampire Bats, Honey Bees, Wild Dogs, Ants/Aphids) possess a unique, pure-strategy Nash Equilibrium where both players choose a cooperative or mutualistic action. This suggests that the modeled interactions are powerfully structured to favor stable, cooperative outcomes.\n2.  **Coordination, Not Dilemmas:** These games are better characterized as **Coordination Games** or **Assurance Games** rather than classic social dilemmas like the Prisoner's Dilemma. The central challenge for the players is not to resist a temptation to defect against a cooperating partner, but rather to successfully coordinate on the mutually beneficial outcome. In several cases, the cooperative strategy is strictly dominant, removing any strategic dilemma entirely.\n3.  **The Outlier - A Game of Conflict:** The Cleaner Wrasse game (Game 3) stands in stark contrast. Its unique Nash Equilibrium is a state of \"tolerated cheating,\" where one player's optimal strategy is parasitic and the other's is to endure it. This models a more direct conflict of interest within a cooperative framework and highlights how game theory can explain stable but seemingly suboptimal interactions.\n4.  **Asymmetry as the Norm:** With the exception of the African Wild Dog game, the games are **asymmetric**. The players have different roles (e.g., Donor/Recipient, Dancer/Observer) and/or belong to different species, with distinct action sets and payoff structures. This reflects the biological reality of specialized roles in mutualistic partnerships.\n\nBelow is a detailed analysis of each game.\n\n---\n\n### **Detailed Game-by-Game Analysis**\n\n#### **Game 0: Vampire Bat Food Sharing**\n\nThis game models reciprocal altruism between a Donor and a Recipient bat.\n\n**Payoff Matrix:**\n(Payoffs: Donor Bat, Recipient Bat)\n\n| | **Request Food** | **Do Not Request Food** |\n| :--- | :---: | :---: |\n| **Share Blood** | (0.9, 1.0) | (0.5, 0.7) |\n| **Keep Blood** | (-1.0, -0.9) | (-0.7, -1.0) |\n\n**Analysis:**\n\n*   **Character:** This is an **asymmetric, mixed-motive game**. The players have different roles and action sets. While both benefit from a successful transfer of food, their individual incentives are not perfectly aligned across all outcomes.\n*   **Nash Equilibrium:** The game has a single, unique Pure Strategy Nash Equilibrium (PSNE) at **(Share Blood, Request Food)** with a payoff of (0.9, 1.0).\n    *   If the Recipient requests food, the Donor prefers to Share (0.9) over Keep (-1.0).\n    *   If the Donor shares blood, the Recipient prefers to Request (1.0) over Not Request (0.7).\n    *   Neither player has a unilateral incentive to deviate from this outcome.\n*   **Strategic Structure:** This game is remarkably simple from a strategic standpoint.\n    *   For the Donor Bat, **'Share Blood' is a strictly dominant strategy**. Regardless of the Recipient's action, Sharing yields a higher payoff (0.9 > -1.0 and 0.5 > -0.7).\n    *   For the Recipient Bat, **'Request Food' is a strictly dominant strategy**. Regardless of the Donor's action, Requesting yields a higher payoff (1.0 > 0.7 and -0.9 > -1.0).\n*   **Classification:** This is a straightforward coordination game where the cooperative outcome is achieved because it is the dominant strategy for both players. There is no social dilemma. The payoff structure ensures that altruism (sharing) and clear communication (requesting) are the only rational choices. The equilibrium is also **Pareto Optimal**.\n\n---\n\n#### **Game 1: Honey Bee Waggle Dance**\n\nThis game models information transfer between a Dancer bee and an Observer bee.\n\n**Payoff Matrix:**\n(Payoffs: Dancer Bee, Observer Bee)\n\n| | **Follow a Dance** | **Explore Independently** |\n| :--- | :---: | :---: |\n| **Perform Waggle Dance** | (1.0, 1.0) | (0.1, 0.5) |\n| **Perform Round Dance** | (0.8, 0.8) | (0.1, 0.5) |\n| **Perform Transitional Dance**| (0.9, 0.9) | (0.1, 0.5) |\n| **Disrupt Other Dances** | (-0.2, 0.8) | (0.4, 0.7) |\n| **Fight Competing Bees** | (-0.5, 0.6) | (0.0, 0.7) |\n\n**Analysis:**\n\n*   **Character:** This is a highly **asymmetric, mixed-motive game**. The Dancer has five actions representing different types of communication and conflict, while the Observer has a simple choice to follow or explore.\n*   **Nash Equilibrium:** The game has one PSNE at **(Perform Waggle Dance, Follow a Dance)** with a payoff of (1.0, 1.0).\n    *   If the Observer chooses to 'Follow a Dance', the Dancer's best response is to 'Perform Waggle Dance' (payoff 1.0, which is the maximum possible).\n    *   If the Dancer 'Performs Waggle Dance', the Observer's best response is to 'Follow a Dance' (1.0) over 'Explore Independently' (0.5).\n*   **Strategic Structure:** This is a classic **Coordination Game**. The highest payoffs for both players occur when they coordinate on the most efficient information transfer for high-value resources. The conflict strategies ('Disrupt', 'Fight') are strongly disincentivized when the Observer is cooperating ('Follow a Dance'), yielding negative payoffs for the Dancer. The cooperative outcome `(1.0, 1.0)` is **Pareto Optimal**.\n*   **Classification:** The game models the efficiency of specialized communication. It highlights that for a communication system to be stable, both the sender and receiver must find it in their best interest to use it faithfully.\n\n---\n\n#### **Game 2: African Wild Dog Cooperative Hunting**\n\nThis game models the decision to participate in a pack hunt.\n\n**Payoff Matrix:**\n(Payoffs: Hunter A, Hunter B)\n\n| | **Engage in Cooperative Hunt** | **Shirk from Hunt** |\n| :--- | :---: | :---: |\n| **Engage in Cooperative Hunt**| (5.0, 5.0) | (-5.0, -1.0) |\n| **Shirk from Hunt** | (-1.0, -5.0) | (-10.0, -10.0) |\n\n**Analysis:**\n\n*   **Character:** This is a **symmetric, mixed-motive game**. Both players are identical with the same actions and payoffs.\n*   **Nash Equilibrium:** The game has a unique PSNE at **(Engage in Cooperative Hunt, Engage in Cooperative Hunt)** with a payoff of (5.0, 5.0).\n*   **Strategic Structure:** This game shares a similar structure to the Vampire Bat game. The cooperative action, **'Engage in Cooperative Hunt', is a strictly dominant strategy**.\n    *   If Hunter B Engages, Hunter A prefers to Engage (5.0) over Shirk (-1.0).\n    *   If Hunter B Shirks, Hunter A still prefers to Engage (-5.0) over Shirk (-10.0).\n    *   The same logic applies to Hunter B due to the game's symmetry.\n*   **Classification:** This is often mistaken for a Stag Hunt game, but the payoff structure makes it simpler. In a classic Stag Hunt, there are two equilibria (cooperate, cooperate) and (shirk, shirk). Here, the penalty for mutual shirking (-10) is so severe that it is never a stable outcome. Like Game 0, this is a \"no-brainer\" coordination game where the dominant strategy for each player is to cooperate, leading to a unique, **Pareto Optimal** equilibrium.\n\n---\n\n#### **Game 3: Cleaner Wrasse and Client Fish Symbiosis**\n\nThis game models the symbiosis between cleaner wrasse and their clients, including the possibility of the cleaner \"cheating.\"\n\n**Payoff Matrix:**\n(Payoffs: Cleaner Wrasse, Client Fish)\n\n| | **Tolerate** | **Seek Another Cleaner** |\n| :--- | :---: | :---: |\n| **Provide Honest Cleaning** | (2.0, 3.0) | (-1.0, -2.0) |\n| **Cheat** | (3.0, 1.5) | (-3.0, 1.0) |\n\n**Analysis:**\n\n*   **Character:** This is an **asymmetric, mixed-motive game** with a significant element of conflict.\n*   **Nash Equilibrium:** This game's equilibrium is fundamentally different from the others. The unique PSNE is at **(Cheat, Tolerate)** with a payoff of (3.0, 1.5).\n    *   If the Client Fish 'Tolerates', the Cleaner Wrasse prefers to 'Cheat' (3.0) over 'Provide Honest Cleaning' (2.0).\n    *   If the Cleaner Wrasse 'Cheats', the Client Fish prefers to 'Tolerate' (1.5) over 'Seek Another Cleaner' (1.0).\n*   **Strategic Structure:** This game does not have dominant strategies. The Wrasse's best move depends on the Client's, and vice versa. The equilibrium represents a stable state of tolerated parasitism. The cleaner has a direct incentive to cheat for a higher immediate payoff, and the client, while harmed, finds it marginally better to endure the cheating than to incur the cost of finding a new cleaner.\n*   **Pareto Optimality:** The Nash Equilibrium (3.0, 1.5) is **Pareto Optimal**. There is no other outcome where one player is made better off without making the other worse off. For instance, moving to (Honest, Tolerate) at (2.0, 3.0) would make the Client better off but the Wrasse worse off. This highlights the inherent conflict in the game\u2014the Wrasse's maximum payoff and the Client's maximum payoff are in different cells.\n*   **Classification:** This is a classic example of a **conflict game embedded within a cooperative context**. It demonstrates how a stable, mutually acceptable outcome can still involve exploitation. The model powerfully predicts that cheating can be an evolutionarily stable strategy under certain conditions (i.e., when the cost of finding a new cleaner is higher than the cost of being cheated).\n\n---\n\n#### **Game 6: Ant and Aphid Mutualism**\n\nThis game models the \"farming\" relationship between ants and aphids.\n\n**Payoff Matrix:**\n(Payoffs: Ants, Aphids)\n\n| | **Produce Sufficient Honeydew** | **Over-Produce Honeydew** | **Under-Produce Honeydew** |\n| :--- | :---: | :---: | :---: |\n| **Provide Protection & Harvest Sustainably** | (10.0, 9.0) | (8.0, 4.0) | (3.0, 2.0) |\n| **Over-Exploit Aphids** | (4.0, 3.0) | (0.0, 0.0) | (0.0, 0.0) |\n| **Neglect Aphids** | (1.0, 1.0) | (0.0, 0.0) | (0.0, 0.0) |\n\n**Analysis:**\n\n*   **Character:** This is a 3x3 **asymmetric, mixed-motive game** modeling inter-species mutualism.\n*   **Nash Equilibrium:** There is a single PSNE at **(Provide Protection & Harvest Sustainably, Produce Sufficient Honeydew)** with a payoff of (10.0, 9.0).\n    *   If the Aphids 'Produce Sufficient Honeydew', the Ants' best response is to 'Provide Protection' (10.0) over 'Over-Exploit' (4.0) or 'Neglect' (1.0).\n    *   If the Ants 'Provide Protection', the Aphids' best response is to 'Produce Sufficient Honeydew' (9.0) over 'Over-Produce' (4.0) or 'Under-Produce' (2.0).\n*   **Strategic Structure:** Similar to the bee game, this is a **Coordination Game**. Neither player has a dominant strategy, but their interests are strongly aligned at the mutualistic outcome. Any deviation by one player would provoke a sub-optimal response from the other, leading to a worse outcome for both. For example, if aphids under-produce, the value of protecting them drops for the ants. The equilibrium `(10.0, 9.0)` is the payoff-dominant outcome and is **Pareto Optimal**. All other outcomes are strictly worse for at least one, and usually both, players.\n*   **Classification:** This game effectively models the delicate balance required in a sustainable mutualism. The payoff structure punishes both over-exploitation and neglect, stabilizing the relationship at a point of efficient, sustainable, and mutually beneficial exchange."
+]

@@ -1,0 +1,2224 @@
+[
+    {
+        "Species": [
+            "Cuculus canorus",
+            "Acrocephalus scirpaceus"
+        ],
+        "Description": "Common Cuckoos are obligate brood parasites, laying their eggs in the nests of other bird species, such as reed warblers. The cuckoo chick typically hatches first and instinctively evicts the host's own eggs or young from the nest. The dilemma for the host parents is their inability to recognize the parasitic egg or chick, leading them to expend significant energy and resources raising a non-kin individual at the expense of their own reproductive success. For the cuckoo chick, the non-trivial dilemma is the rapid and precise action required post-hatch to eliminate rivals before the host parents can discern the deception, ensuring exclusive access to parental care.",
+        "Query": "Common Cuckoo brood parasitism host discrimination chick eviction",
+        "Article": "*   This species is a widespread summer migrant to Europe and Asia, and winters in Africa. It is a brood parasite, which means it lays eggs in the nests of other bird species, particularly of dunnocks, meadow pipits, and reed warblers. Although its eggs are larger than those of its hosts, the eggs in each type of host nest resemble the host's eggs. The adult too is a mimic, in its case of the sparrowhawk; since that species is a predator, the mimicry gives the female time to lay her eggs without being attacked.\n\n*   The common cuckoo is an obligate brood parasite; it lays its eggs in the nests of other birds.\n\n*   Hatched cuckoo chicks may push host eggs out of the nest or be raised alongside the host's chicks. A female may visit up to 50 nests during a breeding season. Common cuckoos first breed at the age of two years.\n\n*   More than 100 host species have been recorded: meadow pipit, dunnock and Eurasian reed warbler are the most common hosts in northern Europe; garden warbler, meadow pipit, pied wagtail and European robin in central Europe; brambling and common redstart in Finland; and great reed warbler in Hungary.\n\n*   Female common cuckoos are divided into gentes \u2013 groups of females favouring a particular host species' nest and laying eggs that match those of that species in color and pattern.\n\n*   The common cuckoo's behaviour was firstly observed and described by Aristotle and the combination of behaviour and anatomical adaptation by Edward Jenner, who was elected as Fellow of the Royal Society in 1788 for this work rather than for his development of the smallpox vaccine.\n\n*   The naked, altricial chick hatches after 11\u201313 days. It methodically evicts all host progeny from host nests. It is a much larger bird than its hosts, and needs to monopolize the food supplied by the parents. The chick will roll the other eggs out of the nest by pushing them with its back over the edge. If the host's eggs hatch before the cuckoo's, the cuckoo chick will push the other chicks out of the nest in a similar way. At 14 days old, the common cuckoo chick is about three times the size of an adult Eurasian reed warbler.\n\n*   Experiments have shown that common cuckoo chicks persuade their host parents to feed them by making a rapid begging call that sounds \"remarkably like a whole brood of host chicks\". The researchers suggested that \"the cuckoo needs vocal trickery to stimulate adequate care to compensate for the fact that it presents a visual stimulus of just one gape\". However, a cuckoo chick needs the amount of food of a whole brood of host nestlings, and it struggles to elicit that much from the host parents with only the vocal stimulus. For this reason, cuckoo chicks exploit host parental care by remaining with the host parent longer than host chicks do, both before and after fledging.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Female Cuckoo",
+                        "actions": [
+                            "Lay parasitic egg in host nest"
+                        ],
+                        "utilities": {
+                            "Lay parasitic egg in host nest": {
+                                "Incubate eggs": {
+                                    "outcome": "Host parents accept and incubate the parasitic egg, providing the initial care needed for development.",
+                                    "utility": 10.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "Host parents successfully feed the hatched cuckoo chick, ensuring its growth and survival, which represents the culmination of the parasitic strategy.",
+                                    "utility": 20.0
+                                },
+                                "Hatch": {
+                                    "outcome": "The parasitic egg successfully hatches into a cuckoo chick, a critical step in the reproductive cycle.",
+                                    "utility": 15.0
+                                },
+                                "Evict host progeny": {
+                                    "outcome": "The cuckoo chick successfully evicts host eggs or young, monopolizing the nest and future parental care from the host parents.",
+                                    "utility": 18.0
+                                },
+                                "Solicit food from host parents": {
+                                    "outcome": "The cuckoo chick successfully elicits food from the host parents, crucial for its rapid growth and survival.",
+                                    "utility": 19.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Host Parents",
+                        "actions": [
+                            "Incubate eggs",
+                            "Feed chicks"
+                        ],
+                        "utilities": {
+                            "Incubate eggs": {
+                                "Lay parasitic egg in host nest": {
+                                    "outcome": "Host parents unknowingly commit resources to incubating a parasitic cuckoo egg alongside their own, initiating the exploitation of their reproductive efforts.",
+                                    "utility": -5.0
+                                },
+                                "Hatch": {
+                                    "outcome": "A cuckoo chick successfully hatches from an egg the host parents are incubating, signifying the direct materialization of their parasitic burden and the beginning of resource monopolization.",
+                                    "utility": -10.0
+                                },
+                                "Evict host progeny": {
+                                    "outcome": "While host parents are incubating, a newly hatched cuckoo chick evicts their own eggs or young from the nest, leading to the complete failure of their current reproductive attempt.",
+                                    "utility": -20.0
+                                },
+                                "Solicit food from host parents": {
+                                    "outcome": "Host parents are committed to incubating an egg that, upon hatching, will lead to a cuckoo chick demanding significant food resources, representing a future drain on their energy for a non-kin individual.",
+                                    "utility": -15.0
+                                }
+                            },
+                            "Feed chicks": {
+                                "Lay parasitic egg in host nest": {
+                                    "outcome": "Host parents are actively feeding their current brood (which may include a cuckoo chick) while a female cuckoo attempts to lay another parasitic egg, representing continued parasitic pressure and potential further resource misallocation.",
+                                    "utility": -7.0
+                                },
+                                "Hatch": {
+                                    "outcome": "While host parents are focused on feeding chicks, another cuckoo egg hatches in the nest, adding to the demanding mouths or signifying the full emergence of the parasite they are inadvertently supporting.",
+                                    "utility": -12.0
+                                },
+                                "Evict host progeny": {
+                                    "outcome": "Host parents attempt to feed chicks in their nest, but the cuckoo chick violently evicts their own offspring, rendering their feeding efforts futile for their kin and directing all care to the parasite.",
+                                    "utility": -25.0
+                                },
+                                "Solicit food from host parents": {
+                                    "outcome": "Host parents are successfully deceived into expending significant energy and resources to feed the parasitic cuckoo chick, ensuring its rapid growth and survival at the severe detriment of their own reproductive success.",
+                                    "utility": -18.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Cuckoo Chick",
+                        "actions": [
+                            "Hatch",
+                            "Evict host progeny",
+                            "Solicit food from host parents"
+                        ],
+                        "utilities": {
+                            "Hatch": {
+                                "Lay parasitic egg in host nest": {
+                                    "outcome": "The cuckoo chick successfully hatches, signifying the initial success of the parasitic strategy, potentially while the female cuckoo is still actively laying other eggs in this or other nests. The chick's existence is secured.",
+                                    "utility": 15.0
+                                },
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick successfully hatches from an egg that the host parents have unknowingly incubated, bringing the cuckoo chick into existence and marking the critical transition from egg to independent organism, ready to exploit host resources.",
+                                    "utility": 18.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick hatches into a nest where host parents are already actively feeding young (or have been feeding the cuckoo itself), indicating an immediate opportunity for the newly hatched cuckoo to demand and receive food, leveraging existing parental investment.",
+                                    "utility": 19.0
+                                }
+                            },
+                            "Evict host progeny": {
+                                "Lay parasitic egg in host nest": {
+                                    "outcome": "The newly hatched cuckoo chick methodically evicts host eggs or chicks, securing exclusive access to the nest and all future parental care, ensuring its sole survival and development, even as the female cuckoo continues her reproductive efforts elsewhere.",
+                                    "utility": 22.0
+                                },
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick successfully evicts host eggs that the parents are currently incubating, completely eliminating potential future competition and monopolizing the nest and all parental resources before the host's own eggs can hatch.",
+                                    "utility": 25.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick forcefully evicts already hatched host chicks from the nest, compelling the host parents to redirect all their ongoing feeding efforts and resources exclusively towards the cuckoo chick, maximizing its growth and survival.",
+                                    "utility": 28.0
+                                }
+                            },
+                            "Solicit food from host parents": {
+                                "Lay parasitic egg in host nest": {
+                                    "outcome": "The cuckoo chick successfully uses vocal trickery to persuade host parents to feed it abundantly, ensuring its rapid growth and survival, while the female cuckoo might be engaged in laying additional eggs in other nests.",
+                                    "utility": 20.0
+                                },
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick effectively solicits food from the host parents, successfully diverting their attention and resources towards feeding it, even when their primary focus is still on incubating other eggs, demonstrating its immediate dominance.",
+                                    "utility": 21.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick successfully exploits the host parents' natural feeding instincts, eliciting and monopolizing the provision of significant energy and resources for its rapid growth and survival, ensuring its thriving at the expense of potential host progeny.",
+                                    "utility": 23.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The primary semantic issue with the game definition is the inclusion of 'Hatch' as a volitional action for the Cuckoo Chick. Hatching is a biological developmental event, not a chosen behavior or strategy. The cuckoo chick's critical dilemma, as described in the text, begins *post-hatch*, focusing on actions like eviction and soliciting food. Therefore, 'Hatch' should not be listed as an action for the Cuckoo Chick. Additionally, for the Cuckoo Chick's remaining actions ('Evict host progeny' and 'Solicit food from host parents'), some utilities are contextualized by the 'Lay parasitic egg in host nest' action of the Female Cuckoo. While the female cuckoo's action is the initiating event for the entire parasitic process, it is not an immediate or interactive context for the *newly hatched cuckoo chick's* dilemma or its immediate, post-hatch actions. The chick's behaviors are primarily influenced by the host parents' current activities (incubating or feeding) and the presence of rivals. The revised game removes 'Hatch' as a Cuckoo Chick action and removes the biologically irrelevant 'Lay parasitic egg' context from the Cuckoo Chick's utilities, which improves the biological plausibility and the logical flow of the game's representation of the chick's dilemma.\nNew game suggested was not formally valid: Invalid game data structure: must be a list.",
+                "Error": "Only accepting 2 player games for now.",
+                "Feedback": "Technical errors: Only accepting 2 player games for now."
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Cuckoo Chick",
+                        "actions": [
+                            "Evict host progeny",
+                            "Solicit food from host parents"
+                        ],
+                        "utilities": {
+                            "Evict host progeny": {
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick successfully evicts host eggs that the parents are currently incubating, completely eliminating potential future competition and monopolizing the nest and all parental resources before the host's own eggs can hatch.",
+                                    "utility": 25.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick forcefully evicts already hatched host chicks from the nest, compelling the host parents to redirect all their ongoing feeding efforts and resources exclusively towards the cuckoo chick, maximizing its growth and survival.",
+                                    "utility": 28.0
+                                }
+                            },
+                            "Solicit food from host parents": {
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick effectively solicits food from the host parents, successfully diverting their attention and resources towards feeding it, even when their primary focus is still on incubating other eggs, demonstrating its immediate dominance.",
+                                    "utility": 21.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick successfully exploits the host parents' natural feeding instincts, eliciting and monopolizing the provision of significant energy and resources for its rapid growth and survival, ensuring its thriving at the expense of potential host progeny.",
+                                    "utility": 23.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Host Parents",
+                        "actions": [
+                            "Incubate eggs",
+                            "Feed chicks"
+                        ],
+                        "utilities": {
+                            "Incubate eggs": {
+                                "Evict host progeny": {
+                                    "outcome": "While host parents are incubating, a newly hatched cuckoo chick evicts their own eggs or young from the nest, leading to the complete failure of their current reproductive attempt.",
+                                    "utility": -20.0
+                                },
+                                "Solicit food from host parents": {
+                                    "outcome": "Host parents are committed to incubating an egg that, upon hatching, will lead to a cuckoo chick demanding significant food resources, representing a future drain on their energy for a non-kin individual.",
+                                    "utility": -15.0
+                                }
+                            },
+                            "Feed chicks": {
+                                "Evict host progeny": {
+                                    "outcome": "Host parents attempt to feed chicks in their nest, but the cuckoo chick violently evicts their own offspring, rendering their feeding efforts futile for their kin and directing all care to the parasite.",
+                                    "utility": -25.0
+                                },
+                                "Solicit food from host parents": {
+                                    "outcome": "Host parents are successfully deceived into expending significant energy and resources to feed the parasitic cuckoo chick, ensuring its rapid growth and survival at the severe detriment of their own reproductive success.",
+                                    "utility": -18.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The provided game definition requires significant changes to accurately and semantically represent the described biological interaction, particularly concerning player definitions and action validity.\n\nHere's a detailed breakdown of issues and proposed changes:\n\n**1. Player Definition and Actions for the \"Cuckoo\" Player:**\n\n*   **Issue:** The \"Cuckoo\" player is poorly defined. Its actions (\"Lay parasitic egg\", \"Hatch\", \"Evict host progeny\", \"Solicit food from host parents\") conflate behaviors of the adult female cuckoo (laying eggs), a biological process (hatching), and strategic actions of the cuckoo chick (eviction, soliciting food). The interaction description specifically highlights the \"cuckoo chick's\" dilemma post-hatch.\n*   **Biological Implausibility:**\n    *   \"Lay parasitic egg\" is an action performed by the adult female cuckoo, not the chick.\n    *   \"Hatch\" is a biological event or developmental process, not a strategic action that a chick can choose to perform or not perform.\n*   **Mutual Exclusivity:** The actions \"Lay parasitic egg\" and \"Hatch\" cannot be chosen by a cuckoo chick, making the set of actions non-mutually exclusive for a single entity (the chick). Even for the entire cuckoo life cycle, these are sequential stages/events, not simultaneous choices in a game context.\n*   **Recommendation:**\n    *   **Rename the Player:** Change \"Cuckoo\" to \"Cuckoo Chick\" to accurately reflect the primary focus of the game's dilemma.\n    *   **Remove Actions:** Eliminate \"Lay parasitic egg\" and \"Hatch\" from the Cuckoo Chick's actions. The game should model the interaction *after* the egg has been laid and the chick has hatched.\n    *   **Retain Actions:** Keep \"Evict host progeny\" and \"Solicit food from host parents\". These are genuine, strategic actions performed by the cuckoo chick to ensure its survival and monopolize resources. They are mutually exclusive choices at a given point in time (e.g., the chick prioritizes eviction first, or, if no host progeny are present, it focuses on soliciting food).\n\n**2. Player Actions for \"Host Parents\":**\n\n*   **Issue:** The \"Host Parents'\" actions (\"Incubate eggs\", \"Feed chicks\") are presented as choices, but the description states their \"inability to recognize the parasitic egg or chick.\" This implies their parental care behaviors are not strategic choices in response to the cuckoo, but rather the default behaviors they undertake based on the stage of their breeding cycle.\n*   **Biological Implausibility (as strategic choices):** Host parents typically transition from incubating eggs to feeding chicks as a natural progression of their breeding cycle. They do not strategically \"choose\" between these two primary modes of care at a given moment in response to a cuckoo, especially if they cannot discern the parasite.\n*   **Recommendation:**\n    *   **Reinterpret \"Actions\" as \"States/Contexts\":** While the JSON schema requires \"actions,\" for the Host Parents, these should be understood as the *state of their parental care* or the *context* in which the Cuckoo Chick's actions occur. The Cuckoo Chick acts *given* whether the Host Parents are primarily in an \"Incubating Eggs\" phase or a \"Feeding Chicks\" phase.\n    *   **Retain Actions:** Keep \"Incubate eggs\" and \"Feed chicks\" as they are relevant contexts for the cuckoo chick's behavior and utility outcomes. These two states are mutually exclusive for the primary focus of parental care at any given time.\n\n**3. Utility Values and Fidelity:**\n\n*   **Issue:** Utilities linked to the removed actions (\"Lay parasitic egg\" and \"Hatch\") become irrelevant.\n*   **Recommendation:**\n    *   **Adjust Utilities for Cuckoo Chick:** All utility entries associated with \"Lay parasitic egg\" and \"Hatch\" should be removed. The remaining utilities for \"Evict host progeny\" (25.0, 28.0) and \"Solicit food from host parents\" (21.0, 23.0) are biologically plausible. Eviction provides higher utility, as it secures exclusive access to resources (28.0 for evicting fed chicks is highest, making sense as it guarantees immediate, active care). Soliciting food provides good utility but is lower than eviction, as it's the ongoing exploitation after the nest is secured.\n    *   **Adjust Utilities for Host Parents:** All utility entries that refer to the Cuckoo's \"Lay parasitic egg\" and \"Hatch\" actions should be removed. The remaining negative utilities for the Host Parents are plausible. Eviction (-20.0 for eggs, -25.0 for chicks) represents the greatest loss, with losing already invested chicks being worse. Soliciting food (-15.0 while incubating, -18.0 while feeding) represents resource drain, less severe than total reproductive failure but still detrimental. The general trend of increasing negative utility for the Host as the parasitic strategy progresses (from initial presence to successful exploitation/eviction) is biologically sound.\n\n**Revised Game Definition (Conceptual Changes):**\n\n```json\n[\n  {\n    \"name\": \"Cuckoo Chick\",\n    \"actions\": [\"Evict host progeny\", \"Solicit food from host parents\"],\n    \"utilities\": {\n      \"Evict host progeny\": {\n        \"Incubate eggs\": {\n          \"outcome\": \"The cuckoo chick successfully evicts host eggs that the parents are currently incubating, completely eliminating potential future competition and monopolizing the nest and all parental resources before the host's own eggs can hatch.\",\n          \"utility\": 25.0\n        },\n        \"Feed chicks\": {\n          \"outcome\": \"The cuckoo chick forcefully evicts already hatched host chicks from the nest, compelling the host parents to redirect all their ongoing feeding efforts and resources exclusively towards the cuckoo chick, maximizing its growth and survival.\",\n          \"utility\": 28.0\n        }\n      },\n      \"Solicit food from host parents\": {\n        \"Incubate eggs\": {\n          \"outcome\": \"The cuckoo chick effectively solicits food from the host parents, successfully diverting their attention and resources towards feeding it, even when their primary focus is still on incubating other eggs, demonstrating its immediate dominance.\",\n          \"utility\": 21.0\n        },\n        \"Feed chicks\": {\n          \"outcome\": \"The cuckoo chick successfully exploits the host parents' natural feeding instincts, eliciting and monopolizing the provision of significant energy and resources for its rapid growth and survival, ensuring its thriving at the expense of potential host progeny.\",\n          \"utility\": 23.0\n        }\n      }\n    }\n  },\n  {\n    \"name\": \"Host Parents\",\n    \"actions\": [\"Incubate eggs\", \"Feed chicks\"],\n    \"utilities\": {\n      \"Incubate eggs\": {\n        \"Evict host progeny\": {\n          \"outcome\": \"While host parents are incubating, a newly hatched cuckoo chick evicts their own eggs or young from the nest, leading to the complete failure of their current reproductive attempt.\",\n          \"utility\": -20.0\n        },\n        \"Solicit food from host parents\": {\n          \"outcome\": \"Host parents are committed to incubating an egg that, upon hatching, will lead to a cuckoo chick demanding significant food resources, representing a future drain on their energy for a non-kin individual.\",\n          \"utility\": -15.0\n        }\n      },\n      \"Feed chicks\": {\n        \"Evict host progeny\": {\n          \"outcome\": \"Host parents attempt to feed chicks in their nest, but the cuckoo chick violently evicts their own offspring, rendering their feeding efforts futile for their kin and directing all care to the parasite.\",\n          \"utility\": -25.0\n        },\n        \"Solicit food from host parents\": {\n          \"outcome\": \"Host parents are successfully deceived into expending significant energy and resources to feed the parasitic cuckoo chick, ensuring its rapid growth and survival at the severe detriment of their own reproductive success.\",\n          \"utility\": -18.0\n        }\n      }\n    }\n  }\n]\n```",
+                "OldGame": [
+                    {
+                        "name": "Cuckoo",
+                        "actions": [
+                            "Lay parasitic egg",
+                            "Hatch",
+                            "Evict host progeny",
+                            "Solicit food from host parents"
+                        ],
+                        "utilities": {
+                            "Lay parasitic egg": {
+                                "Incubate eggs": {
+                                    "outcome": "Host parents accept and incubate the parasitic egg, providing the initial care needed for development.",
+                                    "utility": 10.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "Host parents successfully feed the hatched cuckoo chick, ensuring its growth and survival, which represents the culmination of the parasitic strategy.",
+                                    "utility": 20.0
+                                }
+                            },
+                            "Hatch": {
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick successfully hatches from an egg that the host parents have unknowingly incubated, bringing the cuckoo chick into existence and marking the critical transition from egg to independent organism, ready to exploit host resources.",
+                                    "utility": 18.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick hatches into a nest where host parents are already actively feeding young (or have been feeding the cuckoo itself), indicating an immediate opportunity for the newly hatched cuckoo to demand and receive food, leveraging existing parental investment.",
+                                    "utility": 19.0
+                                }
+                            },
+                            "Evict host progeny": {
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick successfully evicts host eggs that the parents are currently incubating, completely eliminating potential future competition and monopolizing the nest and all parental resources before the host's own eggs can hatch.",
+                                    "utility": 25.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick forcefully evicts already hatched host chicks from the nest, compelling the host parents to redirect all their ongoing feeding efforts and resources exclusively towards the cuckoo chick, maximizing its growth and survival.",
+                                    "utility": 28.0
+                                }
+                            },
+                            "Solicit food from host parents": {
+                                "Incubate eggs": {
+                                    "outcome": "The cuckoo chick effectively solicits food from the host parents, successfully diverting their attention and resources towards feeding it, even when their primary focus is still on incubating other eggs, demonstrating its immediate dominance.",
+                                    "utility": 21.0
+                                },
+                                "Feed chicks": {
+                                    "outcome": "The cuckoo chick successfully exploits the host parents' natural feeding instincts, eliciting and monopolizing the provision of significant energy and resources for its rapid growth and survival, ensuring its thriving at the expense of potential host progeny.",
+                                    "utility": 23.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Host Parents",
+                        "actions": [
+                            "Incubate eggs",
+                            "Feed chicks"
+                        ],
+                        "utilities": {
+                            "Incubate eggs": {
+                                "Lay parasitic egg": {
+                                    "outcome": "Host parents unknowingly commit resources to incubating a parasitic cuckoo egg alongside their own, initiating the exploitation of their reproductive efforts.",
+                                    "utility": -5.0
+                                },
+                                "Hatch": {
+                                    "outcome": "A cuckoo chick successfully hatches from an egg the host parents are incubating, signifying the direct materialization of their parasitic burden and the beginning of resource monopolization.",
+                                    "utility": -10.0
+                                },
+                                "Evict host progeny": {
+                                    "outcome": "While host parents are incubating, a newly hatched cuckoo chick evicts their own eggs or young from the nest, leading to the complete failure of their current reproductive attempt.",
+                                    "utility": -20.0
+                                },
+                                "Solicit food from host parents": {
+                                    "outcome": "Host parents are committed to incubating an egg that, upon hatching, will lead to a cuckoo chick demanding significant food resources, representing a future drain on their energy for a non-kin individual.",
+                                    "utility": -15.0
+                                }
+                            },
+                            "Feed chicks": {
+                                "Lay parasitic egg": {
+                                    "outcome": "Host parents are actively feeding their current brood (which may include a cuckoo chick) while a female cuckoo attempts to lay another parasitic egg, representing continued parasitic pressure and potential further resource misallocation.",
+                                    "utility": -7.0
+                                },
+                                "Hatch": {
+                                    "outcome": "While host parents are focused on feeding chicks, another cuckoo egg hatches in the nest, adding to the demanding mouths or signifying the full emergence of the parasite they are inadvertently supporting.",
+                                    "utility": -12.0
+                                },
+                                "Evict host progeny": {
+                                    "outcome": "Host parents attempt to feed chicks in their nest, but the cuckoo chick violently evicts their own offspring, rendering their feeding efforts futile for their kin and directing all care to the parasite.",
+                                    "utility": -25.0
+                                },
+                                "Solicit food from host parents": {
+                                    "outcome": "Host parents are successfully deceived into expending significant energy and resources to feed the parasitic cuckoo chick, ensuring its rapid growth and survival at the severe detriment of their own reproductive success.",
+                                    "utility": -18.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Cuckoo Chick": {
+                                "Evict host progeny": 1.0,
+                                "Solicit food from host parents": 0.0
+                            },
+                            "Host Parents": {
+                                "Incubate eggs": 1.0,
+                                "Feed chicks": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Cuckoo Chick": {
+                                "Evict host progeny": 1.0,
+                                "Solicit food from host parents": 0.0
+                            },
+                            "Host Parents": {
+                                "Incubate eggs": 1.0,
+                                "Feed chicks": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Cuckoo Chick": {
+                                "Evict host progeny": 1.0,
+                                "Solicit food from host parents": 0.0
+                            },
+                            "Host Parents": {
+                                "Feed chicks": 0.0,
+                                "Incubate eggs": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Female Cuckoo": "Lay parasitic egg in host nest",
+            "Host Parents": [
+                "Incubate eggs",
+                "Feed chicks"
+            ],
+            "Cuckoo Chick": [
+                "Hatch",
+                "Evict host progeny",
+                "Solicit food from host parents"
+            ]
+        }
+    },
+    {
+        "Species": [
+            "Orcinus orca",
+            "Carcharodon carcharias"
+        ],
+        "Description": "Orcas, or killer whales, are apex predators that have been documented to hunt and kill Great White Sharks. The interaction presents a significant dilemma as both are top-tier predators. Orcas often employ sophisticated cooperative hunting strategies, including ramming the shark to disorient it, or flipping it upside down to induce tonic immobility. The non-trivial dilemma for the Great White Shark is not only facing a larger, highly intelligent, and coordinated predator but also being targeted for its nutrient-rich liver, which the orcas precisely extract, demonstrating a high level of specialized predation.",
+        "Query": "Orca predation Great White Shark liver extraction cooperative hunting",
+        "Article": "Error"
+    },
+    {
+        "Species": [
+            "Lycaon pictus",
+            "Connochaetes taurinus"
+        ],
+        "Description": "African Wild Dogs hunt cooperatively in packs, often targeting large ungulates like wildebeest or impala. The non-trivial dilemma for the prey is the effectiveness of group defense (e.g., forming a tight circle or fleeing en masse) versus individual vulnerability to the relentless pursuit and coordinated attacks of the pack. For the wild dogs, the dilemma involves expending significant energy on long chases and coordinating complex maneuvers to overcome the prey's defenses, balancing the risk of injury against the need for a successful kill to feed the pack, including non-hunting members.",
+        "Query": "African Wild Dog cooperative hunting prey defense strategies",
+        "Article": "The dog is a wolf-like canid. The genetic divergence between the dog's ancestor and modern wolves occurred between 20,000 and 40,000 years ago, just before or during the Last Glacial Maximum (20,000\u201327,000 years ago).\n\nOne of the most important transitions in human history was the domestication of animals, which began with the long-term association between wolves and hunter\u2013gatherers more than 15,000 years ago.\n\nThe domestication of the dog occurred due to variation among the common ancestor wolf population in the fight-or-flight response where the common ancestor with less aggression and aversion but greater altruism towards humans received fitness benefits.\n\nThe domestication of the dog predates agriculture,\n\nFirst dogs as a hunting technology\n\nDuring the Upper Paleolithic (50,000\u201310,000 YBP), the increase in human population density, advances in blade and hunting technology, and climate change may have altered prey densities and made scavenging crucial to the survival of some wolf populations.\n\nThe dog is a classic example of a domestic animal that likely traveled a commensal pathway into domestication.\n\nWolves were probably attracted to human campfires by the smell of meat being cooked and discarded refuse in the vicinity, first loosely attaching themselves and then considering these as part of their home territory where their warning growls would alert humans to the approach of outsiders. The wolves most likely drawn to human camps were the less-aggressive, subdominant pack members with lowered flight response, higher stress thresholds and less wary around humans, which was the start of a process known as self-domestication, making them better candidates for further domestication.\n\nOn the mammoth steppe the wolf's ability to hunt in packs, to share risk fairly among pack members, and to cooperate moved them to the top of the food chain above lions, hyenas and bears. One study proposed that during the Last Glacial Maximum, some humans teamed up with those pastoralist wolves and learned their techniques.\n\nMany early humans remained gatherers and scavengers, or specialized as fish-hunters, hunter-gatherers, and hunter-gardeners. However, some adopted the pastoralist wolves' lifestyle as herd followers and herders of reindeer, horses, and other hoofed animals. They harvested the best stock for themselves while the wolves kept the herd strong, and this group of humans was to become the first herders and this group of wolves was to become the first dogs.\n\nThe remains of large carcasses left by human hunter-gatherers may have led some wolves into entering a migratory relationship with humans.\n\nDuring the harsh winters of the Last Glacial Maximum plant foods would have not been available, and meat would not be the favoured food but fat and grease would be, as is prized by some high-latitude dwelling peoples in modern times. Game meat would have been devoid of fat, but the limbs and crania contain fat deposits, and limb bones contain fatty oils. There is evidence of such processing during this period.\n\nThese genes are involved in the synthesis, transport and degradation of a variety of neurotransmitters, particularly the catecholamines, which include dopamine and noradrenaline.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "African Wild Dogs",
+                        "actions": [
+                            "chase_prey",
+                            "coordinate_attack"
+                        ],
+                        "utilities": {
+                            "chase_prey": {
+                                "engage_group_defense": {
+                                    "outcome": "Prey form a tight defensive circle, making the chase difficult and risking injury to the wild dogs. Significant energy is expended with low immediate success.",
+                                    "utility": -5.0
+                                },
+                                "flee_individually": {
+                                    "outcome": "Prey scatter, allowing wild dogs to focus pursuit on individual targets, though still requiring considerable energy expenditure.",
+                                    "utility": 3.0
+                                }
+                            },
+                            "coordinate_attack": {
+                                "engage_group_defense": {
+                                    "outcome": "Wild dogs attempt complex maneuvers to break the prey's group defense. This is a high-risk, high-reward strategy; successful execution leads to a kill, but failure can result in injury.",
+                                    "utility": 4.0
+                                },
+                                "flee_individually": {
+                                    "outcome": "Wild dogs coordinate to target and isolate individuals from the scattering prey, increasing the efficiency and success rate of taking down a specific animal.",
+                                    "utility": 9.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prey Ungulates",
+                        "actions": [
+                            "engage_group_defense",
+                            "flee_individually"
+                        ],
+                        "utilities": {
+                            "engage_group_defense": {
+                                "chase_prey": {
+                                    "outcome": "Prey execute a successful group defense strategy (e.g., forming a tight circle or fleeing en masse), deterring the wild dogs' general chase and making it difficult for them to achieve an immediate kill, significantly reducing individual risk for the ungulates.",
+                                    "utility": 4.0
+                                },
+                                "coordinate_attack": {
+                                    "outcome": "Wild dogs attempt complex, high-risk maneuvers to break the prey's group defense. If successful, this coordinated attack overcomes the group's efforts, leading to a kill for the wild dogs, making it a highly dangerous scenario for the prey with a high risk of fatality.",
+                                    "utility": -8.0
+                                }
+                            },
+                            "flee_individually": {
+                                "chase_prey": {
+                                    "outcome": "Prey scatter individually, making them vulnerable to direct pursuit by wild dogs. While some individuals may evade capture, the overall risk of being singled out and hunted is high for the scattered ungulates.",
+                                    "utility": -3.0
+                                },
+                                "coordinate_attack": {
+                                    "outcome": "Wild dogs efficiently coordinate to target and isolate individuals from the scattering prey, dramatically increasing their success rate in making a kill, leading to the highest risk of mortality for the ungulates.",
+                                    "utility": -9.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "PrevGame": [
+                    {
+                        "name": "African Wild Dogs",
+                        "actions": [
+                            "chase_prey",
+                            "coordinate_attack"
+                        ],
+                        "utilities": {
+                            "chase_prey": {
+                                "engage_group_defense": {
+                                    "outcome": "Prey form a tight defensive circle, making the chase difficult and risking injury to the wild dogs. Significant energy is expended with low immediate success.",
+                                    "utility": -5.0
+                                },
+                                "flee_individually": {
+                                    "outcome": "Prey scatter, allowing wild dogs to focus pursuit on individual targets, though still requiring considerable energy expenditure.",
+                                    "utility": 3.0
+                                }
+                            },
+                            "coordinate_attack": {
+                                "engage_group_defense": {
+                                    "outcome": "Wild dogs attempt complex maneuvers to break the prey's group defense. This is a high-risk, high-reward strategy; successful execution leads to a kill, but failure can result in injury.",
+                                    "utility": 7.0
+                                },
+                                "flee_individually": {
+                                    "outcome": "Wild dogs coordinate to target and isolate individuals from the scattering prey, increasing the efficiency and success rate of taking down a specific animal.",
+                                    "utility": 6.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prey Ungulates",
+                        "actions": [
+                            "engage_group_defense",
+                            "flee_individually"
+                        ],
+                        "utilities": {
+                            "engage_group_defense": {
+                                "chase_prey": {
+                                    "outcome": "Prey execute a successful group defense strategy (e.g., forming a tight circle or fleeing en masse), deterring the wild dogs' general chase and making it difficult for them to achieve an immediate kill, significantly reducing individual risk for the ungulates.",
+                                    "utility": 4.0
+                                },
+                                "coordinate_attack": {
+                                    "outcome": "Wild dogs attempt complex, high-risk maneuvers to break the prey's group defense. If successful, this coordinated attack overcomes the group's efforts, leading to a kill for the wild dogs, making it a highly dangerous scenario for the prey with a high risk of fatality.",
+                                    "utility": -8.0
+                                }
+                            },
+                            "flee_individually": {
+                                "chase_prey": {
+                                    "outcome": "Prey scatter individually, making them vulnerable to direct pursuit by wild dogs. While some individuals may evade capture, the overall risk of being singled out and hunted is high for the scattered ungulates.",
+                                    "utility": -3.0
+                                },
+                                "coordinate_attack": {
+                                    "outcome": "Wild dogs efficiently coordinate to target and isolate individuals from the scattering prey, dramatically increasing their success rate in making a kill, leading to the highest risk of mortality for the ungulates.",
+                                    "utility": -9.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The primary issue concerns the utility values for the 'African Wild Dogs' player, specifically when they choose 'coordinate_attack'. In the original game, 'coordinate_attack' against 'engage_group_defense' (utility 7.0) was rated higher than 'coordinate_attack' against 'flee_individually' (utility 6.0). Biologically, African Wild Dogs (and most pack predators) find it significantly more efficient, less risky, and more successful to target and isolate individuals from a scattered group than to break a tight defensive formation. While breaking a group defense can be 'high-reward' if successful, the probability of success is often low, and the risk of injury is high. Conversely, efficiently coordinating to pick off scattered prey is a highly reliable and preferred strategy. Therefore, the utility for 'coordinate_attack' when prey 'flee_individually' should be the highest for the wild dogs, reflecting the most favorable hunting scenario, and the utility for 'coordinate_attack' against a 'group_defense' should be lower to reflect the inherent risk and difficulty.",
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "African Wild Dogs": {
+                                "chase_prey": 0.0,
+                                "coordinate_attack": 1.0
+                            },
+                            "Prey Ungulates": {
+                                "engage_group_defense": 1.0,
+                                "flee_individually": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "African Wild Dogs": {
+                                "chase_prey": 0.0,
+                                "coordinate_attack": 1.0
+                            },
+                            "Prey Ungulates": {
+                                "engage_group_defense": 1.0,
+                                "flee_individually": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "African Wild Dogs": {
+                                "chase_prey": 0.0,
+                                "coordinate_attack": 1.0
+                            },
+                            "Prey Ungulates": {
+                                "engage_group_defense": 1.0,
+                                "flee_individually": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "African Wild Dogs": "coordinate_attack",
+            "Prey Ungulates": "engage_group_defense"
+        }
+    },
+    {
+        "Species": [
+            "Mellivora capensis",
+            "Naja naja",
+            "Apis mellifera"
+        ],
+        "Description": "The Honey Badger is renowned for its fearless and tenacious approach to prey, including highly venomous snakes and aggressive bee colonies. The non-trivial dilemma for the honey badger is the extreme risk of severe injury, envenomation, or numerous painful stings for a meal. Despite being bitten by cobras or stung by bees, they often persist until successful, showcasing remarkable resilience and a high pain tolerance. For the snake or bees, the dilemma is facing a relentless predator that appears undeterred by their potent defenses, forcing them into a life-or-death struggle against an unusually persistent adversary.",
+        "Query": "Honey Badger predation venomous snake bee nest resilience",
+        "Article": "- Animals use colour to advertise services such as cleaning to animals of other species; to signal their sexual status to other members of the same species; and in mimicry, taking advantage of the warning coloration of another species. \n- Some animals use flashes of colour to divert attacks by startling predators.\n- Warning coloration (aposematism) is effectively the \"opposite\" of camouflage, and a special case of advertising. Its function is to make the animal, for example a wasp or a coral snake, highly conspicuous to potential predators, so that it is noticed, remembered, and then avoided. \n- Warning colours work by being associated by potential predators with something that makes the warning coloured animal unpleasant or dangerous.\n- aggressive and able to defend itself, for example honey badgers.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Honey Badger",
+                        "actions": [
+                            "Initiate Attack",
+                            "Persist",
+                            "Retreat"
+                        ],
+                        "utilities": {
+                            "Initiate Attack": {
+                                "Defend": {
+                                    "outcome": "Honey Badger initiates attack and faces potent defenses; high risk of injury/envenomation, meal not secured.",
+                                    "utility": -4.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger initiates attack, but prey escapes; no meal, energy expended.",
+                                    "utility": -2.0
+                                }
+                            },
+                            "Persist": {
+                                "Defend": {
+                                    "outcome": "Honey Badger persists through severe defenses, securing the meal despite injury/stings due to remarkable resilience and high pain tolerance.",
+                                    "utility": 8.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger persists in pursuit, but prey ultimately manages to flee; no meal secured.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "Retreat": {
+                                "Defend": {
+                                    "outcome": "Honey Badger retreats, avoiding conflict and potential injury, but foregoing the meal.",
+                                    "utility": 0.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger retreats, avoiding conflict and potential injury, but foregoing the meal.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prey (Snake/Bee Colony)",
+                        "actions": [
+                            "Defend",
+                            "Flee"
+                        ],
+                        "utilities": {
+                            "Defend": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey defends against the Honey Badger's initial attack, inflicting pain/injury and temporarily maintaining its safety.",
+                                    "utility": 3.0
+                                },
+                                "Persist": {
+                                    "outcome": "Prey defends vigorously but is eventually overcome by the Honey Badger's relentless persistence, resulting in its demise.",
+                                    "utility": -10.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Honey Badger retreats, leading to the Prey's safe survival without confrontation.",
+                                    "utility": 7.5
+                                }
+                            },
+                            "Flee": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey flees as the Honey Badger initiates an attack, successfully escaping before engagement and ensuring its survival.",
+                                    "utility": 5.0
+                                },
+                                "Persist": {
+                                    "outcome": "Prey flees from the persistent Honey Badger, narrowly escaping its pursuit and surviving.",
+                                    "utility": 4.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Honey Badger retreats, leading to the Prey's safe survival without confrontation.",
+                                    "utility": 7.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "PrevGame": [
+                    {
+                        "name": "Honey Badger",
+                        "actions": [
+                            "Initiate Attack",
+                            "Persist",
+                            "Retreat"
+                        ],
+                        "utilities": {
+                            "Initiate Attack": {
+                                "Defend": {
+                                    "outcome": "Honey Badger initiates attack and faces potent defenses; high risk of injury/envenomation, meal not secured.",
+                                    "utility": -4.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger initiates attack, but prey escapes; no meal, energy expended.",
+                                    "utility": -2.0
+                                }
+                            },
+                            "Persist": {
+                                "Defend": {
+                                    "outcome": "Honey Badger persists through severe defenses, securing the meal despite injury/stings due to remarkable resilience and high pain tolerance.",
+                                    "utility": 8.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger persists in pursuit, but prey ultimately manages to flee; no meal secured.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "Retreat": {
+                                "Defend": {
+                                    "outcome": "Honey Badger retreats, avoiding conflict and potential injury, but foregoing the meal.",
+                                    "utility": 0.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger retreats; prey would have fled anyway, resulting in no meal but also no harm or wasted energy.",
+                                    "utility": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prey (Snake/Bee Colony)",
+                        "actions": [
+                            "Defend",
+                            "Flee"
+                        ],
+                        "utilities": {
+                            "Defend": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey defends against the Honey Badger's initial attack, inflicting pain/injury and temporarily maintaining its safety.",
+                                    "utility": 3.0
+                                },
+                                "Persist": {
+                                    "outcome": "Prey defends vigorously but is eventually overcome by the Honey Badger's relentless persistence, resulting in its demise.",
+                                    "utility": -10.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Prey's defenses successfully deter the Honey Badger, forcing it to retreat and ensuring the Prey's survival.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Flee": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey flees as the Honey Badger initiates an attack, successfully escaping before engagement and ensuring its survival.",
+                                    "utility": 5.0
+                                },
+                                "Persist": {
+                                    "outcome": "Prey flees from the persistent Honey Badger, narrowly escaping its pursuit and surviving.",
+                                    "utility": 4.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Prey retreats, and the Honey Badger also retreats, resulting in no confrontation and the Prey's safe escape.",
+                                    "utility": 7.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The primary semantic issue lies in the interpretation of the 'Retreat' action for both players within a simultaneous game context. When the Honey Badger chooses to 'Retreat,' it signifies disengagement from the interaction. In a simultaneous game, the Prey's chosen action ('Defend' or 'Flee') is made at the same time as the Honey Badger's decision. If the Honey Badger chooses to retreat, the premise for the Prey's action as a direct *response to an ongoing threat* is removed.\n\nThe original game assigned different utilities to the Honey Badger's 'Retreat' depending on the Prey's action ('Defend' vs 'Flee'), which is semantically inconsistent since the Honey Badger's retreat should lead to a consistent outcome for itself (no meal, no harm/energy cost) regardless of what the Prey *would have done*. Similarly, for the Prey, if the Honey Badger retreats, the outcome for the Prey is simply safe survival, regardless of whether it simultaneously 'chose' to 'Defend' or 'Flee'; the threat has unilaterally withdrawn.\n\nTo resolve this, the outcomes and utilities associated with the Honey Badger's 'Retreat' action have been made consistent for both players:\n1.  **Honey Badger's 'Retreat' utility:** The utility for the Honey Badger choosing 'Retreat' is now uniformly 0.0, reflecting a neutral outcome where no meal is secured but no harm or wasted energy is incurred. The outcome description has also been made consistent.\n2.  **Prey's utility when Honey Badger 'Retreats':** The utility for the Prey when the Honey Badger chooses 'Retreat' is now uniformly 7.5, reflecting safe survival without confrontation, regardless of whether the Prey's own chosen action was 'Defend' or 'Flee'. The outcome description reflects this consistent scenario of the Honey Badger's withdrawal leading to the Prey's safety.",
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Persist": 0.0,
+                                "Retreat": 1.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 0.0,
+                                "Flee": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Persist": 0.0,
+                                "Retreat": 1.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 0.0,
+                                "Flee": 1.0
+                            }
+                        },
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Persist": 0.0,
+                                "Retreat": 1.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 0.27,
+                                "Flee": 0.73
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Persist": 0.0,
+                                "Retreat": 1.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 0.27,
+                                "Flee": 0.73
+                            }
+                        }
+                    ],
+                    "Comments": "Equilibrium found in Lemke-Hawson that isn't in Support or Vertex. Equilibria in Support and Vertex not equivalent. 1 equilibria found in Support. 2 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Honey Badger",
+                        "actions": [
+                            "Initiate Attack",
+                            "Committed Attack",
+                            "Retreat"
+                        ],
+                        "utilities": {
+                            "Initiate Attack": {
+                                "Defend": {
+                                    "outcome": "Honey Badger initiates attack and faces potent defenses; high risk of injury/envenomation, meal not secured.",
+                                    "utility": -4.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger initiates attack, but prey escapes; no meal, energy expended.",
+                                    "utility": -2.0
+                                }
+                            },
+                            "Committed Attack": {
+                                "Defend": {
+                                    "outcome": "Honey Badger persists through severe defenses, securing the meal despite injury/stings due to remarkable resilience and high pain tolerance.",
+                                    "utility": 8.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger persists in pursuit, but prey ultimately manages to flee; no meal secured.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "Retreat": {
+                                "Defend": {
+                                    "outcome": "Honey Badger retreats, avoiding conflict and potential injury, but foregoing the meal.",
+                                    "utility": 0.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger retreats, avoiding conflict and potential injury, but foregoing the meal.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prey (Snake/Bee Colony)",
+                        "actions": [
+                            "Defend",
+                            "Flee"
+                        ],
+                        "utilities": {
+                            "Defend": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey defends against the Honey Badger's initial attack, inflicting pain/injury and temporarily maintaining its safety.",
+                                    "utility": 3.0
+                                },
+                                "Committed Attack": {
+                                    "outcome": "Prey defends vigorously but is eventually overcome by the Honey Badger's relentless persistence, resulting in its demise.",
+                                    "utility": -10.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Honey Badger retreats, leading to the Prey's safe survival without confrontation.",
+                                    "utility": 7.5
+                                }
+                            },
+                            "Flee": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey flees as the Honey Badger initiates an attack, successfully escaping before engagement and ensuring its survival.",
+                                    "utility": 5.0
+                                },
+                                "Committed Attack": {
+                                    "outcome": "Prey attempts to flee from the persistent Honey Badger, but is ultimately caught and overcome due to the Badger's relentless pursuit, resulting in demise.",
+                                    "utility": -12.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Honey Badger retreats, leading to the Prey's safe survival without confrontation.",
+                                    "utility": 7.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game setup effectively captures the core dilemma and behaviors described for both the Honey Badger and its prey. The utilities generally reflect biologically plausible preferences, with successful foraging being highly valuable for the predator and survival being paramount for the prey. The relative values (e.g., death being the lowest utility for prey, securing a meal being high for the badger) are appropriate. The game is also non-trivial, with clear distinctions in outcomes and utilities, encouraging strategic choice.\n\nHowever, there is a semantic issue regarding the Honey Badger's actions, specifically \"Initiate Attack\" and \"Persist\", within the context of a simultaneous game.\n\n**Issue:**\nThe actions \"Initiate Attack\" and \"Persist\" for the Honey Badger are presented as mutually exclusive choices available at the same initial decision point. Biologically, \"Initiate Attack\" describes the *start* of an engagement, while \"Persist\" implies *continuation* through an already ongoing challenge. An animal cannot simultaneously \"initiate\" an attack and \"persist\" through its defenses as a single, first choice in an interaction. \"Persist\" is typically a follow-up action or a decision made *after* an initial attack has begun and met resistance. This violates the principle of mutually exclusive actions for a simultaneous game, where all actions must be distinct options available at the same moment.\n\n**Proposed Change:**\nTo maintain the integrity of a simultaneous game model and improve biological fidelity, the action \"Persist\" for the Honey Badger should be renamed to reflect an initial strategic stance or level of commitment rather than a temporal phase.\n\n*   **Change:** Rename the Honey Badger's action \"Persist\" to \"Committed Attack\" or \"Relentless Attack\".\n\n*   **Reasoning:** This rephrasing clarifies that this action represents an initial strategic choice by the Honey Badger to engage with an unwavering determination to see the attack through, regardless of immediate costs. This contrasts with \"Initiate Attack\" (which could then be interpreted as a more \"Probing Attack\" or standard engagement, where the badger might be more inclined to retreat if faced with strong defense). By framing them as distinct *strategies* for engagement (\"Probing Attack\", \"Committed Attack\", \"Retreat\") chosen at the outset, they become truly mutually exclusive actions in a simultaneous game, accurately reflecting the Honey Badger's described tenacity as an inherent characteristic of its attack strategy rather than a reactive, sequential behavior. The outcomes and utilities associated with the current \"Persist\" action (e.g., securing the meal despite injury) strongly support this interpretation of a pre-determined, high-commitment strategy.",
+                "OldGame": [
+                    {
+                        "name": "Honey Badger",
+                        "actions": [
+                            "Initiate Attack",
+                            "Persist",
+                            "Retreat"
+                        ],
+                        "utilities": {
+                            "Initiate Attack": {
+                                "Defend": {
+                                    "outcome": "Honey Badger initiates attack and faces potent defenses; high risk of injury/envenomation, meal not secured.",
+                                    "utility": -4.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger initiates attack, but prey escapes; no meal, energy expended.",
+                                    "utility": -2.0
+                                }
+                            },
+                            "Persist": {
+                                "Defend": {
+                                    "outcome": "Honey Badger persists through severe defenses, securing the meal despite injury/stings due to remarkable resilience and high pain tolerance.",
+                                    "utility": 8.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger persists in pursuit, but prey ultimately manages to flee; no meal secured.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "Retreat": {
+                                "Defend": {
+                                    "outcome": "Honey Badger retreats, avoiding conflict and potential injury, but foregoing the meal.",
+                                    "utility": 0.0
+                                },
+                                "Flee": {
+                                    "outcome": "Honey Badger retreats, avoiding conflict and potential injury, but foregoing the meal.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prey (Snake/Bee Colony)",
+                        "actions": [
+                            "Defend",
+                            "Flee"
+                        ],
+                        "utilities": {
+                            "Defend": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey defends against the Honey Badger's initial attack, inflicting pain/injury and temporarily maintaining its safety.",
+                                    "utility": 3.0
+                                },
+                                "Persist": {
+                                    "outcome": "Prey defends vigorously but is eventually overcome by the Honey Badger's relentless persistence, resulting in its demise.",
+                                    "utility": -10.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Honey Badger retreats, leading to the Prey's safe survival without confrontation.",
+                                    "utility": 7.5
+                                }
+                            },
+                            "Flee": {
+                                "Initiate Attack": {
+                                    "outcome": "Prey flees as the Honey Badger initiates an attack, successfully escaping before engagement and ensuring its survival.",
+                                    "utility": 5.0
+                                },
+                                "Persist": {
+                                    "outcome": "Prey attempts to flee from the persistent Honey Badger, but is ultimately caught and overcome due to the Badger's relentless pursuit, resulting in demise.",
+                                    "utility": -12.0
+                                },
+                                "Retreat": {
+                                    "outcome": "Honey Badger retreats, leading to the Prey's safe survival without confrontation.",
+                                    "utility": 7.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Committed Attack": 1.0,
+                                "Retreat": 0.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 1.0,
+                                "Flee": 0.0
+                            }
+                        },
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Committed Attack": 0.0,
+                                "Retreat": 1.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 0.0,
+                                "Flee": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Committed Attack": 1.0,
+                                "Retreat": 0.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 1.0,
+                                "Flee": 0.0
+                            }
+                        },
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Committed Attack": 0.0,
+                                "Retreat": 1.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 0.0,
+                                "Flee": 1.0
+                            }
+                        },
+                        {
+                            "Honey Badger": {
+                                "Initiate Attack": 0.0,
+                                "Committed Attack": 0.0,
+                                "Retreat": 1.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 0.27,
+                                "Flee": 0.73
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Honey Badger": {
+                                "Committed Attack": 1.0,
+                                "Initiate Attack": 0.0,
+                                "Retreat": 0.0
+                            },
+                            "Prey (Snake/Bee Colony)": {
+                                "Defend": 1.0,
+                                "Flee": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "Equilibria in Support and Vertex not equivalent. 2 equilibria found in Support. 3 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Honey Badger": "Persist",
+            "Prey (Snake/Bee Colony)": "Defend"
+        }
+    },
+    {
+        "Species": [
+            "Pepsis formosa",
+            "Aphonopelma chalcodes"
+        ],
+        "Description": "The Tarantula Hawk Wasp is a specialized parasitoid that preys exclusively on tarantulas. Despite being significantly smaller, the female wasp actively hunts and paralyzes the large, formidable spider with a potent sting. The non-trivial dilemma for the tarantula is its relatively ineffective defense mechanisms (e.g., urticating hairs) against the wasp's precision and speed, often leading to paralysis and subsequent horrifying fate as a living host for the wasp's larva. For the wasp, the dilemma is the high risk involved in approaching and stinging a potentially dangerous opponent accurately, as a single misstep could result in injury or death, yet successful provisioning is essential for its offspring's survival.",
+        "Query": "Tarantula Hawk Wasp Pepsis spider paralysis parasitoid",
+        "Article": "*   \"Hemipepsis ustulata is a species of tarantula hawk wasp native to the Southwestern United States. Tarantula hawks are a large, conspicuous family of long-legged wasps that prey on tarantulas by using their long legs to grapple with their prey and then paralyze them with a powerful sting (ranked as one of the most painful in the insect world by the Schmidt sting pain index).\"\n\n*   \"After mating, the female wasp seeks out a tarantula, either free-ranging or in its burrow. After grappling with the tarantula, the wasp delivers a powerful sting that paralyzes the tarantula, but keeps it alive. This allows the wasp to lay an egg that adheres to the spider's abdomen. One egg is provisioned per tarantula.\"\n\n*   \"When the larva hatches, it feeds on the spider's organs, keeping the spider alive for as long as possible while doing so.\"\n\n*   \"The territorial males of this species perch on prominent vegetation at high elevations (1500 m or higher) and chase away intruders.\"\n\n*   \"The debilitating, painful sting of H. ustulata deters nearly all predators.\"\n\n*   \"The venom from the sting of H. ustulata is able to paralyze prey for several months; this paralysis is not directly fatal, but prey is likely to starve to death before the paralysis wears off.\"\n\n*   \"Tarantula hawks use convergent coloration for defense. Female tarantula hawks ward off potential predators with their sting, and males, which are stingless, ward off predators as they bear resemblance to the female.\"\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Female Tarantula Hawk Wasp",
+                        "actions": [
+                            "Attempt Paralysis Sting",
+                            "Abort Attack"
+                        ],
+                        "utilities": {
+                            "Attempt Paralysis Sting": {
+                                "Deploy Urticating Hairs": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula; the tarantula's urticating hairs are ineffective as a deterrent but may cause minor irritation to the wasp.",
+                                    "utility": 0.9
+                                },
+                                "Attempt Evasion": {
+                                    "outcome": "The wasp, utilizing its precision and speed, successfully tracks and stings the tarantula, paralyzing it, despite the tarantula's attempt to evade.",
+                                    "utility": 1.0
+                                },
+                                "Counter-Attack": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula, but faces significant danger from the tarantula's counter-attack, incurring high personal risk of injury or death.",
+                                    "utility": 0.5
+                                }
+                            },
+                            "Abort Attack": {
+                                "Deploy Urticating Hairs": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, avoiding conflict with the tarantula and its hairs, but failing to provision for its offspring.",
+                                    "utility": 0.0
+                                },
+                                "Attempt Evasion": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, allowing the tarantula to evade without engagement, and failing to provision for its offspring.",
+                                    "utility": 0.0
+                                },
+                                "Counter-Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, safely avoiding a dangerous counter-attack from the tarantula, but failing to provision for its offspring.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Tarantula",
+                        "actions": [
+                            "Deploy Urticating Hairs",
+                            "Attempt Evasion",
+                            "Counter-Attack"
+                        ],
+                        "utilities": {
+                            "Deploy Urticating Hairs": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula; the tarantula's urticating hairs are ineffective as a deterrent but may cause minor irritation to the wasp. The tarantula is paralyzed and will become host to a larva.",
+                                    "utility": -1.0
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, avoiding conflict with the tarantula and its hairs. The tarantula is safe from immediate attack.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Attempt Evasion": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "The wasp, utilizing its precision and speed, successfully tracks and stings the tarantula, paralyzing it, despite the tarantula's attempt to evade. The tarantula is paralyzed and will become host to a larva.",
+                                    "utility": -1.0
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, allowing the tarantula to evade without engagement. The tarantula is safe from immediate attack.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Counter-Attack": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "Despite the tarantula's counter-attack, which posed a significant danger to the wasp, the wasp successfully stings and paralyzes the tarantula. The tarantula is paralyzed and will become host to a larva, its horrifying fate unadverted.",
+                                    "utility": -1.0
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, safely avoiding a dangerous counter-attack from the tarantula. The tarantula successfully defends itself by posing a threat, and the wasp retreats.",
+                                    "utility": 1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "None\nNew game suggested was not formally valid: Invalid game data structure: must be a list.",
+                "Validated": true,
+                "Feedback": "The game might be degenerate. Check if one or both players are indifferent to their strategies. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Female Tarantula Hawk Wasp": {
+                                "Attempt Paralysis Sting": 1.0,
+                                "Abort Attack": 0.0
+                            },
+                            "Tarantula": {
+                                "Deploy Urticating Hairs": 1.0,
+                                "Attempt Evasion": 0.0,
+                                "Counter-Attack": 0.0
+                            }
+                        },
+                        {
+                            "Female Tarantula Hawk Wasp": {
+                                "Attempt Paralysis Sting": 1.0,
+                                "Abort Attack": 0.0
+                            },
+                            "Tarantula": {
+                                "Deploy Urticating Hairs": 0.0,
+                                "Attempt Evasion": 1.0,
+                                "Counter-Attack": 0.0
+                            }
+                        },
+                        {
+                            "Female Tarantula Hawk Wasp": {
+                                "Attempt Paralysis Sting": 1.0,
+                                "Abort Attack": 0.0
+                            },
+                            "Tarantula": {
+                                "Deploy Urticating Hairs": 0.0,
+                                "Attempt Evasion": 0.0,
+                                "Counter-Attack": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [],
+                    "LemkeHawson": [
+                        {
+                            "Female Tarantula Hawk Wasp": {
+                                "Abort Attack": 0.0,
+                                "Attempt Paralysis Sting": 1.0
+                            },
+                            "Tarantula": {
+                                "Attempt Evasion": 0.0,
+                                "Counter-Attack": 0.0,
+                                "Deploy Urticating Hairs": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "Equilibrium found in Lemke-Hawson that isn't in Support or Vertex. Equilibria in Support and Vertex not equivalent. 3 equilibria found in Support. 0 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Female Tarantula Hawk Wasp",
+                        "actions": [
+                            "Attempt Paralysis Sting",
+                            "Abort Attack"
+                        ],
+                        "utilities": {
+                            "Attempt Paralysis Sting": {
+                                "Deploy Urticating Hairs": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula; the tarantula's urticating hairs are ineffective as a deterrent but may cause minor irritation to the wasp.",
+                                    "utility": 0.9
+                                },
+                                "Attempt Evasion": {
+                                    "outcome": "The wasp, utilizing its precision and speed, successfully tracks and stings the tarantula, paralyzing it, despite the tarantula's attempt to evade.",
+                                    "utility": 1.0
+                                },
+                                "Counter-Attack": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula, but faces significant danger from the tarantula's counter-attack, incurring high personal risk of injury or death.",
+                                    "utility": 0.5
+                                }
+                            },
+                            "Abort Attack": {
+                                "Deploy Urticating Hairs": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, avoiding conflict with the tarantula and its hairs, but failing to provision for its offspring.",
+                                    "utility": 0.0
+                                },
+                                "Attempt Evasion": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, allowing the tarantula to evade without engagement, and failing to provision for its offspring.",
+                                    "utility": 0.0
+                                },
+                                "Counter-Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, safely avoiding a dangerous counter-attack from the tarantula, but failing to provision for its offspring.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Tarantula",
+                        "actions": [
+                            "Deploy Urticating Hairs",
+                            "Attempt Evasion",
+                            "Counter-Attack"
+                        ],
+                        "utilities": {
+                            "Deploy Urticating Hairs": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula; the tarantula's urticating hairs are ineffective as a deterrent but may cause minor irritation to the wasp. The tarantula is paralyzed and will become host to a larva.",
+                                    "utility": -0.9
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, avoiding conflict with the tarantula and its hairs. The tarantula is safe from immediate attack.",
+                                    "utility": 0.9
+                                }
+                            },
+                            "Attempt Evasion": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "The wasp, utilizing its precision and speed, successfully tracks and stings the tarantula, paralyzing it, despite the tarantula's attempt to evade. The tarantula is paralyzed and will become host to a larva.",
+                                    "utility": -1.0
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, allowing the tarantula to evade without engagement. The tarantula is safe from immediate attack.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Counter-Attack": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "Despite the tarantula's counter-attack, which posed a significant danger to the wasp, the wasp successfully stings and paralyzes the tarantula. The tarantula is paralyzed and will become host to a larva, its horrifying fate unadverted.",
+                                    "utility": -1.2
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, safely avoiding a dangerous counter-attack from the tarantula. The tarantula successfully defends itself by posing a threat, and the wasp retreats.",
+                                    "utility": 0.8
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition provided largely demonstrates a high degree of fidelity to the natural world and the specific interaction described, with biologically plausible actions and a sensible general order of preferences for both players. The dilemmas faced by both the Wasp and the Tarantula are well-represented by the differing utilities based on the outcomes.\n\nHowever, there is one key area that requires adjustment to fully align with the validation criteria, specifically point 3: \"The game is not trivial or degenerate, e.g. the animal is not indifferent to its choices.\"\n\n**Issue:**\n\n1.  **Tarantula's Indifference to its Choices when the Wasp Aborts Attack:**\n    When the \"Female Tarantula Hawk Wasp\" chooses to \"Abort Attack\", the \"Tarantula\" is assigned a utility of `1.0` regardless of its own chosen action (\"Deploy Urticating Hairs\", \"Attempt Evasion\", or \"Counter-Attack\"). This implies that if the wasp decides to disengage, the tarantula is indifferent to which defensive action it undertook, as all lead to the same maximal positive outcome (survival). While survival is indeed the top priority, biological realism suggests there might be subtle differences in cost or efficiency associated with each defensive maneuver, even if the immediate outcome is the same (safety). For example, deploying urticating hairs is a resource expenditure, attempting evasion requires energy, and a counter-attack is a high-risk, high-energy endeavor. Assigning identical utilities here makes the tarantula indifferent to its choices in this specific scenario, violating the non-degeneracy condition.\n\n**Proposed Changes:**\n\nTo address the tarantula's indifference and maintain biological plausibility while ensuring non-degeneracy, the utilities for the Tarantula when the Wasp chooses \"Abort Attack\" should be differentiated:\n\n*   **Tarantula's Utility for \"Deploy Urticating Hairs\" when Wasp chooses \"Abort Attack\":**\n    *   **Current Utility:** `1.0`\n    *   **Proposed Utility:** `0.9`\n    *   **Reasoning:** While the tarantula is safe, deploying urticating hairs is a defensive resource that can be lost and may require time and energy to regenerate. A successful deterrence that involves expending this resource should be slightly less optimal than one that requires no such expenditure.\n\n*   **Tarantula's Utility for \"Attempt Evasion\" when Wasp chooses \"Abort Attack\":**\n    *   **Current Utility:** `1.0`\n    *   **Proposed Utility:** `1.0`\n    *   **Reasoning:** If the wasp aborts the attack, a successful evasion (even if just an attempt that is not truly tested) represents a clean disengagement with minimal direct confrontation or significant resource loss beyond locomotion. This can be considered the ideal outcome for the tarantula's safety strategy.\n\n*   **Tarantula's Utility for \"Counter-Attack\" when Wasp chooses \"Abort Attack\":**\n    *   **Current Utility:** `1.0`\n    *   **Proposed Utility:** `0.8`\n    *   **Reasoning:** Although the counter-attack successfully deters the wasp and leads to safety, mounting a counter-attack is a high-energy, high-risk behavior as indicated in the wasp's outcomes. Even if it results in the wasp retreating, the energy expenditure and the inherent risk of engaging in such a confrontation should result in a slightly lower utility compared to a clean evasion, reflecting the higher cost of this particular defensive posture.\n\n**Revised Game Definition (relevant section only):**\n\n```json\n{\n    \"name\": \"Tarantula\",\n    \"actions\": [\"Deploy Urticating Hairs\", \"Attempt Evasion\", \"Counter-Attack\"],\n    \"utilities\": {\n        \"Deploy Urticating Hairs\": {\n            \"Attempt Paralysis Sting\": { ... },\n            \"Abort Attack\": {\n                \"outcome\": \"The wasp decides to disengage and abort the attack, avoiding conflict with the tarantula and its hairs. The tarantula is safe from immediate attack.\",\n                \"utility\": 0.9\n            }\n        },\n        \"Attempt Evasion\": {\n            \"Attempt Paralysis Sting\": { ... },\n            \"Abort Attack\": {\n                \"outcome\": \"The wasp decides to disengage and abort the attack, allowing the tarantula to evade without engagement. The tarantula is safe from immediate attack.\",\n                \"utility\": 1.0\n            }\n        },\n        \"Counter-Attack\": {\n            \"Attempt Paralysis Sting\": { ... },\n            \"Abort Attack\": {\n                \"outcome\": \"The wasp decides to disengage and abort the attack, safely avoiding a dangerous counter-attack from the tarantula. The tarantula successfully defends itself by posing a threat, and the wasp retreats.\",\n                \"utility\": 0.8\n            }\n        }\n    }\n}\n```",
+                "OldGame": [
+                    {
+                        "name": "Female Tarantula Hawk Wasp",
+                        "actions": [
+                            "Attempt Paralysis Sting",
+                            "Abort Attack"
+                        ],
+                        "utilities": {
+                            "Attempt Paralysis Sting": {
+                                "Deploy Urticating Hairs": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula; the tarantula's urticating hairs are ineffective as a deterrent but may cause minor irritation to the wasp.",
+                                    "utility": 0.9
+                                },
+                                "Attempt Evasion": {
+                                    "outcome": "The wasp, utilizing its precision and speed, successfully tracks and stings the tarantula, paralyzing it, despite the tarantula's attempt to evade.",
+                                    "utility": 1.0
+                                },
+                                "Counter-Attack": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula, but faces significant danger from the tarantula's counter-attack, incurring high personal risk of injury or death.",
+                                    "utility": 0.5
+                                }
+                            },
+                            "Abort Attack": {
+                                "Deploy Urticating Hairs": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, avoiding conflict with the tarantula and its hairs, but failing to provision for its offspring.",
+                                    "utility": 0.0
+                                },
+                                "Attempt Evasion": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, allowing the tarantula to evade without engagement, and failing to provision for its offspring.",
+                                    "utility": 0.0
+                                },
+                                "Counter-Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, safely avoiding a dangerous counter-attack from the tarantula, but failing to provision for its offspring.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Tarantula",
+                        "actions": [
+                            "Deploy Urticating Hairs",
+                            "Attempt Evasion",
+                            "Counter-Attack"
+                        ],
+                        "utilities": {
+                            "Deploy Urticating Hairs": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "The wasp successfully stings and paralyzes the tarantula; the tarantula's urticating hairs are ineffective as a deterrent but may cause minor irritation to the wasp. The tarantula is paralyzed and will become host to a larva.",
+                                    "utility": -0.9
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, avoiding conflict with the tarantula and its hairs. The tarantula is safe from immediate attack.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Attempt Evasion": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "The wasp, utilizing its precision and speed, successfully tracks and stings the tarantula, paralyzing it, despite the tarantula's attempt to evade. The tarantula is paralyzed and will become host to a larva.",
+                                    "utility": -1.0
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, allowing the tarantula to evade without engagement. The tarantula is safe from immediate attack.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Counter-Attack": {
+                                "Attempt Paralysis Sting": {
+                                    "outcome": "Despite the tarantula's counter-attack, which posed a significant danger to the wasp, the wasp successfully stings and paralyzes the tarantula. The tarantula is paralyzed and will become host to a larva, its horrifying fate unadverted.",
+                                    "utility": -1.2
+                                },
+                                "Abort Attack": {
+                                    "outcome": "The wasp decides to disengage and abort the attack, safely avoiding a dangerous counter-attack from the tarantula. The tarantula successfully defends itself by posing a threat, and the wasp retreats.",
+                                    "utility": 1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Female Tarantula Hawk Wasp": {
+                                "Attempt Paralysis Sting": 1.0,
+                                "Abort Attack": 0.0
+                            },
+                            "Tarantula": {
+                                "Deploy Urticating Hairs": 1.0,
+                                "Attempt Evasion": 0.0,
+                                "Counter-Attack": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Female Tarantula Hawk Wasp": {
+                                "Attempt Paralysis Sting": 1.0,
+                                "Abort Attack": 0.0
+                            },
+                            "Tarantula": {
+                                "Deploy Urticating Hairs": 1.0,
+                                "Attempt Evasion": 0.0,
+                                "Counter-Attack": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Female Tarantula Hawk Wasp": {
+                                "Abort Attack": 0.0,
+                                "Attempt Paralysis Sting": 1.0
+                            },
+                            "Tarantula": {
+                                "Attempt Evasion": 0.0,
+                                "Counter-Attack": 0.0,
+                                "Deploy Urticating Hairs": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Female Tarantula Hawk Wasp": "Attempt Paralysis Sting",
+            "Tarantula": "Deploy Urticating Hairs"
+        }
+    },
+    {
+        "Species": [
+            "Varanus komodoensis",
+            "Bubalus bubalis"
+        ],
+        "Description": "Komodo Dragons are apex predators that employ a unique \"bite and wait\" hunting strategy, often targeting large prey like water buffalo or deer. The non-trivial dilemma for the prey is that even if it initially escapes the dragon's attack, the bites deliver a cocktail of anticoagulant venom and potent bacteria that lead to severe blood loss, shock, and eventual systemic infection. The prey slowly weakens over days, presenting a prolonged and agonizing demise. For the dragon, the dilemma is the patience required to track the debilitated prey for extended periods, risking the prey dying elsewhere or being scavenged by other animals before it succumbs, balancing energy conservation with the need to secure the kill.",
+        "Query": "Komodo Dragon bite-and-wait hunting strategy venom bacteria",
+        "Article": "Error"
+    },
+    {
+        "Species": [
+            "Spea multiplicata"
+        ],
+        "Description": "In New Mexico Spadefoot Toads, tadpoles exhibit a remarkable developmental plasticity where some individuals can develop into a carnivorous morph. This morph specializes in preying on other tadpoles, including their own siblings and non-kin, often in ephemeral desert ponds. The non-trivial dilemma is a trade-off: rapid development and larger size (beneficial in drying ponds) achieved through cannibalism, but at the cost of consuming kin and potential pathogens from conspecifics. For the herbivorous morphs, the dilemma is the risk of being preyed upon by their own kin, forcing a survival race against both predation and environmental desiccation in a confined, temporary habitat.",
+        "Query": "Spadefoot Toad tadpole cannibalism developmental plasticity ephemeral ponds",
+        "Article": "*   Frogs are widely distributed, ranging from the tropics to subarctic regions, but the greatest concentration of species diversity is in tropical rainforest and associated wetlands. They account for around 88% of extant amphibian species, and are one of the five most diverse vertebrate orders. The oldest fossil \"proto-frog\" Triadobatrachus is known from the Early Triassic of Madagascar (250 million years ago), but molecular clock dating suggests their divergence from other amphibians may extend further back to the Permian, 265 million years ago.\n\n*   Adult frogs have a stout body, protruding eyes, anteriorly-attached tongue, limbs folded underneath, and no tail (the \"tail\" of tailed frogs is an extension of the male cloaca). Frogs have glandular skin, with secretions ranging from distasteful to toxic. Their skin varies in colour from well-camouflaged dappled brown, grey and green, to vivid patterns of bright red or yellow and black to show toxicity and ward off predators. Adult frogs live in both fresh water and on dry land; some species are adapted for living underground or in trees. As their skin is semi-permeable, making them susceptible to dehydration, they either live in moist ecological niches or have special adaptations to deal with drier habitats. Frogs produce a wide range of vocalisations, particularly in their breeding season, and exhibit many different kinds of complex behaviours to attract mates, to fend off predators and to generally survive.\n\n*   Being oviparous anamniotes, frogs typically spawn their eggs in bodies of water. The eggs then hatch into fully aquatic larvae called tadpoles, which have tails and internal gills. A few species lay eggs on land or bypass the tadpole stage altogether. Tadpoles have highly specialised rasping mouth parts suitable for herbivorous, omnivorous or planktivorous diets. The life cycle is completed when they metamorphose into semiaquatic adults capable of terrestrial locomotion and hybrid respiration using both lungs aided by buccal pumping and gas exchange across the skin, and the larval tail regresses into an internal urostyle. Adult frogs generally have a carnivorous diet consisting of small invertebrates, especially insects, but omnivorous species exist and a few feed on plant matter. Frogs generally seize and ingest food by protruding their adhesive tongue and then swallow the item whole, often using their eyeballs and extraocular muscles to help pushing down the throat, and their digestive system is extremely efficient at converting what they eat into body mass. Being low-level consumers, both tadpoles and adult frogs are an important food source for other predators and a vital part of the food web dynamics of many of the world's ecosystems.\n\n*   At the breeding site, the male mounts the female and grips her tightly round the body. Typically, amplexus takes place in the water, the female releases her eggs and the male covers them with sperm; fertilisation is external. In many species such as the Great Plains toad (Bufo cognatus), the male restrains the eggs with his back feet, holding them in place for about three minutes. Members of the West African genus Nimbaphrynoides are unique among frogs in that they are viviparous; Limnonectes larvaepartus, Eleutherodactylus jasperi and members of the Tanzanian genus Nectophrynoides are the only frogs known to be ovoviviparous. In these species, fertilisation is internal and females give birth to fully developed juvenile frogs, except L. larvaepartus, which give birth to tadpoles.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Carnivorous Tadpole",
+                        "actions": [
+                            "Hunt Tadpoles",
+                            "Forage Non-Tadpole Food"
+                        ],
+                        "utilities": {
+                            "Hunt Tadpoles": {
+                                "Graze": {
+                                    "outcome": "Carnivorous Tadpole successfully preys on the stationary Herbivorous Tadpole, gaining significant resources for rapid development and larger size, crucial for survival in the ephemeral pond.",
+                                    "utility": 9.0
+                                },
+                                "Attempt Escape": {
+                                    "outcome": "Carnivorous Tadpole attempts to hunt the escaping Herbivorous Tadpole. Given its specialization, it generally succeeds, but with slightly more effort and a minor increased risk compared to a stationary target, still achieving significant developmental benefits.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Forage Non-Tadpole Food": {
+                                "Graze": {
+                                    "outcome": "Carnivorous Tadpole forages for non-tadpole food. This provides sustenance but does not offer the accelerated development or size benefits as efficiently as cannibalism, making it a less optimal strategy for rapid growth in a temporary pond.",
+                                    "utility": 3.0
+                                },
+                                "Attempt Escape": {
+                                    "outcome": "Carnivorous Tadpole focuses on foraging for non-tadpole food. The Herbivorous Tadpole's attempt to escape does not directly impact the Carnivorous Tadpole's ability to acquire non-tadpole food, providing general sustenance.",
+                                    "utility": 3.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Herbivorous Tadpole",
+                        "actions": [
+                            "Graze",
+                            "Attempt Escape"
+                        ],
+                        "utilities": {
+                            "Graze": {
+                                "Hunt Tadpoles": {
+                                    "outcome": "Herbivorous Tadpole remains stationary while the Carnivorous Tadpole actively hunts, leading to successful predation. The Herbivorous Tadpole is consumed, resulting in its demise.",
+                                    "utility": -10.0
+                                },
+                                "Forage Non-Tadpole Food": {
+                                    "outcome": "Herbivorous Tadpole grazes, acquiring necessary resources for sustenance and survival, while the Carnivorous Tadpole focuses on non-tadpole food, posing no immediate threat.",
+                                    "utility": 5.0
+                                }
+                            },
+                            "Attempt Escape": {
+                                "Hunt Tadpoles": {
+                                    "outcome": "Herbivorous Tadpole attempts to escape the hunting Carnivorous Tadpole. Despite the attempt, the specialized Carnivorous Tadpole generally succeeds in predation, though with slightly more effort. The Herbivorous Tadpole is likely consumed.",
+                                    "utility": -9.0
+                                },
+                                "Forage Non-Tadpole Food": {
+                                    "outcome": "Herbivorous Tadpole attempts to escape, but the Carnivorous Tadpole is occupied with foraging non-tadpole food. The escape attempt is unnecessary but harmless, and the Herbivorous Tadpole remains safe, though expending some energy needlessly.",
+                                    "utility": 4.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "None\nNew game suggested was not formally valid: Invalid game data structure: must be a list.",
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Carnivorous Tadpole": {
+                                "Hunt Tadpoles": 1.0,
+                                "Forage Non-Tadpole Food": 0.0
+                            },
+                            "Herbivorous Tadpole": {
+                                "Graze": 0.0,
+                                "Attempt Escape": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Carnivorous Tadpole": {
+                                "Hunt Tadpoles": 1.0,
+                                "Forage Non-Tadpole Food": 0.0
+                            },
+                            "Herbivorous Tadpole": {
+                                "Graze": 0.0,
+                                "Attempt Escape": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Carnivorous Tadpole": {
+                                "Forage Non-Tadpole Food": 0.0,
+                                "Hunt Tadpoles": 1.0
+                            },
+                            "Herbivorous Tadpole": {
+                                "Attempt Escape": 1.0,
+                                "Graze": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Carnivorous Tadpole",
+                        "actions": [
+                            "Hunt Tadpoles",
+                            "Forage Non-Tadpole Food"
+                        ],
+                        "utilities": {
+                            "Hunt Tadpoles": {
+                                "Graze": {
+                                    "outcome": "Carnivorous Tadpole successfully preys on the stationary Herbivorous Tadpole, gaining significant resources for rapid development and larger size, crucial for survival in the ephemeral pond.",
+                                    "utility": 9.0
+                                },
+                                "Attempt Escape": {
+                                    "outcome": "Carnivorous Tadpole attempts to hunt the escaping Herbivorous Tadpole. Given its specialization, it generally succeeds, but with slightly more effort and a minor increased risk compared to a stationary target, still achieving significant developmental benefits.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Forage Non-Tadpole Food": {
+                                "Graze": {
+                                    "outcome": "Carnivorous Tadpole forages for non-tadpole food. This provides sustenance but does not offer the accelerated development or size benefits as efficiently as cannibalism, making it a less optimal strategy for rapid growth in a temporary pond.",
+                                    "utility": 3.0
+                                },
+                                "Attempt Escape": {
+                                    "outcome": "Carnivorous Tadpole focuses on foraging for non-tadpole food. The Herbivorous Tadpole's attempt to escape does not directly impact the Carnivorous Tadpole's ability to acquire non-tadpole food, providing general sustenance.",
+                                    "utility": 3.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Herbivorous Tadpole",
+                        "actions": [
+                            "Graze",
+                            "Attempt Escape"
+                        ],
+                        "utilities": {
+                            "Graze": {
+                                "Hunt Tadpoles": {
+                                    "outcome": "Herbivorous Tadpole remains stationary while the Carnivorous Tadpole actively hunts, leading to successful predation. The Herbivorous Tadpole is consumed, resulting in its demise.",
+                                    "utility": -9.0
+                                },
+                                "Forage Non-Tadpole Food": {
+                                    "outcome": "Herbivorous Tadpole grazes, acquiring necessary resources for sustenance and survival, while the Carnivorous Tadpole focuses on non-tadpole food, posing no immediate threat.",
+                                    "utility": 5.0
+                                }
+                            },
+                            "Attempt Escape": {
+                                "Hunt Tadpoles": {
+                                    "outcome": "Herbivorous Tadpole attempts to escape the hunting Carnivorous Tadpole. Despite the attempt, the specialized Carnivorous Tadpole generally succeeds in predation, though with slightly more effort. The Herbivorous Tadpole is likely consumed, but the act of attempting escape represents a marginally preferred, albeit often futile, survival strategy compared to passively accepting predation.",
+                                    "utility": -8.5
+                                },
+                                "Forage Non-Tadpole Food": {
+                                    "outcome": "Herbivorous Tadpole attempts to escape, but the Carnivorous Tadpole is occupied with foraging non-tadpole food. The escape attempt is unnecessary but harmless, and the Herbivorous Tadpole remains safe, though expending some energy needlessly.",
+                                    "utility": 4.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition is largely well-structured and aligns with the biological description provided. The actions are mutually exclusive and biologically plausible. The relative utilities for the Carnivorous Tadpole make sense, reflecting the benefits of cannibalism for rapid development versus general foraging.\n\nHowever, there is one key area where the game becomes degenerate, violating the principle that an animal should not be indifferent to its choices, particularly in life-or-death situations:\n\n**Issue:**\nFor the \"Herbivorous Tadpole,\" when the \"Carnivorous Tadpole\" chooses to \"Hunt Tadpoles,\" the utility for the Herbivorous Tadpole is -9.0 whether it chooses to \"Graze\" or \"Attempt Escape.\"\n*   `Herbivorous Tadpole` -> `Graze` vs `Hunt Tadpoles`: utility -9.0\n*   `Herbivorous Tadpole` -> `Attempt Escape` vs `Hunt Tadpoles`: utility -9.0\n\nThis identical utility implies that the Herbivorous Tadpole is completely indifferent between remaining stationary and attempting to escape when actively hunted. Biologically, even if the success rate of escape is very low against a specialized predator, an animal will almost invariably attempt to flee, indicating that \"trying to escape\" is generally a slightly preferred or less undesirable option than passively accepting predation. If the outcome is always death (represented by -9.0), then there's no strategic difference in attempting to escape, making the \"Attempt Escape\" action degenerate in this specific context. The description states \"generally succeeds\" and \"likely consumed,\" which allows for a small, non-zero chance of escape, or at least a slightly less negative outcome for attempting to evade.\n\n**Proposed Change:**\nModify the utility for the \"Herbivorous Tadpole\" when it chooses \"Attempt Escape\" and the \"Carnivorous Tadpole\" chooses \"Hunt Tadpoles.\" Increase this utility slightly from -9.0 to a marginally less negative value, for example, -8.5 or -8.0.\n\n**Rationale for Change:**\nThis adjustment ensures that the \"Herbivorous Tadpole\" is not indifferent to its choices when facing predation, even if the odds are stacked against it. It reflects the biological reality that an attempt at evasion, even if often unsuccessful, is generally a more adaptive behavior than remaining stationary, and thus would carry a slightly higher (less negative) utility, even if it still results in a very high probability of mortality. This makes the game non-degenerate and more accurately models the subtle trade-offs and decisions made by the prey.\n\n```json\n[\n  {\n    \"name\": \"Carnivorous Tadpole\",\n    \"actions\": [\"Hunt Tadpoles\", \"Forage Non-Tadpole Food\"],\n    \"utilities\": {\n      \"Hunt Tadpoles\": {\n        \"Graze\": {\n          \"outcome\": \"Carnivorous Tadpole successfully preys on the stationary Herbivorous Tadpole, gaining significant resources for rapid development and larger size, crucial for survival in the ephemeral pond.\",\n          \"utility\": 9.0\n        },\n        \"Attempt Escape\": {\n          \"outcome\": \"Carnivorous Tadpole attempts to hunt the escaping Herbivorous Tadpole. Given its specialization, it generally succeeds, but with slightly more effort and a minor increased risk compared to a stationary target, still achieving significant developmental benefits.\",\n          \"utility\": 7.0\n        }\n      },\n      \"Forage Non-Tadpole Food\": {\n        \"Graze\": {\n          \"outcome\": \"Carnivorous Tadpole forages for non-tadpole food. This provides sustenance but does not offer the accelerated development or size benefits as efficiently as cannibalism, making it a less optimal strategy for rapid growth in a temporary pond.\",\n          \"utility\": 3.0\n        },\n        \"Attempt Escape\": {\n          \"outcome\": \"Carnivorous Tadpole focuses on foraging for non-tadpole food. The Herbivorous Tadpole's attempt to escape does not directly impact the Carnivorous Tadpole's ability to acquire non-tadpole food, providing general sustenance.\",\n          \"utility\": 3.0\n        }\n      }\n    }\n  },\n  {\n    \"name\": \"Herbivorous Tadpole\",\n    \"actions\": [\"Graze\", \"Attempt Escape\"],\n    \"utilities\": {\n      \"Graze\": {\n        \"Hunt Tadpoles\": {\n          \"outcome\": \"Herbivorous Tadpole remains stationary while the Carnivorous Tadpole actively hunts, leading to successful predation. The Herbivorous Tadpole is consumed, resulting in its demise.\",\n          \"utility\": -9.0\n        },\n        \"Forage Non-Tadpole Food\": {\n          \"outcome\": \"Herbivorous Tadpole grazes, acquiring necessary resources for sustenance and survival, while the Carnivorous Tadpole focuses on non-tadpole food, posing no immediate threat.\",\n          \"utility\": 5.0\n        }\n      },\n      \"Attempt Escape\": {\n        \"Hunt Tadpoles\": {\n          \"outcome\": \"Herbivorous Tadpole attempts to escape the hunting Carnivorous Tadpole. Despite the attempt, the specialized Carnivorous Tadpole generally succeeds in predation, though with slightly more effort. The Herbivorous Tadpole is likely consumed, but the act of attempting escape represents a marginally preferred, albeit often futile, survival strategy.\",\n          \"utility\": -8.5  // Changed from -9.0 to -8.5\n        },\n        \"Forage Non-Tadpole Food\": {\n          \"outcome\": \"Herbivorous Tadpole attempts to escape, but the Carnivorous Tadpole is occupied with foraging non-tadpole food. The escape attempt is unnecessary but harmless, and the Herbivorous Tadpole remains safe, though expending some energy needlessly.\",\n          \"utility\": 4.0\n        }\n      }\n    }\n  }\n]\n```",
+                "OldGame": [
+                    {
+                        "name": "Carnivorous Tadpole",
+                        "actions": [
+                            "Hunt Tadpoles",
+                            "Forage Non-Tadpole Food"
+                        ],
+                        "utilities": {
+                            "Hunt Tadpoles": {
+                                "Graze": {
+                                    "outcome": "Carnivorous Tadpole successfully preys on the stationary Herbivorous Tadpole, gaining significant resources for rapid development and larger size, crucial for survival in the ephemeral pond.",
+                                    "utility": 9.0
+                                },
+                                "Attempt Escape": {
+                                    "outcome": "Carnivorous Tadpole attempts to hunt the escaping Herbivorous Tadpole. Given its specialization, it generally succeeds, but with slightly more effort and a minor increased risk compared to a stationary target, still achieving significant developmental benefits.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Forage Non-Tadpole Food": {
+                                "Graze": {
+                                    "outcome": "Carnivorous Tadpole forages for non-tadpole food. This provides sustenance but does not offer the accelerated development or size benefits as efficiently as cannibalism, making it a less optimal strategy for rapid growth in a temporary pond.",
+                                    "utility": 3.0
+                                },
+                                "Attempt Escape": {
+                                    "outcome": "Carnivorous Tadpole focuses on foraging for non-tadpole food. The Herbivorous Tadpole's attempt to escape does not directly impact the Carnivorous Tadpole's ability to acquire non-tadpole food, providing general sustenance.",
+                                    "utility": 3.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Herbivorous Tadpole",
+                        "actions": [
+                            "Graze",
+                            "Attempt Escape"
+                        ],
+                        "utilities": {
+                            "Graze": {
+                                "Hunt Tadpoles": {
+                                    "outcome": "Herbivorous Tadpole remains stationary while the Carnivorous Tadpole actively hunts, leading to successful predation. The Herbivorous Tadpole is consumed, resulting in its demise.",
+                                    "utility": -9.0
+                                },
+                                "Forage Non-Tadpole Food": {
+                                    "outcome": "Herbivorous Tadpole grazes, acquiring necessary resources for sustenance and survival, while the Carnivorous Tadpole focuses on non-tadpole food, posing no immediate threat.",
+                                    "utility": 5.0
+                                }
+                            },
+                            "Attempt Escape": {
+                                "Hunt Tadpoles": {
+                                    "outcome": "Herbivorous Tadpole attempts to escape the hunting Carnivorous Tadpole. Despite the attempt, the specialized Carnivorous Tadpole generally succeeds in predation, though with slightly more effort. The Herbivorous Tadpole is likely consumed.",
+                                    "utility": -9.0
+                                },
+                                "Forage Non-Tadpole Food": {
+                                    "outcome": "Herbivorous Tadpole attempts to escape, but the Carnivorous Tadpole is occupied with foraging non-tadpole food. The escape attempt is unnecessary but harmless, and the Herbivorous Tadpole remains safe, though expending some energy needlessly.",
+                                    "utility": 4.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Carnivorous Tadpole": {
+                                "Hunt Tadpoles": 1.0,
+                                "Forage Non-Tadpole Food": 0.0
+                            },
+                            "Herbivorous Tadpole": {
+                                "Graze": 0.0,
+                                "Attempt Escape": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Carnivorous Tadpole": {
+                                "Hunt Tadpoles": 1.0,
+                                "Forage Non-Tadpole Food": 0.0
+                            },
+                            "Herbivorous Tadpole": {
+                                "Graze": 0.0,
+                                "Attempt Escape": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Carnivorous Tadpole": {
+                                "Forage Non-Tadpole Food": 0.0,
+                                "Hunt Tadpoles": 1.0
+                            },
+                            "Herbivorous Tadpole": {
+                                "Attempt Escape": 1.0,
+                                "Graze": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Carnivorous Tadpole": "Hunt Tadpoles",
+            "Herbivorous Tadpole": "Graze"
+        }
+    },
+    {
+        "Species": [
+            "Polihierax semitorquatus",
+            "Philetairus socius"
+        ],
+        "Description": "The African Pygmy Falcon and Sociable Weaver exhibit a unique and complex interspecies relationship. The falcons regularly nest and roost within the massive communal nests of Sociable Weavers. While primarily insectivorous, falcons are opportunistic predators and have been observed preying on weaver nestlings or juveniles. The non-trivial dilemma for the Sociable Weavers is tolerating a potential predator within their highly valuable, multi-generational nests. This tolerance is believed to be a form of mutualism, as the presence of the falcons, which are highly alert and vocal, might deter larger predators (like snakes or raptors) from approaching the communal nest, providing a net benefit of enhanced security for the weavers despite occasional predation.",
+        "Query": "African Pygmy Falcon Sociable Weaver communal nest predation mutualism",
+        "Article": "Error"
+    },
+    {
+        "Species": [
+            "Ursus arctos horribilis",
+            "Oncorhynchus nerka"
+        ],
+        "Description": "Grizzly bears exhibit intense predation on salmon during their annual spawning runs, a crucial period for the bears to accumulate fat reserves for hibernation. The non-trivial dilemma for the salmon is their genetically programmed imperative to return to natal streams to reproduce, despite the gauntlet of predators (including bears, eagles, and other fish) and the physiological toll of the journey. For the bears, the dilemma is optimizing energy expenditure during hunting versus maximizing caloric intake from the abundant, but still challenging, prey. Bears often develop specialized techniques (e.g., targeting fat-rich brains/eggs, or efficient catch methods) to maximize energy gain while minimizing exertion, as a successful spawning season is vital for their survival through winter.",
+        "Query": "Grizzly Bear salmon spawning predation energy optimization",
+        "Article": "*   A salmon run is an annual fish migration event where many salmonid species, which are typically hatched in fresh water and live most of their adult life downstream in the ocean, swim back against the stream to the upper reaches of rivers to spawn on the gravel beds of small creeks. After spawning, most Atlantic salmon and all species of Pacific salmon die, and the salmon life cycle starts over again with the new generation of hatchlings.\n\n*   Most salmon species migrate during the autumn (September through November), which coincides with the pre-winter activities of many hibernating animals. The annual salmon run can be a major feeding event for predators such as grizzly bears and bald eagles, as well as an important window period for sport fishermen.\n\n*   Skilled predators, such as bears, bald eagles and fishermen can await the salmon during the run. Normally solitary animals, grizzly bears congregate by streams and rivers when the salmon spawn.\n\n*   The run up the river can be exhausting, sometimes requiring the salmon to battle hundreds of miles upstream against strong currents and rapids. They cease feeding during the run.\n\n*   The physical condition of the salmon deteriorates the longer they remain in fresh water. Once the salmon have spawned, most of them deteriorate rapidly (a.k.a. \"spawned out\") and soon die.\n\n*   In the Pacific Northwest and Alaska, salmon is a keystone species, supporting wildlife from birds to bears and otters. The bodies of salmon represent a transfer of nutrients from the ocean, rich in nitrogen, sulfur, carbon and phosphorus, to the forest ecosystem.\n\n*   Grizzly bears function as ecosystem engineers, capturing salmon and carrying them into adjacent wooded areas. There they deposit nutrient-rich urine and feces and partially eaten carcasses.\n\n*   Wolves normally hunt for deer. A 2008 study suggests that when the salmon run starts, wolves choose to fish for salmon, even if plenty of deer are still available.\n\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Grizzly Bear",
+                        "actions": [
+                            "Hunt Salmon",
+                            "Target Energy-Rich Parts",
+                            "Employ Efficient Hunting Technique"
+                        ],
+                        "utilities": {
+                            "Hunt Salmon": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear hunts actively as salmon prioritize their upstream journey. This is a primary feeding opportunity, with salmon facing the physiological toll of their journey, making them generally vulnerable prey.",
+                                    "utility": 7.0
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear hunts, but the salmon actively attempts to evade capture. The bear expends more energy, and success rates can vary, leading to some catches but also escapes.",
+                                    "utility": 5.0
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear hunts salmon that are focused on spawning or have already spawned. These salmon are physically deteriorated and easier to catch, though potentially less nutritionally dense if 'spawned out'.",
+                                    "utility": 6.0
+                                }
+                            },
+                            "Target Energy-Rich Parts": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear successfully catches a strong, migrating salmon and selectively consumes its most calorically dense parts (e.g., brains, eggs). This strategy maximizes nutrient intake from prime prey.",
+                                    "utility": 9.0
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear manages to catch an evading salmon and focuses on consuming its most energy-rich parts. Despite the salmon's evasion efforts, the bear optimizes its caloric return per catch.",
+                                    "utility": 8.0
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear catches a spawning or post-spawning salmon and targets its remaining energy-rich parts. Even though the salmon may be weaker, this strategy ensures a focused intake of available nutrients.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Employ Efficient Hunting Technique": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear uses highly efficient hunting techniques (e.g., ambushing at rapids, strategic positioning) to catch migrating salmon. This yields high caloric gain for minimal energy expenditure, an optimal outcome.",
+                                    "utility": 10.0
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear employs an efficient technique to capture an evading salmon. This reduces the energy cost of the chase, improving the bear's overall energy balance even when facing active resistance.",
+                                    "utility": 8.0
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear uses an efficient technique to catch physically deteriorated spawning or post-spawning salmon. This is a very low-effort strategy for a reliable, abundant, and easily accessible food source.",
+                                    "utility": 9.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Salmon",
+                        "actions": [
+                            "Prioritize Journey Progression",
+                            "Attempt Active Evasion",
+                            "Commit to Spawning (High Vulnerability)"
+                        ],
+                        "utilities": {
+                            "Prioritize Journey Progression": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon continues its arduous journey upstream, but is actively hunted by the bear. This significantly increases the risk of not reaching spawning grounds and dying prematurely.",
+                                    "utility": -8.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "While prioritizing its journey, the salmon is caught by the bear, which efficiently targets its most calorically dense parts. This results in an immediate and fatal end, preventing reproduction.",
+                                    "utility": -10.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon attempts to navigate upstream, but the bear utilizes highly efficient hunting techniques, making escape extremely difficult and almost certainly leading to capture and pre-reproductive death.",
+                                    "utility": -9.0
+                                }
+                            },
+                            "Attempt Active Evasion": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon expends crucial energy attempting to evade the hunting bear. While some evasion may occur, it is still at high risk of capture, jeopardizing its journey and ability to reproduce.",
+                                    "utility": -6.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "Despite the salmon's evasion efforts, it is caught by the bear, which then focuses on consuming its most energy-rich parts. Evasion was ultimately ineffective, leading to a fatal outcome before reproduction.",
+                                    "utility": -9.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon's attempts to evade are largely nullified by the bear's efficient hunting techniques. This leads to a swift capture, preventing the salmon from reaching its spawning grounds.",
+                                    "utility": -8.0
+                                }
+                            },
+                            "Commit to Spawning (High Vulnerability)": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon focuses on its genetically programmed imperative to reproduce. While vulnerable and potentially caught by the bear during or after spawning, its primary goal of perpetuating the species is achieved.",
+                                    "utility": 3.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "While the salmon is focused on spawning or has recently spawned, the bear catches it and efficiently targets its remaining energy-rich parts. The salmon fulfills its reproductive duty but is then quickly dispatched.",
+                                    "utility": 1.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon, physically deteriorated from its journey and focus on reproduction, is easily caught by the bear employing efficient techniques. The reproductive act is likely completed, but the salmon's life ends immediately thereafter.",
+                                    "utility": 2.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "PrevGame": [
+                    {
+                        "name": "Grizzly Bear",
+                        "actions": [
+                            "Hunt Salmon",
+                            "Target Energy-Rich Parts",
+                            "Employ Efficient Hunting Technique"
+                        ],
+                        "utilities": {
+                            "Hunt Salmon": {
+                                "Migrate Upstream": {
+                                    "outcome": "The Grizzly Bear hunts actively as salmon migrate upstream. This is a primary feeding opportunity, with salmon facing the physiological toll of their journey, making them generally vulnerable prey.",
+                                    "utility": 7.0
+                                },
+                                "Attempt to Evade Predators": {
+                                    "outcome": "The Grizzly Bear hunts, but the salmon actively attempts to evade capture. The bear expends more energy, and success rates can vary, leading to some catches but also escapes.",
+                                    "utility": 5.0
+                                },
+                                "Reproduce": {
+                                    "outcome": "The Grizzly Bear hunts salmon that are focused on spawning or have already spawned. These salmon are physically deteriorated and easier to catch, though potentially less nutritionally dense if 'spawned out'.",
+                                    "utility": 6.0
+                                }
+                            },
+                            "Target Energy-Rich Parts": {
+                                "Migrate Upstream": {
+                                    "outcome": "The Grizzly Bear successfully catches a strong, migrating salmon and selectively consumes its most calorically dense parts (e.g., brains, eggs). This strategy maximizes nutrient intake from prime prey.",
+                                    "utility": 9.0
+                                },
+                                "Attempt to Evade Predators": {
+                                    "outcome": "The Grizzly Bear manages to catch an evading salmon and focuses on consuming its most energy-rich parts. Despite the salmon's evasion efforts, the bear optimizes its caloric return per catch.",
+                                    "utility": 8.0
+                                },
+                                "Reproduce": {
+                                    "outcome": "The Grizzly Bear catches a spawning or post-spawning salmon and targets its remaining energy-rich parts. Even though the salmon may be weaker, this strategy ensures a focused intake of available nutrients.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Employ Efficient Hunting Technique": {
+                                "Migrate Upstream": {
+                                    "outcome": "The Grizzly Bear uses highly efficient hunting techniques (e.g., ambushing at rapids, strategic positioning) to catch migrating salmon. This yields high caloric gain for minimal energy expenditure, an optimal outcome.",
+                                    "utility": 10.0
+                                },
+                                "Attempt to Evade Predators": {
+                                    "outcome": "The Grizzly Bear employs an efficient technique to capture an evading salmon. This reduces the energy cost of the chase, improving the bear's overall energy balance even when facing active resistance.",
+                                    "utility": 8.0
+                                },
+                                "Reproduce": {
+                                    "outcome": "The Grizzly Bear uses an efficient technique to catch physically deteriorated spawning or post-spawning salmon. This is a very low-effort strategy for a reliable, abundant, and easily accessible food source.",
+                                    "utility": 9.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Salmon",
+                        "actions": [
+                            "Migrate Upstream",
+                            "Attempt to Evade Predators",
+                            "Reproduce"
+                        ],
+                        "utilities": {
+                            "Migrate Upstream": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon continues its arduous migration upstream, but is actively hunted by the bear. This significantly increases the risk of not reaching spawning grounds and dying prematurely.",
+                                    "utility": -8.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "While migrating, the salmon is caught by the bear, which efficiently targets its most calorically dense parts. This results in an immediate and fatal end, preventing reproduction.",
+                                    "utility": -10.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon attempts to navigate upstream, but the bear utilizes highly efficient hunting techniques, making escape extremely difficult and almost certainly leading to capture and pre-reproductive death.",
+                                    "utility": -9.0
+                                }
+                            },
+                            "Attempt to Evade Predators": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon expends crucial energy attempting to evade the hunting bear. While some evasion may occur, it is still at high risk of capture, jeopardizing its journey and ability to reproduce.",
+                                    "utility": -6.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "Despite the salmon's evasion efforts, it is caught by the bear, which then focuses on consuming its most energy-rich parts. Evasion was ultimately ineffective, leading to a fatal outcome before reproduction.",
+                                    "utility": -9.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon's attempts to evade are largely nullified by the bear's efficient hunting techniques. This leads to a swift capture, preventing the salmon from reaching its spawning grounds.",
+                                    "utility": -8.0
+                                }
+                            },
+                            "Reproduce": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon focuses on its genetically programmed imperative to reproduce. While vulnerable and potentially caught by the bear during or after spawning, its primary goal of perpetuating the species is achieved.",
+                                    "utility": 3.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "While the salmon is focused on spawning or has recently spawned, the bear catches it and efficiently targets its remaining energy-rich parts. The salmon fulfills its reproductive duty but is then quickly dispatched.",
+                                    "utility": 1.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon, physically deteriorated from its journey and focus on reproduction, is easily caught by the bear employing efficient techniques. The reproductive act is likely completed, but the salmon's life ends immediately thereafter.",
+                                    "utility": 2.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The primary semantic issue lies in the definition of the Salmon's actions. 'Migrate Upstream' and 'Reproduce' represent distinct, sequential life stages or locations, rather than mutually exclusive actions available to the salmon at any single encounter. A salmon cannot choose to 'Reproduce' if it is still migrating far from the spawning grounds, nor can it 'Migrate Upstream' if it has already arrived and is spawning. Furthermore, 'Attempt to Evade Predators' is a reactive behavior that occurs *during* either migration or reproduction, rather than an alternative primary objective. This violates the requirement that actions be mutually exclusive and universally available in a given situation. The game has been updated by rephrasing the Salmon's actions to represent mutually exclusive behavioral priorities or choices available at the moment of a predatory encounter, while preserving the original utility structures.",
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Grizzly Bear": {
+                                "Hunt Salmon": 0.0,
+                                "Target Energy-Rich Parts": 0.0,
+                                "Employ Efficient Hunting Technique": 1.0
+                            },
+                            "Salmon": {
+                                "Prioritize Journey Progression": 0.0,
+                                "Attempt Active Evasion": 0.0,
+                                "Commit to Spawning (High Vulnerability)": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Grizzly Bear": {
+                                "Hunt Salmon": 0.0,
+                                "Target Energy-Rich Parts": 0.0,
+                                "Employ Efficient Hunting Technique": 1.0
+                            },
+                            "Salmon": {
+                                "Prioritize Journey Progression": 0.0,
+                                "Attempt Active Evasion": 0.0,
+                                "Commit to Spawning (High Vulnerability)": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Grizzly Bear": {
+                                "Employ Efficient Hunting Technique": 1.0,
+                                "Hunt Salmon": 0.0,
+                                "Target Energy-Rich Parts": 0.0
+                            },
+                            "Salmon": {
+                                "Attempt Active Evasion": 0.0,
+                                "Commit to Spawning (High Vulnerability)": 1.0,
+                                "Prioritize Journey Progression": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Grizzly Bear",
+                        "actions": [
+                            "General Hunting Strategy",
+                            "Selective Consumption Strategy",
+                            "Efficient Capture Strategy"
+                        ],
+                        "utilities": {
+                            "General Hunting Strategy": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear hunts actively as salmon prioritize their upstream journey. This is a primary feeding opportunity, with salmon facing the physiological toll of their journey, making them generally vulnerable prey.",
+                                    "utility": 7.0
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear hunts, but the salmon actively attempts to evade capture. The bear expends more energy, and success rates can vary, leading to some catches but also escapes.",
+                                    "utility": 5.0
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear hunts salmon that are focused on spawning or have already spawned. These salmon are physically deteriorated and easier to catch, though potentially less nutritionally dense if 'spawned out'.",
+                                    "utility": 6.0
+                                }
+                            },
+                            "Selective Consumption Strategy": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear successfully catches a strong, migrating salmon and selectively consumes its most calorically dense parts (e.g., brains, eggs). This strategy maximizes nutrient intake from prime prey.",
+                                    "utility": 9.0
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear manages to catch an evading salmon and focuses on consuming its most energy-rich parts. Despite the salmon's evasion efforts, the bear optimizes its caloric return per catch.",
+                                    "utility": 8.0
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear catches a spawning or post-spawning salmon and targets its remaining energy-rich parts. Even though the salmon may be weaker, this strategy ensures a focused intake of available nutrients.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Efficient Capture Strategy": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear uses highly efficient hunting techniques (e.g., ambushing at rapids, strategic positioning) to catch migrating salmon. This yields high caloric gain for minimal energy expenditure, an optimal outcome.",
+                                    "utility": 10.5
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear employs an efficient technique to capture an evading salmon. This reduces the energy cost of the chase, improving the bear's overall energy balance even when facing active resistance.",
+                                    "utility": 8.1
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear uses an efficient technique to catch physically deteriorated spawning or post-spawning salmon. This is a very low-effort strategy for a reliable, abundant, and easily accessible food source.",
+                                    "utility": 9.5
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Salmon",
+                        "actions": [
+                            "Prioritize Journey Progression",
+                            "Attempt Active Evasion",
+                            "Commit to Spawning (High Vulnerability)"
+                        ],
+                        "utilities": {
+                            "Prioritize Journey Progression": {
+                                "General Hunting Strategy": {
+                                    "outcome": "The salmon continues its arduous journey upstream, but is actively hunted by the bear. This significantly increases the risk of not reaching spawning grounds and dying prematurely.",
+                                    "utility": -8.0
+                                },
+                                "Selective Consumption Strategy": {
+                                    "outcome": "While prioritizing its journey, the salmon is caught by the bear, which efficiently targets its most calorically dense parts. This results in an immediate and fatal end, preventing reproduction.",
+                                    "utility": -10.0
+                                },
+                                "Efficient Capture Strategy": {
+                                    "outcome": "The salmon attempts to navigate upstream, but the bear utilizes highly efficient hunting techniques, making escape extremely difficult and almost certainly leading to capture and pre-reproductive death.",
+                                    "utility": -9.0
+                                }
+                            },
+                            "Attempt Active Evasion": {
+                                "General Hunting Strategy": {
+                                    "outcome": "The salmon expends crucial energy attempting to evade the hunting bear. While some evasion may occur, it is still at high risk of capture, jeopardizing its journey and ability to reproduce.",
+                                    "utility": -6.0
+                                },
+                                "Selective Consumption Strategy": {
+                                    "outcome": "Despite the salmon's evasion efforts, it is caught by the bear, which then focuses on consuming its most energy-rich parts. Evasion was ultimately ineffective, leading to a fatal outcome before reproduction.",
+                                    "utility": -9.0
+                                },
+                                "Efficient Capture Strategy": {
+                                    "outcome": "The salmon's attempts to evade are largely nullified by the bear's efficient hunting techniques. This leads to a swift capture, preventing the salmon from reaching its spawning grounds.",
+                                    "utility": -8.0
+                                }
+                            },
+                            "Commit to Spawning (High Vulnerability)": {
+                                "General Hunting Strategy": {
+                                    "outcome": "The salmon focuses on its genetically programmed imperative to reproduce. While vulnerable and potentially caught by the bear during or after spawning, its primary goal of perpetuating the species is achieved.",
+                                    "utility": 3.5
+                                },
+                                "Selective Consumption Strategy": {
+                                    "outcome": "While the salmon is focused on spawning or has recently spawned, the bear catches it and efficiently targets its remaining energy-rich parts. The salmon fulfills its reproductive duty but is then quickly dispatched.",
+                                    "utility": 1.5
+                                },
+                                "Efficient Capture Strategy": {
+                                    "outcome": "The salmon, physically deteriorated from its journey and focus on reproduction, is easily caught by the bear employing efficient techniques. The reproductive act is likely completed, but the salmon's life ends immediately thereafter.",
+                                    "utility": 2.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition provided is generally well-structured and demonstrates a good understanding of the biological interaction, especially concerning the preferences and dilemmas of both species. The utility values assigned are largely plausible and reflect the biological imperatives of the grizzly bear (energy gain, survival through winter) and the salmon (reproduction, survival until spawning). The game is non-trivial, with varying outcomes for different choices, and has high fidelity to natural behaviors.\n\nHowever, there is a significant issue with the **mutual exclusivity of the Grizzly Bear's actions**, as per the validation criteria: \"The player actions defined should be mutually exclusive, i.e., the animal is not capable of choosing more than one of the actions in the given situation.\"\n\n**What to change and why:**\n\n*   **Change:** For the \"Grizzly Bear\" player, rename the actions to ensure they represent genuinely mutually exclusive strategic choices rather than overlapping activities or phases of an activity.\n    *   Rename \"Hunt Salmon\" to **\"General Hunting Strategy\"**.\n    *   Rename \"Target Energy-Rich Parts\" to **\"Selective Consumption Strategy\"**.\n    *   Rename \"Employ Efficient Hunting Technique\" to **\"Efficient Capture Strategy\"**.\n*   **Why:** The original action \"Hunt Salmon\" is a broad, overarching activity. The other two actions, \"Target Energy-Rich Parts\" and \"Employ Efficient Hunting Technique,\" describe *specific methods* or *phases* that occur *within* or *as part of* hunting. For instance, a bear that \"Targets Energy-Rich Parts\" is still fundamentally \"Hunting Salmon.\" Similarly, a bear that \"Employs Efficient Hunting Technique\" is also \"Hunting Salmon.\" This means these actions, as currently defined, are not mutually exclusive; a bear capable of the latter two is inherently engaged in the former.\n\n    By renaming them to \"General Hunting Strategy,\" \"Selective Consumption Strategy,\" and \"Efficient Capture Strategy,\" they are reframed as distinct, top-level strategic choices the bear makes for a given encounter. This clarifies that the bear is choosing *which primary approach* to employ:\n    1.  A standard, less specialized hunting method (\"General Hunting Strategy\").\n    2.  A method specifically focused on minimizing effort during capture (\"Efficient Capture Strategy\").\n    3.  A method focused on maximizing caloric intake by targeting specific parts *upon successful capture* (\"Selective Consumption Strategy\").\n\n    This redefinition ensures that the bear commits to one distinct strategy at a time, fulfilling the mutual exclusivity requirement for game theory actions. The current utility values are already consistent with these reinterpreted strategic choices, reflecting the bear's optimization dilemma as described.",
+                "OldGame": [
+                    {
+                        "name": "Grizzly Bear",
+                        "actions": [
+                            "Hunt Salmon",
+                            "Target Energy-Rich Parts",
+                            "Employ Efficient Hunting Technique"
+                        ],
+                        "utilities": {
+                            "Hunt Salmon": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear hunts actively as salmon prioritize their upstream journey. This is a primary feeding opportunity, with salmon facing the physiological toll of their journey, making them generally vulnerable prey.",
+                                    "utility": 7.0
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear hunts, but the salmon actively attempts to evade capture. The bear expends more energy, and success rates can vary, leading to some catches but also escapes.",
+                                    "utility": 5.0
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear hunts salmon that are focused on spawning or have already spawned. These salmon are physically deteriorated and easier to catch, though potentially less nutritionally dense if 'spawned out'.",
+                                    "utility": 6.0
+                                }
+                            },
+                            "Target Energy-Rich Parts": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear successfully catches a strong, migrating salmon and selectively consumes its most calorically dense parts (e.g., brains, eggs). This strategy maximizes nutrient intake from prime prey.",
+                                    "utility": 9.0
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear manages to catch an evading salmon and focuses on consuming its most energy-rich parts. Despite the salmon's evasion efforts, the bear optimizes its caloric return per catch.",
+                                    "utility": 8.0
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear catches a spawning or post-spawning salmon and targets its remaining energy-rich parts. Even though the salmon may be weaker, this strategy ensures a focused intake of available nutrients.",
+                                    "utility": 7.0
+                                }
+                            },
+                            "Employ Efficient Hunting Technique": {
+                                "Prioritize Journey Progression": {
+                                    "outcome": "The Grizzly Bear uses highly efficient hunting techniques (e.g., ambushing at rapids, strategic positioning) to catch migrating salmon. This yields high caloric gain for minimal energy expenditure, an optimal outcome.",
+                                    "utility": 10.5
+                                },
+                                "Attempt Active Evasion": {
+                                    "outcome": "The Grizzly Bear employs an efficient technique to capture an evading salmon. This reduces the energy cost of the chase, improving the bear's overall energy balance even when facing active resistance.",
+                                    "utility": 8.1
+                                },
+                                "Commit to Spawning (High Vulnerability)": {
+                                    "outcome": "The Grizzly Bear uses an efficient technique to catch physically deteriorated spawning or post-spawning salmon. This is a very low-effort strategy for a reliable, abundant, and easily accessible food source.",
+                                    "utility": 9.5
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Salmon",
+                        "actions": [
+                            "Prioritize Journey Progression",
+                            "Attempt Active Evasion",
+                            "Commit to Spawning (High Vulnerability)"
+                        ],
+                        "utilities": {
+                            "Prioritize Journey Progression": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon continues its arduous journey upstream, but is actively hunted by the bear. This significantly increases the risk of not reaching spawning grounds and dying prematurely.",
+                                    "utility": -8.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "While prioritizing its journey, the salmon is caught by the bear, which efficiently targets its most calorically dense parts. This results in an immediate and fatal end, preventing reproduction.",
+                                    "utility": -10.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon attempts to navigate upstream, but the bear utilizes highly efficient hunting techniques, making escape extremely difficult and almost certainly leading to capture and pre-reproductive death.",
+                                    "utility": -9.0
+                                }
+                            },
+                            "Attempt Active Evasion": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon expends crucial energy attempting to evade the hunting bear. While some evasion may occur, it is still at high risk of capture, jeopardizing its journey and ability to reproduce.",
+                                    "utility": -6.0
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "Despite the salmon's evasion efforts, it is caught by the bear, which then focuses on consuming its most energy-rich parts. Evasion was ultimately ineffective, leading to a fatal outcome before reproduction.",
+                                    "utility": -9.0
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon's attempts to evade are largely nullified by the bear's efficient hunting techniques. This leads to a swift capture, preventing the salmon from reaching its spawning grounds.",
+                                    "utility": -8.0
+                                }
+                            },
+                            "Commit to Spawning (High Vulnerability)": {
+                                "Hunt Salmon": {
+                                    "outcome": "The salmon focuses on its genetically programmed imperative to reproduce. While vulnerable and potentially caught by the bear during or after spawning, its primary goal of perpetuating the species is achieved.",
+                                    "utility": 3.5
+                                },
+                                "Target Energy-Rich Parts": {
+                                    "outcome": "While the salmon is focused on spawning or has recently spawned, the bear catches it and efficiently targets its remaining energy-rich parts. The salmon fulfills its reproductive duty but is then quickly dispatched.",
+                                    "utility": 1.5
+                                },
+                                "Employ Efficient Hunting Technique": {
+                                    "outcome": "The salmon, physically deteriorated from its journey and focus on reproduction, is easily caught by the bear employing efficient techniques. The reproductive act is likely completed, but the salmon's life ends immediately thereafter.",
+                                    "utility": 2.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Grizzly Bear": {
+                                "General Hunting Strategy": 0.0,
+                                "Selective Consumption Strategy": 0.0,
+                                "Efficient Capture Strategy": 1.0
+                            },
+                            "Salmon": {
+                                "Prioritize Journey Progression": 0.0,
+                                "Attempt Active Evasion": 0.0,
+                                "Commit to Spawning (High Vulnerability)": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Grizzly Bear": {
+                                "General Hunting Strategy": 0.0,
+                                "Selective Consumption Strategy": 0.0,
+                                "Efficient Capture Strategy": 1.0
+                            },
+                            "Salmon": {
+                                "Prioritize Journey Progression": 0.0,
+                                "Attempt Active Evasion": 0.0,
+                                "Commit to Spawning (High Vulnerability)": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Grizzly Bear": {
+                                "Efficient Capture Strategy": 1.0,
+                                "General Hunting Strategy": 0.0,
+                                "Selective Consumption Strategy": 0.0
+                            },
+                            "Salmon": {
+                                "Attempt Active Evasion": 0.0,
+                                "Commit to Spawning (High Vulnerability)": 1.0,
+                                "Prioritize Journey Progression": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Grizzly Bear": "Employ Efficient Hunting Technique",
+            "Salmon": "Reproduce"
+        }
+    },
+    {
+        "Species": [
+            "Micrurus fulvius",
+            "Lampropeltis elapsoides",
+            "Strix varia"
+        ],
+        "Description": "This case exemplifies Batesian mimicry, where the harmless Scarlet Kingsnake (mimic) has evolved coloration (red, black, and yellow/white bands) strikingly similar to the highly venomous Eastern Coral Snake (model). The non-trivial dilemma for a predator (e.g., a bird or mammal) encountering such a snake is how to distinguish between a deadly meal and a harmless one. The learning process involves costly trials (attacking a coral snake can be fatal), which drives predators to adopt a \"better safe than sorry\" avoidance rule for all snakes with that pattern. For the mimic, the dilemma is balancing the benefits of avoidance from predators with the potential for the model's population to decline (reducing the strength of the mimicry signal) or for predators to learn to discriminate if mimics become too abundant.",
+        "Query": "Batesian mimicry coral snake scarlet kingsnake predator learning avoidance",
+        "Article": "Error"
+    }
+]

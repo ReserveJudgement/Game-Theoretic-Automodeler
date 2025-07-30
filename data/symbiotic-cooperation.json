@@ -1,0 +1,2170 @@
+[
+    {
+        "Species": [
+            "Labroides dimidiatus",
+            "various reef fish"
+        ],
+        "Description": "The cleaner wrasse removes parasites from larger 'client' fish. While this appears mutually beneficial (wrasse gets food, client gets cleaned), the wrasse faces a dilemma: parasites are less nutritious than the client's mucus. The cleaner wrasse can 'cheat' by biting mucus, which harms the client. Clients, in turn, must decide whether to punish a cheating cleaner (e.g., by chasing it away or switching cleaning stations) or tolerate minor cheating, making it a dynamic negotiation over service quality and honesty.",
+        "Query": "cleaner wrasse client fish reciprocal altruism cheating punishment",
+        "Article": "Here are the relevant passages from the provided text, without HTML formatting:\n\n*   Biological market theory is an extension of the idea of reciprocal altruism, as a mechanism to explain altruistic acts between unrelated individuals in a more flexible system of exchanging commodities. The term 'biological market' was first used by Ronald Noe and Hammerstein in 1994 to refer to all the interactions between organisms in which different organisms function as 'traders' that exchange goods and services such as food and water, grooming, warning calls, shelter, etc. Biological market theory consists of five formal characteristics which present a basis for altruism.\n\n*   The applicability of biological market theory with its emphasis on partner choice is evident in the interactions between the cleaner wrasse and its \"client\" reef fish. Cleaners have small territories, which the majority of reef fish species actively visit to invite inspection of their surface, gills, and mouth. Clients benefit from the removal of parasites while cleaners benefit from the access to a food source. Some particularly choosy client species have large home ranges that cover several cleaning stations, whereas other clients have small ranges and have access to one cleaning station only (resident clients). Field observations, field manipulations, and laboratory experiments revealed that whether or not a client has choice options influences several aspects of both cleaner and client behaviour. Cleaners give choosy clients priority of access. Choosy clients switch partners if cheated by a cleaner by taking a bite of out of the cleaner, whereas resident clients punish cheats. Cleaners and resident clients, but not choosy clients, build up relationships before normal cleaning interactions take place. Cleaners are particularly cooperative if choosy clients are bystanders of an interaction but less so when resident clients are bystanders.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Cleaner Wrasse",
+                        "actions": [
+                            "Clean Parasites",
+                            "Bite Mucus (Cheat)"
+                        ],
+                        "utilities": {
+                            "Clean Parasites": {
+                                "Punish Cheater": {
+                                    "outcome": "Cleaner provides the expected service (eats parasites), but the client inexplicably punishes, leading to the loss of interaction and future food source.",
+                                    "utility": -10.0
+                                },
+                                "Tolerate Cheating": {
+                                    "outcome": "Cleaner successfully cleans parasites, gaining food and maintaining a positive interaction with the client.",
+                                    "utility": 3.0
+                                }
+                            },
+                            "Bite Mucus (Cheat)": {
+                                "Punish Cheater": {
+                                    "outcome": "Cleaner cheats to get more nutritious mucus, but is punished by the client (e.g., chased away), resulting in the loss of the current client and future feeding opportunities.",
+                                    "utility": -3.0
+                                },
+                                "Tolerate Cheating": {
+                                    "outcome": "Cleaner successfully cheats by biting mucus, gaining nutritious food without consequence, and maintaining the interaction.",
+                                    "utility": 5.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Client Fish",
+                        "actions": [
+                            "Punish Cheater",
+                            "Tolerate Cheating"
+                        ],
+                        "utilities": {
+                            "Punish Cheater": {
+                                "Clean Parasites": {
+                                    "outcome": "Cleaner provides the expected service (eats parasites), but the client inexplicably punishes, leading to the loss of a beneficial interaction and future cleaning services.",
+                                    "utility": -5.0
+                                },
+                                "Bite Mucus (Cheat)": {
+                                    "outcome": "Cleaner cheats by biting mucus, harming the client, but the client successfully punishes (e.g., by chasing it away), deterring further cheating or ending the current harmful interaction.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Tolerate Cheating": {
+                                "Clean Parasites": {
+                                    "outcome": "Cleaner successfully cleans parasites, providing good service to the client, who benefits from parasite removal and maintains the positive interaction.",
+                                    "utility": 4.0
+                                },
+                                "Bite Mucus (Cheat)": {
+                                    "outcome": "Cleaner cheats by biting mucus, harming the client, and the client tolerates this behavior, potentially leading to ongoing harm and exploitation.",
+                                    "utility": -4.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The primary issue with the original game definition lies in the outcome and utility assigned to the scenario where the 'Cleaner Wrasse' chooses to 'Clean Parasites' (i.e., provides good service) and the 'Client Fish' chooses to 'Punish Cheater'. Biologically, a client fish would not 'punish' a cleaner for providing the expected beneficial service of parasite removal. The description explicitly states clients 'punish a *cheating* cleaner'. Therefore, the outcome 'inexplicably punishes' is semantically inconsistent and biologically implausible for a mutualistic interaction.\n\nMy modifications address this by:\n1.  **Revising the outcome description:** For the scenario where the Cleaner Wrasse 'Clean Parasites' and the Client Fish 'Punish Cheater', the outcome for both players has been changed from 'inexplicably punishes' to reflect that the client 'ends the interaction' or 'foregoes beneficial cleaning services'. This acknowledges that the interaction ends, but without implying a 'punishment' for good behavior.\n2.  **Adjusting Wrasse's Utility:** The utility for the Cleaner Wrasse in this scenario was -10.0, which was significantly worse than being caught cheating (-3.0). This is biologically illogical, as providing good service should not result in a worse outcome than cheating and getting caught. I've adjusted this utility to -3.0. This means that from the wrasse's perspective, losing a client (whether through being punished for cheating, or the client simply deciding to end the interaction even if the wrasse cleaned well) results in the same negative utility (loss of a food source/opportunity). This makes the wrasse's decision space more consistent: the best outcome is to cheat and not be punished (5.0), followed by cleaning and being tolerated (3.0), and the worst outcomes (equal at -3.0) are losing the client, regardless of whether it cheated or not, if the client chooses to end the interaction (labeled 'Punish Cheater').\n\nThese changes ensure the game maintains high fidelity to the natural world, removing made-up behaviors and aligning preferences more plausibly.\nNew game suggested was not formally valid: Invalid game data structure: must be a list.",
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Cleaner Wrasse": {
+                                "Clean Parasites": 0.0,
+                                "Bite Mucus (Cheat)": 1.0
+                            },
+                            "Client Fish": {
+                                "Punish Cheater": 1.0,
+                                "Tolerate Cheating": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Cleaner Wrasse": {
+                                "Clean Parasites": 0.0,
+                                "Bite Mucus (Cheat)": 1.0
+                            },
+                            "Client Fish": {
+                                "Punish Cheater": 1.0,
+                                "Tolerate Cheating": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Cleaner Wrasse": {
+                                "Bite Mucus (Cheat)": 1.0,
+                                "Clean Parasites": 0.0
+                            },
+                            "Client Fish": {
+                                "Punish Cheater": 1.0,
+                                "Tolerate Cheating": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Cleaner Wrasse",
+                        "actions": [
+                            "Clean Parasites",
+                            "Bite Mucus (Cheat)"
+                        ],
+                        "utilities": {
+                            "Clean Parasites": {
+                                "Punish Cheater": {
+                                    "outcome": "Cleaner provides the expected service (eats parasites), but the client inexplicably punishes, leading to the loss of interaction and future food source.",
+                                    "utility": -10.0
+                                },
+                                "Tolerate Cheating": {
+                                    "outcome": "Cleaner successfully cleans parasites, gaining food and maintaining a positive interaction with the client. This long-term relationship and reputation building provides a good outcome.",
+                                    "utility": 3.0
+                                }
+                            },
+                            "Bite Mucus (Cheat)": {
+                                "Punish Cheater": {
+                                    "outcome": "Cleaner cheats to get more nutritious mucus, but is punished by the client (e.g., chased away), resulting in the loss of the current client and future feeding opportunities.",
+                                    "utility": -3.0
+                                },
+                                "Tolerate Cheating": {
+                                    "outcome": "Cleaner successfully cheats by biting mucus, gaining nutritious food without consequence, and maintaining the interaction.",
+                                    "utility": 5.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Client Fish",
+                        "actions": [
+                            "Punish Cheater",
+                            "Tolerate Cheating"
+                        ],
+                        "utilities": {
+                            "Punish Cheater": {
+                                "Clean Parasites": {
+                                    "outcome": "Cleaner provides the expected service (eats parasites), but the client inexplicably punishes, leading to the loss of a beneficial interaction and future cleaning services.",
+                                    "utility": -5.0
+                                },
+                                "Bite Mucus (Cheat)": {
+                                    "outcome": "Cleaner cheats by biting mucus, harming the client, but the client successfully punishes (e.g., by chasing it away), deterring further cheating or ending the current harmful interaction.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Tolerate Cheating": {
+                                "Clean Parasites": {
+                                    "outcome": "Cleaner successfully cleans parasites, providing good service to the client, who benefits from parasite removal and maintains the positive interaction.",
+                                    "utility": 4.0
+                                },
+                                "Bite Mucus (Cheat)": {
+                                    "outcome": "Cleaner cheats by biting mucus, harming the client, and the client tolerates this behavior, potentially leading to ongoing harm and exploitation.",
+                                    "utility": -4.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "Here is a detailed comment on the necessary change and why:\n\n**Change Required:**\n\n1.  **Cleaner Wrasse Utilities:**\n    *   **Current:** For the Cleaner Wrasse, the utility for \"Clean Parasites\" when the Client Fish chooses \"Tolerate Cheating\" is `5.0`. This is the same utility as for \"Bite Mucus (Cheat)\" when the Client Fish also chooses \"Tolerate Cheating\" (`5.0`).\n    *   **Problem:** The textual description explicitly states: \"parasites are less nutritious than the client's mucus.\" The current utility values imply that the Cleaner Wrasse gains the same benefit (utility of 5.0) from eating less nutritious parasites as it does from eating more nutritious mucus, assuming no punishment. This contradicts the stated \"dilemma\" of the wrasse and the biological reality that the wrasse would prefer the more nutritious option if given a choice and no adverse consequences. The model should reflect that cheating (biting mucus) is more rewarding for the wrasse than cleaning parasites, which is precisely why the wrasse faces this \"dilemma\" to begin with.\n    *   **Proposed Change:** Decrease the utility for the Cleaner Wrasse's action \"Clean Parasites\" when the Client Fish's action is \"Tolerate Cheating\". A value of `3.0` or `4.0` would make more biological sense, establishing a clear preference for biting mucus (if tolerated) over cleaning parasites, consistent with mucus being \"more nutritious.\"\n    *   **Revised Entry for Cleaner Wrasse (example change):**\n        ```json\n        {\n          \"name\": \"Cleaner Wrasse\",\n          \"actions\": [\"Clean Parasites\", \"Bite Mucus (Cheat)\"],\n          \"utilities\": {\n            \"Clean Parasites\": {\n              \"Punish Cheater\": {\n                \"outcome\": \"Cleaner provides the expected service (eats parasites), but the client inexplicably punishes, leading to the loss of interaction and future food source.\",\n                \"utility\": -10.0\n              },\n              \"Tolerate Cheating\": {\n                \"outcome\": \"Cleaner successfully cleans parasites, gaining food and maintaining a positive interaction with the client. This long-term relationship and reputation building provides a good outcome.\",\n                \"utility\": 3.0  // Changed from 5.0 to reflect lower nutritional value than mucus\n              }\n            },\n            \"Bite Mucus (Cheat)\": {\n              \"Punish Cheater\": {\n                \"outcome\": \"Cleaner cheats to get more nutritious mucus, but is punished by the client (e.g., chased away), resulting in the loss of the current client and future feeding opportunities.\",\n                \"utility\": -3.0\n              },\n              \"Tolerate Cheating\": {\n                \"outcome\": \"Cleaner successfully cheats by biting mucus, gaining nutritious food without consequence, and maintaining the interaction.\",\n                \"utility\": 5.0\n              }\n            }\n          }\n        }\n        ```\n\n**Reasoning for the change:**\n\nThis adjustment ensures the game accurately reflects the cleaner wrasse's internal conflict and incentive structure described: the wrasse *prefers* to bite mucus because it's more nutritious, making it a \"dilemma\" when balancing this preference against the risk of punishment and loss of a valuable client relationship. By making the utility for successful cheating higher than for successful cleaning, the game correctly models the wrasse's incentive to \"cheat\" when it can get away with it. All other utilities and action definitions appear biologically plausible and consistent with the interaction description.",
+                "OldGame": [
+                    {
+                        "name": "Cleaner Wrasse",
+                        "actions": [
+                            "Clean Parasites",
+                            "Bite Mucus (Cheat)"
+                        ],
+                        "utilities": {
+                            "Clean Parasites": {
+                                "Punish Cheater": {
+                                    "outcome": "Cleaner provides the expected service (eats parasites), but the client inexplicably punishes, leading to the loss of interaction and future food source.",
+                                    "utility": -10.0
+                                },
+                                "Tolerate Cheating": {
+                                    "outcome": "Cleaner successfully cleans parasites, gaining food and maintaining a positive interaction with the client. This long-term relationship and reputation building makes the outcome as valuable as successfully cheating without consequence.",
+                                    "utility": 5.0
+                                }
+                            },
+                            "Bite Mucus (Cheat)": {
+                                "Punish Cheater": {
+                                    "outcome": "Cleaner cheats to get more nutritious mucus, but is punished by the client (e.g., chased away), resulting in the loss of the current client and future feeding opportunities.",
+                                    "utility": -3.0
+                                },
+                                "Tolerate Cheating": {
+                                    "outcome": "Cleaner successfully cheats by biting mucus, gaining nutritious food without consequence, and maintaining the interaction.",
+                                    "utility": 5.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Client Fish",
+                        "actions": [
+                            "Punish Cheater",
+                            "Tolerate Cheating"
+                        ],
+                        "utilities": {
+                            "Punish Cheater": {
+                                "Clean Parasites": {
+                                    "outcome": "Cleaner provides the expected service (eats parasites), but the client inexplicably punishes, leading to the loss of a beneficial interaction and future cleaning services.",
+                                    "utility": -5.0
+                                },
+                                "Bite Mucus (Cheat)": {
+                                    "outcome": "Cleaner cheats by biting mucus, harming the client, but the client successfully punishes (e.g., by chasing it away), deterring further cheating or ending the current harmful interaction.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Tolerate Cheating": {
+                                "Clean Parasites": {
+                                    "outcome": "Cleaner successfully cleans parasites, providing good service to the client, who benefits from parasite removal and maintains the positive interaction.",
+                                    "utility": 4.0
+                                },
+                                "Bite Mucus (Cheat)": {
+                                    "outcome": "Cleaner cheats by biting mucus, harming the client, and the client tolerates this behavior, potentially leading to ongoing harm and exploitation.",
+                                    "utility": -4.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Cleaner Wrasse": {
+                                "Clean Parasites": 0.0,
+                                "Bite Mucus (Cheat)": 1.0
+                            },
+                            "Client Fish": {
+                                "Punish Cheater": 1.0,
+                                "Tolerate Cheating": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Cleaner Wrasse": {
+                                "Clean Parasites": 0.0,
+                                "Bite Mucus (Cheat)": 1.0
+                            },
+                            "Client Fish": {
+                                "Punish Cheater": 1.0,
+                                "Tolerate Cheating": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Cleaner Wrasse": {
+                                "Bite Mucus (Cheat)": 1.0,
+                                "Clean Parasites": 0.0
+                            },
+                            "Client Fish": {
+                                "Punish Cheater": 1.0,
+                                "Tolerate Cheating": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Cleaner Wrasse": "Clean Parasites",
+            "Client Fish": "Tolerate Cheating"
+        }
+    },
+    {
+        "Species": [
+            "Arbuscular mycorrhizal fungi",
+            "various plant species"
+        ],
+        "Description": "Mycorrhizal fungi form a symbiotic relationship with plant roots, providing enhanced nutrient (especially phosphorus) and water uptake in exchange for carbohydrates from the plant. The non-trivial dilemma arises because both partners can potentially 'cheat' or maximize their gain. Plants can selectively reward fungal hyphae that provide more nutrients with more carbon, effectively 'sanctioning' less cooperative fungal partners. Conversely, fungi can vary in their nutrient provision, leading to a biological market where both sides strive for optimal exchange.",
+        "Query": "mycorrhizal symbiosis plant fungal nutrient exchange partner choice sanctions",
+        "Article": "Error"
+    },
+    {
+        "Species": [
+            "Formica rufa",
+            "various aphid species"
+        ],
+        "Description": "Many ant species, such as *Formica rufa*, engage in mutualistic relationships with aphids, protecting them from predators and parasites in exchange for honeydew, a sugary excretion from the aphids. The dilemma for both parties is balancing the costs and benefits. Ants might 'milk' aphids aggressively or even 'farm' them, potentially stressing the aphids. Aphids, in turn, might reduce honeydew production if protection is guaranteed, or if the cost of production outweighs the benefit of ant presence. This leads to a dynamic where the ants must provide sufficient protection to incentivize honeydew production, while aphids must produce enough to maintain the ant's vigilance.",
+        "Query": "ant aphid mutualism honeydew exploitation costs benefits ",
+        "Article": "*   So-called dairying ants have a mutualistic relationship with aphids, tending them for their honeydew and protecting them from predators.\n\n*   Aphids are among the most destructive insect pests on cultivated plants in temperate regions. In addition to weakening the plant by sucking sap, they act as vectors for plant viruses and disfigure ornamental plants with deposits of honeydew and the subsequent growth of sooty moulds.\n\n*   Ants tending aphids and collecting honeydew secreted.\n\n*   Although mutualistic, the feeding behaviour of aphids is altered by ant attendance. Aphids attended by ants tend to increase the production of honeydew in smaller drops with a greater concentration of amino acids.\n\n*   Some species of ants farm aphids, protecting them on the plants where they are feeding, and consuming the honeydew the aphids release from the terminations of their alimentary canals. This is a mutualistic relationship, with these dairying ants milking the aphids by stroking them with their antennae.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Ant",
+                        "actions": [
+                            "InvestInRelationship",
+                            "ExploitAphids",
+                            "AbandonAphids"
+                        ],
+                        "utilities": {
+                            "InvestInRelationship": {
+                                "Cooperate": {
+                                    "outcome": "Ant provides protection and care, Aphid responds by increasing honeydew production. This is the ideal mutualistic state for the Ant, ensuring a stable food source.",
+                                    "utility": 5.0
+                                },
+                                "Defect": {
+                                    "outcome": "Ant invests in protection, but Aphid reduces honeydew production or stops. The Ant expends resources without sufficient return.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "ExploitAphids": {
+                                "Cooperate": {
+                                    "outcome": "Ant aggressively 'milks' the Aphid, which continues to produce honeydew, potentially under stress. The Ant gains a large immediate quantity of honeydew.",
+                                    "utility": 6.0
+                                },
+                                "Defect": {
+                                    "outcome": "Ant aggressively exploits, but Aphid reduces or stops honeydew production due to stress or lack of incentive. Ant expends effort with little or no reward, potentially damaging the relationship.",
+                                    "utility": -4.0
+                                }
+                            },
+                            "AbandonAphids": {
+                                "Cooperate": {
+                                    "outcome": "Ant withdraws all protection and interaction. Even if Aphid produces honeydew, the Ant is not present to collect it. No cost, no immediate benefit.",
+                                    "utility": 0.0
+                                },
+                                "Defect": {
+                                    "outcome": "Ant withdraws all protection and interaction. Aphid reduces honeydew production. No cost, no immediate benefit for the Ant.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Aphid",
+                        "actions": [
+                            "Cooperate",
+                            "Defect"
+                        ],
+                        "utilities": {
+                            "Cooperate": {
+                                "InvestInRelationship": {
+                                    "outcome": "Ant provides protection and care, and Aphid increases honeydew production. This is the ideal mutualistic state for the Aphid, ensuring safety and a stable environment, despite the energy cost of honeydew.",
+                                    "utility": 4.0
+                                },
+                                "ExploitAphids": {
+                                    "outcome": "Ant aggressively 'milks' the Aphid, which continues to produce honeydew under stress. The Aphid is heavily exploited, expending significant energy and experiencing stress without proportionate benefit from the Ant.",
+                                    "utility": -3.0
+                                },
+                                "AbandonAphids": {
+                                    "outcome": "Ant withdraws all protection and interaction. Aphid continues to produce honeydew but is left entirely vulnerable to predators and parasites, expending resources with no protective benefit.",
+                                    "utility": -4.0
+                                }
+                            },
+                            "Defect": {
+                                "InvestInRelationship": {
+                                    "outcome": "Ant invests in protection, but Aphid reduces or stops honeydew production. The Aphid receives protection without the full cost of honeydew production, which is highly beneficial in the short term but risks the relationship's sustainability.",
+                                    "utility": 5.0
+                                },
+                                "ExploitAphids": {
+                                    "outcome": "Ant aggressively exploits, but Aphid reduces or stops honeydew production due to stress or lack of incentive. The Aphid reduces its energy expenditure but still faces the stress and potential harm of aggressive 'milking', leading to a strained and potentially broken relationship.",
+                                    "utility": -2.0
+                                },
+                                "AbandonAphids": {
+                                    "outcome": "Ant withdraws all protection and interaction. Aphid also reduces honeydew production. The Aphid is left vulnerable to predators but conserves energy by not producing honeydew, resulting in a neutral to slightly negative outcome due to lack of protection.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 0.0,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 1.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.0,
+                                "Defect": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 0.0,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 1.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.0,
+                                "Defect": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Ant": {
+                                "AbandonAphids": 1.0,
+                                "ExploitAphids": 0.0,
+                                "InvestInRelationship": 0.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.0,
+                                "Defect": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Ant",
+                        "actions": [
+                            "InvestInRelationship",
+                            "ExploitAphids",
+                            "AbandonAphids"
+                        ],
+                        "utilities": {
+                            "InvestInRelationship": {
+                                "Cooperate": {
+                                    "outcome": "Ant provides protection and care, Aphid responds by increasing honeydew production. This is the ideal mutualistic state for the Ant, ensuring a stable food source.",
+                                    "utility": 7.0
+                                },
+                                "Defect": {
+                                    "outcome": "Ant invests in protection, but Aphid reduces honeydew production or stops. The Ant expends resources without sufficient return.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "ExploitAphids": {
+                                "Cooperate": {
+                                    "outcome": "Ant aggressively 'milks' the Aphid, which continues to produce honeydew, potentially under stress. The Ant gains a large immediate quantity of honeydew.",
+                                    "utility": 4.0
+                                },
+                                "Defect": {
+                                    "outcome": "Ant aggressively exploits, but Aphid reduces or stops honeydew production due to stress or lack of incentive. Ant expends effort with little or no reward, potentially damaging the relationship.",
+                                    "utility": -4.0
+                                }
+                            },
+                            "AbandonAphids": {
+                                "Cooperate": {
+                                    "outcome": "Ant withdraws all protection and interaction. Even if Aphid produces honeydew, the Ant is not present to collect it. No cost, no immediate benefit.",
+                                    "utility": 0.0
+                                },
+                                "Defect": {
+                                    "outcome": "Ant withdraws all protection and interaction. Aphid reduces honeydew production. No cost, no immediate benefit for the Ant.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Aphid",
+                        "actions": [
+                            "Cooperate",
+                            "Defect"
+                        ],
+                        "utilities": {
+                            "Cooperate": {
+                                "InvestInRelationship": {
+                                    "outcome": "Ant provides protection and care, and Aphid increases honeydew production. This is the ideal mutualistic state for the Aphid, ensuring safety and a stable environment, despite the energy cost of honeydew.",
+                                    "utility": 6.0
+                                },
+                                "ExploitAphids": {
+                                    "outcome": "Ant aggressively 'milks' the Aphid, which continues to produce honeydew under stress. The Aphid is heavily exploited, expending significant energy and experiencing stress without proportionate benefit from the Ant.",
+                                    "utility": -3.0
+                                },
+                                "AbandonAphids": {
+                                    "outcome": "Ant withdraws all protection and interaction. Aphid continues to produce honeydew but is left entirely vulnerable to predators and parasites, expending resources with no protective benefit.",
+                                    "utility": -4.0
+                                }
+                            },
+                            "Defect": {
+                                "InvestInRelationship": {
+                                    "outcome": "Ant invests in protection, but Aphid reduces or stops honeydew production. The Aphid receives protection without the full cost of honeydew production, which is highly beneficial in the short term but risks the relationship's sustainability.",
+                                    "utility": 3.0
+                                },
+                                "ExploitAphids": {
+                                    "outcome": "Ant aggressively exploits, but Aphid reduces or stops honeydew production due to stress or lack of incentive. The Aphid reduces its energy expenditure but still faces the stress and potential harm of aggressive 'milking', leading to a strained and potentially broken relationship.",
+                                    "utility": -2.0
+                                },
+                                "AbandonAphids": {
+                                    "outcome": "Ant withdraws all protection and interaction. Aphid also reduces honeydew production. The Aphid is left vulnerable to predators but conserves energy by not producing honeydew, resulting in a neutral to slightly negative outcome due to lack of protection.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "The game has multiple equilibria. A game with a more definite outcome would be better. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 1.0,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 0.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 1.0,
+                                "Defect": 0.0
+                            }
+                        },
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 0.0,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 1.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.0,
+                                "Defect": 1.0
+                            }
+                        },
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 0.5,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 0.5
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.3,
+                                "Defect": 0.7
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 1.0,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 0.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 1.0,
+                                "Defect": 0.0
+                            }
+                        },
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 0.0,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 1.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.0,
+                                "Defect": 1.0
+                            }
+                        },
+                        {
+                            "Ant": {
+                                "InvestInRelationship": 0.5,
+                                "ExploitAphids": 0.0,
+                                "AbandonAphids": 0.5
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.3,
+                                "Defect": 0.7
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Ant": {
+                                "AbandonAphids": 1.0,
+                                "ExploitAphids": 0.0,
+                                "InvestInRelationship": 0.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 0.0,
+                                "Defect": 1.0
+                            }
+                        },
+                        {
+                            "Ant": {
+                                "AbandonAphids": 0.0,
+                                "ExploitAphids": 0.0,
+                                "InvestInRelationship": 1.0
+                            },
+                            "Aphid": {
+                                "Cooperate": 1.0,
+                                "Defect": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "3 equilibria found in Support. 3 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Ant": "InvestInRelationship",
+            "Aphid": "Cooperate"
+        }
+    },
+    {
+        "Species": [
+            "Buphagus africanus",
+            "Syncerus caffer"
+        ],
+        "Description": "Oxpeckers (e.g., Red-billed Oxpecker) perch on large African mammals like buffalo and feed on ticks and other parasites, seemingly providing a cleaning service. However, they also frequently peck at wounds, keeping them open and feeding on the host's blood, which is detrimental. The dilemma lies in the debate over whether this interaction is truly mutualistic or leans towards parasitism. The benefit of parasite removal might be outweighed by the harm from wound aggravation, presenting a complex cost-benefit trade-off for the mammal and a choice for the bird between eating parasites or more 'rewarding' blood.",
+        "Query": "oxpecker large mammal symbiosis mutualism parasitism blood feeding",
+        "Article": "*   Cleaning symbiosis is a mutually beneficial association between individuals of two species, where one (the cleaner) removes and eats parasites and other materials from the surface of the other (the client).\n*   Other cleaning symbioses exist between birds and mammals, and in other groups.\n*   Cleaning symbiosis  is a relationship between a pair of animals of different species, involving the removal and subsequent ingestion of ectoparasites, diseased and injured tissue, and unwanted food items from the surface of the host organism (the client) by the cleaning organism (the cleaner).\n*   Cleaning symbiosis is known from several groups of animals both in the sea and on land (see table). Cleaners include fish, shrimps and birds; clients include a much wider range of fish, marine reptiles including turtles and iguanas, octopus, whales, and terrestrial mammals.\n*   Examples of cleaning symbioses in different groups of animals:\n    *   African plains, savanna: Red-billed oxpecker (Buphagus erythrorhynchus) ... Eats blue ticks (Boophilus decoloratus) and brown ear ticks (Rhipicephalus appendiculatus) (up to 100 adults or 1000 larvae/day), blood: keeps skin wounds open. Large mammals, e.g. impala, rhinoceros, domestic cattle.\n*   some, like the oxpeckers, combine a little eating of parasites (beneficial to client) with taking of blood (harmful to client), their favoured food.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Oxpecker",
+                        "actions": [
+                            "Eat Parasites",
+                            "Eat Blood"
+                        ],
+                        "utilities": {
+                            "Eat Parasites": {
+                                "Tolerate Oxpecker": {
+                                    "outcome": "Oxpecker successfully eats parasites, gaining nutrition while providing a cleaning service to the mammal. This is beneficial food for the oxpecker.",
+                                    "utility": 5.0
+                                },
+                                "Deter Oxpecker": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from eating parasites. Oxpecker misses out on food.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "Eat Blood": {
+                                "Tolerate Oxpecker": {
+                                    "outcome": "Oxpecker successfully pecks at wounds and consumes blood, its 'favoured food'. This is highly beneficial for the oxpecker but detrimental to the mammal.",
+                                    "utility": 10.0
+                                },
+                                "Deter Oxpecker": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from consuming blood. Oxpecker misses out on its preferred and highly rewarding food source.",
+                                    "utility": -5.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Large African Mammal",
+                        "actions": [
+                            "Tolerate Oxpecker",
+                            "Deter Oxpecker"
+                        ],
+                        "utilities": {
+                            "Tolerate Oxpecker": {
+                                "Eat Parasites": {
+                                    "outcome": "The mammal tolerates the oxpecker, which successfully eats parasites, providing a cleaning service. This is beneficial for the mammal.",
+                                    "utility": 3.0
+                                },
+                                "Eat Blood": {
+                                    "outcome": "The mammal tolerates the oxpecker, which pecks at wounds and consumes blood. This is highly detrimental to the mammal, aggravating wounds and causing blood loss.",
+                                    "utility": -10.0
+                                }
+                            },
+                            "Deter Oxpecker": {
+                                "Eat Parasites": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from eating parasites. The mammal misses out on the cleaning service.",
+                                    "utility": -1.0
+                                },
+                                "Eat Blood": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from consuming blood and aggravating wounds. This avoids significant harm to the mammal.",
+                                    "utility": 5.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Oxpecker": {
+                                "Eat Parasites": 0.79,
+                                "Eat Blood": 0.21
+                            },
+                            "Large African Mammal": {
+                                "Tolerate Oxpecker": 0.29,
+                                "Deter Oxpecker": 0.71
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Oxpecker": {
+                                "Eat Parasites": 0.79,
+                                "Eat Blood": 0.21
+                            },
+                            "Large African Mammal": {
+                                "Tolerate Oxpecker": 0.29,
+                                "Deter Oxpecker": 0.71
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Large African Mammal": {
+                                "Deter Oxpecker": 0.71,
+                                "Tolerate Oxpecker": 0.29
+                            },
+                            "Oxpecker": {
+                                "Eat Blood": 0.21,
+                                "Eat Parasites": 0.79
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Oxpecker",
+                        "actions": [
+                            "Eat Parasites",
+                            "Eat Blood"
+                        ],
+                        "utilities": {
+                            "Eat Parasites": {
+                                "Tolerate Oxpecker": {
+                                    "outcome": "Oxpecker successfully eats parasites, gaining nutrition while providing a cleaning service to the mammal. This is beneficial food for the oxpecker.",
+                                    "utility": 5.0
+                                },
+                                "Deter Oxpecker": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from eating parasites. Oxpecker misses out on food.",
+                                    "utility": -3.0
+                                }
+                            },
+                            "Eat Blood": {
+                                "Tolerate Oxpecker": {
+                                    "outcome": "Oxpecker successfully pecks at wounds and consumes blood, its 'favoured food'. This is beneficial for the oxpecker but detrimental to the mammal.",
+                                    "utility": 8.0
+                                },
+                                "Deter Oxpecker": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from consuming blood. Oxpecker misses out on its preferred and highly rewarding food source.",
+                                    "utility": -5.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Large African Mammal",
+                        "actions": [
+                            "Tolerate Oxpecker",
+                            "Deter Oxpecker"
+                        ],
+                        "utilities": {
+                            "Tolerate Oxpecker": {
+                                "Eat Parasites": {
+                                    "outcome": "The mammal tolerates the oxpecker, which successfully eats parasites, providing a cleaning service. This is beneficial for the mammal.",
+                                    "utility": 3.0
+                                },
+                                "Eat Blood": {
+                                    "outcome": "The mammal tolerates the oxpecker, which pecks at wounds and consumes blood. This is detrimental to the mammal, aggravating wounds and causing blood loss.",
+                                    "utility": -8.0
+                                }
+                            },
+                            "Deter Oxpecker": {
+                                "Eat Parasites": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from eating parasites. The mammal misses out on the cleaning service.",
+                                    "utility": -1.0
+                                },
+                                "Eat Blood": {
+                                    "outcome": "The mammal deters the oxpecker, preventing it from consuming blood and aggravating wounds. This avoids significant harm to the mammal.",
+                                    "utility": 5.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Oxpecker": {
+                                "Eat Parasites": 0.76,
+                                "Eat Blood": 0.24
+                            },
+                            "Large African Mammal": {
+                                "Tolerate Oxpecker": 0.4,
+                                "Deter Oxpecker": 0.6
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Oxpecker": {
+                                "Eat Parasites": 0.76,
+                                "Eat Blood": 0.24
+                            },
+                            "Large African Mammal": {
+                                "Tolerate Oxpecker": 0.4,
+                                "Deter Oxpecker": 0.6
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Large African Mammal": {
+                                "Deter Oxpecker": 0.6,
+                                "Tolerate Oxpecker": 0.4
+                            },
+                            "Oxpecker": {
+                                "Eat Blood": 0.24,
+                                "Eat Parasites": 0.76
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Oxpecker": "Eat Blood",
+            "Large African Mammal": "Tolerate Oxpecker"
+        }
+    },
+    {
+        "Species": [
+            "Ficus carica",
+            "Blastophaga psenes"
+        ],
+        "Description": "Fig trees and fig wasps are locked in an obligate mutualism: fig wasps are the sole pollinators of fig flowers within the enclosed fig fruit (syconium), and their larvae develop by consuming some of the fig's ovules. The dilemma is that for the fig tree to reproduce, it must produce seeds, but for the wasp to reproduce, it must consume ovules. The fig tree faces the challenge of ensuring enough ovules mature into seeds while still providing resources for the wasps it needs for pollination. Figs can 'police' cheating wasps (those that lay too many eggs and over-exploit resources) by aborting fruits with excessive egg loads, presenting a constant evolutionary arms race.",
+        "Query": "fig tree fig wasp mutualism pollination partner control sanctions",
+        "Article": "Error"
+    },
+    {
+        "Species": [
+            "Amphiprion ocellaris",
+            "Heteractis magnifica"
+        ],
+        "Description": "Clownfish (e.g., Ocellaris Clownfish) live protected within the stinging tentacles of sea anemones (e.g., Magnificent Sea Anemone), to which they are immune. In return, clownfish are often observed defending the anemone from butterflyfish (which prey on anemones) and potentially aerating the water. The non-trivial dilemma for the anemone is whether the benefits provided by the clownfish (defense, cleaning, aeration) consistently outweigh the costs (competition for food, occasional stress). Research shows varying levels of benefit to the anemone, suggesting the relationship can fluctuate between mutualism and commensalism depending on circumstances.",
+        "Query": "clownfish sea anemone symbiosis mutualism benefits costs commensalism",
+        "Article": "*   Strict service-service interactions are very rare, for reasons that are far from clear. One example is the relationship between sea anemones and anemone fish in the family Pomacentridae: the anemones provide the fish with protection from predators (which cannot tolerate the stings of the anemone's tentacles) and the fish defend the anemones against butterflyfish (family Chaetodontidae), which eat anemones. However, in common with many mutualisms, there is more than one aspect to it: in the anemonefish-anemone mutualism, waste ammonia from the fish feeds the symbiotic algae that are found in the anemone's tentacles.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Clownfish",
+                        "actions": [
+                            "ProvideServices",
+                            "ReceiveProtectionOnly"
+                        ],
+                        "utilities": {
+                            "ProvideServices": {
+                                "AllowResidence": {
+                                    "outcome": "The Clownfish provides defense, cleaning, and aeration to the Sea Anemone, and in return, the Sea Anemone allows the Clownfish to reside safely within its tentacles. This establishes a stable, beneficial mutualistic relationship for the Clownfish.",
+                                    "utility": 1.0
+                                },
+                                "DenyResidence": {
+                                    "outcome": "The Clownfish attempts to provide services, but the Sea Anemone denies residence. The Clownfish is left without its protected home and exposed to predators.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "ReceiveProtectionOnly": {
+                                "AllowResidence": {
+                                    "outcome": "The Clownfish receives protection and residence from the Sea Anemone without consistently providing services. While highly beneficial for the Clownfish, this commensal relationship might be less stable in the long term for the anemone.",
+                                    "utility": 0.9
+                                },
+                                "DenyResidence": {
+                                    "outcome": "The Clownfish attempts to reside with the Sea Anemone without providing services and is denied residence. The Clownfish loses its protected habitat and faces predator threats.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Sea Anemone",
+                        "actions": [
+                            "AllowResidence",
+                            "DenyResidence"
+                        ],
+                        "utilities": {
+                            "AllowResidence": {
+                                "ProvideServices": {
+                                    "outcome": "The Clownfish provides defense, cleaning, and aeration to the Sea Anemone. The Sea Anemone benefits significantly from these services, establishing a strong mutualistic relationship where benefits consistently outweigh costs, enhancing its survival and health.",
+                                    "utility": 1.0
+                                },
+                                "ReceiveProtectionOnly": {
+                                    "outcome": "The Clownfish receives protection and residence but does not consistently provide services. The Sea Anemone incurs costs like competition for food and stress without sufficient offsetting benefits, leading to a potentially detrimental or parasitic relationship from the anemone's perspective.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "DenyResidence": {
+                                "ProvideServices": {
+                                    "outcome": "The Sea Anemone denies residence to a Clownfish that would have provided defense and other services. This leaves the Sea Anemone vulnerable to predators like butterflyfish and deprives it of potential cleaning and aeration benefits, resulting in a missed opportunity and increased risk.",
+                                    "utility": -0.5
+                                },
+                                "ReceiveProtectionOnly": {
+                                    "outcome": "The Sea Anemone denies residence to a Clownfish that would only receive protection without providing services. The Sea Anemone avoids the costs (food competition, stress) associated with an uncooperative resident but remains vulnerable to butterflyfish, maintaining a neutral baseline state without active benefits or burdens.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "The game might be degenerate. Check if one or both players are indifferent to their strategies. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 1.0,
+                                "ReceiveProtectionOnly": 0.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 1.0,
+                                "DenyResidence": 0.0
+                            }
+                        },
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 0.0,
+                                "ReceiveProtectionOnly": 1.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 0.0,
+                                "DenyResidence": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 1.0,
+                                "ReceiveProtectionOnly": 0.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 1.0,
+                                "DenyResidence": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 1.0,
+                                "ReceiveProtectionOnly": 0.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 1.0,
+                                "DenyResidence": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "Equilibria in Support and Vertex not equivalent. 2 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Clownfish",
+                        "actions": [
+                            "ProvideServices",
+                            "ReceiveProtectionOnly"
+                        ],
+                        "utilities": {
+                            "ProvideServices": {
+                                "AllowResidence": {
+                                    "outcome": "The Clownfish provides defense, cleaning, and aeration to the Sea Anemone, and in return, the Sea Anemone allows the Clownfish to reside safely within its tentacles. This establishes a stable, beneficial mutualistic relationship for the Clownfish.",
+                                    "utility": 1.0
+                                },
+                                "DenyResidence": {
+                                    "outcome": "The Clownfish attempts to provide services, but the Sea Anemone denies residence. The Clownfish is left without its protected home and exposed to predators.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "ReceiveProtectionOnly": {
+                                "AllowResidence": {
+                                    "outcome": "The Clownfish receives protection and residence from the Sea Anemone without consistently providing services. While highly beneficial for the Clownfish, this commensal relationship might be less stable in the long term for the anemone.",
+                                    "utility": 0.4
+                                },
+                                "DenyResidence": {
+                                    "outcome": "The Clownfish attempts to reside with the Sea Anemone without providing services and is denied residence. The Clownfish loses its protected habitat and faces predator threats.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Sea Anemone",
+                        "actions": [
+                            "AllowResidence",
+                            "DenyResidence"
+                        ],
+                        "utilities": {
+                            "AllowResidence": {
+                                "ProvideServices": {
+                                    "outcome": "The Clownfish provides defense, cleaning, and aeration to the Sea Anemone. The Sea Anemone benefits significantly from these services, establishing a strong mutualistic relationship where benefits consistently outweigh costs, enhancing its survival and health.",
+                                    "utility": 1.0
+                                },
+                                "ReceiveProtectionOnly": {
+                                    "outcome": "The Clownfish receives protection and residence but does not consistently provide services. The Sea Anemone incurs costs like competition for food and stress without sufficient offsetting benefits, leading to a potentially detrimental or parasitic relationship from the anemone's perspective.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "DenyResidence": {
+                                "ProvideServices": {
+                                    "outcome": "The Sea Anemone denies residence to a Clownfish that would have provided defense and other services. This leaves the Sea Anemone vulnerable to predators like butterflyfish and deprives it of potential cleaning and aeration benefits, resulting in a missed opportunity and increased risk.",
+                                    "utility": -1.0
+                                },
+                                "ReceiveProtectionOnly": {
+                                    "outcome": "The Sea Anemone denies residence to a Clownfish that would only receive protection without providing services. The Sea Anemone avoids the costs (food competition, stress) associated with an uncooperative resident but remains vulnerable to butterflyfish, maintaining a neutral baseline state without active benefits or burdens.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition provided is largely semantically correct and biologically plausible, demonstrating a good understanding of the Clownfish-Sea Anemone interaction. The defined actions for both players are mutually exclusive and align with their observed behaviors. The game is non-trivial, as neither player is indifferent to their choices, and the outcomes reflect real-world scenarios of mutualism, commensalism, and potential conflict. The two-player restriction is also respected.\n\nHowever, there is a minor point regarding the Sea Anemone's utility values that warrants a clarification for precise semantic correctness:\n\n**Change/Clarification Needed:**\n\n1.  **Sea Anemone Utility for `DenyResidence` when Clownfish chooses `ReceiveProtectionOnly`**:\n    *   **Current Description**: \"The Sea Anemone avoids the costs (food competition, stress) associated with an uncooperative resident but remains vulnerable to butterflyfish, maintaining a neutral baseline state without active benefits or burdens.\"\n    *   **Current Utility**: `-0.1`\n    *   **Biological Plausibility Comment**: The description states \"maintaining a neutral baseline state without active benefits or burdens.\" If a \"neutral baseline state\" is strictly interpreted as a state of zero net gain or loss, its utility should be `0`. The current utility of `-0.1` implies a slight negative value even for this \"neutral\" state. While it is biologically plausible that simply existing and being vulnerable to predators (like butterflyfish) represents a slight continuous cost or risk (thus a slightly negative utility compared to an idealized absolute zero), the phrasing \"neutral baseline state\" is slightly at odds with a negative numeric value.\n    *   **Recommendation**:\n        *   **Option A (Preferred for Consistency)**: Change the utility from `-0.1` to `0`. This would more accurately reflect \"neutral baseline state\" where the anemone avoids a parasitic cost but also gains no benefit, returning it to a default, non-interactive state. This aligns with the idea that the anemone avoids active burdens and doesn't gain benefits it wasn't expecting anyway from a non-contributing clownfish.\n        *   **Option B (If -0.1 is Intentional)**: If the `-0.1` is deliberately chosen to represent a background level of vulnerability or energetic cost that always exists for the anemone even in a \"neutral\" state (i.e., absolute `0` is an unattainable ideal state), then the description should be modified to better reflect this. For instance, \"maintaining its typical baseline vulnerability, which carries a minor inherent cost.\"\n\nBy addressing this minor inconsistency, the model's semantic clarity and biological fidelity would be further enhanced.",
+                "OldGame": [
+                    {
+                        "name": "Clownfish",
+                        "actions": [
+                            "ProvideServices",
+                            "ReceiveProtectionOnly"
+                        ],
+                        "utilities": {
+                            "ProvideServices": {
+                                "AllowResidence": {
+                                    "outcome": "The Clownfish provides defense, cleaning, and aeration to the Sea Anemone, and in return, the Sea Anemone allows the Clownfish to reside safely within its tentacles. This establishes a stable, beneficial mutualistic relationship for the Clownfish.",
+                                    "utility": 1.0
+                                },
+                                "DenyResidence": {
+                                    "outcome": "The Clownfish attempts to provide services, but the Sea Anemone denies residence. The Clownfish is left without its protected home and exposed to predators.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "ReceiveProtectionOnly": {
+                                "AllowResidence": {
+                                    "outcome": "The Clownfish receives protection and residence from the Sea Anemone without consistently providing services. While highly beneficial for the Clownfish, this commensal relationship might be less stable in the long term for the anemone.",
+                                    "utility": 0.4
+                                },
+                                "DenyResidence": {
+                                    "outcome": "The Clownfish attempts to reside with the Sea Anemone without providing services and is denied residence. The Clownfish loses its protected habitat and faces predator threats.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Sea Anemone",
+                        "actions": [
+                            "AllowResidence",
+                            "DenyResidence"
+                        ],
+                        "utilities": {
+                            "AllowResidence": {
+                                "ProvideServices": {
+                                    "outcome": "The Clownfish provides defense, cleaning, and aeration to the Sea Anemone. The Sea Anemone benefits significantly from these services, establishing a strong mutualistic relationship where benefits consistently outweigh costs, enhancing its survival and health.",
+                                    "utility": 1.0
+                                },
+                                "ReceiveProtectionOnly": {
+                                    "outcome": "The Clownfish receives protection and residence but does not consistently provide services. The Sea Anemone incurs costs like competition for food and stress without sufficient offsetting benefits, leading to a potentially detrimental or parasitic relationship from the anemone's perspective.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "DenyResidence": {
+                                "ProvideServices": {
+                                    "outcome": "The Sea Anemone denies residence to a Clownfish that would have provided defense and other services. This leaves the Sea Anemone vulnerable to predators like butterflyfish and deprives it of potential cleaning and aeration benefits, resulting in a missed opportunity and increased risk.",
+                                    "utility": -1.0
+                                },
+                                "ReceiveProtectionOnly": {
+                                    "outcome": "The Sea Anemone denies residence to a Clownfish that would only receive protection without providing services. The Sea Anemone avoids the costs (food competition, stress) associated with an uncooperative resident but remains vulnerable to butterflyfish, maintaining a neutral baseline state without active benefits or burdens.",
+                                    "utility": -0.1
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "The game might be degenerate. Check if one or both players are indifferent to their strategies. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 1.0,
+                                "ReceiveProtectionOnly": 0.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 1.0,
+                                "DenyResidence": 0.0
+                            }
+                        },
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 0.0,
+                                "ReceiveProtectionOnly": 1.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 0.0,
+                                "DenyResidence": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 1.0,
+                                "ReceiveProtectionOnly": 0.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 1.0,
+                                "DenyResidence": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Clownfish": {
+                                "ProvideServices": 1.0,
+                                "ReceiveProtectionOnly": 0.0
+                            },
+                            "Sea Anemone": {
+                                "AllowResidence": 1.0,
+                                "DenyResidence": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "Equilibria in Support and Vertex not equivalent. 2 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Clownfish": "ProvideServices",
+            "Sea Anemone": "AllowResidence"
+        }
+    },
+    {
+        "Species": [
+            "Indicator indicator",
+            "Homo sapiens"
+        ],
+        "Description": "The Greater Honeyguide famously guides humans (and honey badgers) to wild bee nests. The bird performs specific calls and flight patterns, leading its partner to the honey, which it cannot access itself. Once the nest is opened, the honeyguide feeds on the wax and larvae that are left behind. The dilemma for both species involves risk and reward: the honeyguide expends energy and risks predation by exposing itself, while the human (or badger) risks stings and expends effort to open the nest. The cooperation requires trust and communication, where both partners assess if the potential gain from the honey is worth the collective effort and danger.",
+        "Query": "honeyguide human cooperation bee nest foraging mutualism",
+        "Article": "*   Mutualism describes the ecological interaction between two or more species where each species has a net benefit.\n*   A prominent example of pollination mutualism is with bees and flowering plants. Bees use these plants as their food source with pollen and nectar. In turn, they transfer pollen to other nearby flowers, inadvertently allowing for cross-pollination. Cross-pollination has become essential in plant reproduction and fruit/seed production. The bees get their nutrients from the plants, and allow for successful fertilization of plants, demonstrating a mutualistic relationship between two seemingly-unlike species.\n*   The term \"species group\" can be used to describe the manner in which individual organisms group together. In this non-taxonomic context one can refer to \"same-species groups\" and \"mixed-species groups.\"\n*   Humans are involved in mutualisms with other species: their gut flora is essential for efficient digestion.\n*   One researcher has proposed that the key advantage Homo sapiens had over Neanderthals in competing over similar habitats was the former's mutualism with dogs.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Greater Honeyguide",
+                        "actions": [
+                            "Guide to nest",
+                            "Do not guide"
+                        ],
+                        "utilities": {
+                            "Guide to nest": {
+                                "Follow guide and open nest": {
+                                    "outcome": "The Greater Honeyguide successfully guides the forager to a wild bee nest. The forager opens the nest, and the Honeyguide feeds on the leftover wax and larvae, gaining a significant food source. The Honeyguide expends energy and takes a risk of predation.",
+                                    "utility": 5.0
+                                },
+                                "Ignore guide": {
+                                    "outcome": "The Greater Honeyguide expends energy and risks predation by attempting to guide, but the forager ignores its calls and flight patterns. The nest is not opened, and the Honeyguide receives no food reward.",
+                                    "utility": -5.0
+                                }
+                            },
+                            "Do not guide": {
+                                "Follow guide and open nest": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding. The forager cannot follow a guide that is not present, thus no honey acquisition interaction occurs. The Honeyguide incurs no guiding costs or benefits.",
+                                    "utility": 0.0
+                                },
+                                "Ignore guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding, and the forager takes no action related to guiding. No interaction occurs, and the Honeyguide incurs no costs or benefits related to guiding.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Forager (Human or Honey Badger)",
+                        "actions": [
+                            "Follow guide and open nest",
+                            "Ignore guide"
+                        ],
+                        "utilities": {
+                            "Follow guide and open nest": {
+                                "Guide to nest": {
+                                    "outcome": "The Greater Honeyguide successfully guides the forager to a wild bee nest. The forager expends effort and risks stings to open the nest, but successfully acquires honey, gaining a significant food source.",
+                                    "utility": 5.0
+                                },
+                                "Do not guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding. The forager cannot follow a guide that is not present, thus no honey acquisition interaction occurs. The Forager incurs no guiding costs or benefits, nor does it gain honey.",
+                                    "utility": 0.0
+                                }
+                            },
+                            "Ignore guide": {
+                                "Guide to nest": {
+                                    "outcome": "The Greater Honeyguide attempts to guide the forager, but the forager ignores its calls and flight patterns. No nest is opened, and the forager expends no effort and risks no stings, but also gains no honey.",
+                                    "utility": 0.0
+                                },
+                                "Do not guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding, and the forager takes no action related to guiding. No interaction occurs, and the forager incurs no costs or benefits related to guiding.",
+                                    "utility": 0.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "The game might be degenerate. Check if one or both players are indifferent to their strategies. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Greater Honeyguide": {
+                                "Guide to nest": 1.0,
+                                "Do not guide": 0.0
+                            },
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 1.0,
+                                "Ignore guide": 0.0
+                            }
+                        },
+                        {
+                            "Greater Honeyguide": {
+                                "Guide to nest": 0.0,
+                                "Do not guide": 1.0
+                            },
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 0.0,
+                                "Ignore guide": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Greater Honeyguide": {
+                                "Guide to nest": 1.0,
+                                "Do not guide": 0.0
+                            },
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 1.0,
+                                "Ignore guide": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 1.0,
+                                "Ignore guide": 0.0
+                            },
+                            "Greater Honeyguide": {
+                                "Do not guide": 0.0,
+                                "Guide to nest": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "Equilibria in Support and Vertex not equivalent. 2 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Greater Honeyguide",
+                        "actions": [
+                            "Guide to nest",
+                            "Do not guide"
+                        ],
+                        "utilities": {
+                            "Guide to nest": {
+                                "Follow guide and open nest": {
+                                    "outcome": "The Greater Honeyguide successfully guides the forager to a wild bee nest. The forager opens the nest, and the Honeyguide feeds on the leftover wax and larvae, gaining a significant food source. The Honeyguide expends energy and takes a risk of predation.",
+                                    "utility": 5.0
+                                },
+                                "Ignore guide": {
+                                    "outcome": "The Greater Honeyguide expends energy and risks predation by attempting to guide, but the forager ignores its calls and flight patterns. The nest is not opened, and the Honeyguide receives no food reward, incurring a net negative outcome.",
+                                    "utility": -5.0
+                                }
+                            },
+                            "Do not guide": {
+                                "Follow guide and open nest": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding. As no guide is present, the forager's choice to engage in a guided honey acquisition cannot materialize, and thus no honey acquisition interaction occurs. The Honeyguide incurs a baseline energetic cost without specific guiding benefits.",
+                                    "utility": -1.0
+                                },
+                                "Ignore guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding, and the forager takes no action related to guiding. No interaction occurs, and the Honeyguide incurs a baseline energetic cost without specific guiding benefits.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Forager (Human or Honey Badger)",
+                        "actions": [
+                            "Follow guide and open nest",
+                            "Ignore guide"
+                        ],
+                        "utilities": {
+                            "Follow guide and open nest": {
+                                "Guide to nest": {
+                                    "outcome": "The Greater Honeyguide successfully guides the forager to a wild bee nest. The forager expends effort and risks stings to open the nest, but successfully acquires honey, gaining a significant food source.",
+                                    "utility": 5.0
+                                },
+                                "Do not guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding. The forager's choice to attempt to follow a guide and open a nest is therefore unfulfilled, as no guide is present. No honey acquisition interaction occurs, and the Forager incurs a baseline energetic cost without specific foraging benefits.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Ignore guide": {
+                                "Guide to nest": {
+                                    "outcome": "The Greater Honeyguide attempts to guide the forager, but the forager ignores its calls and flight patterns. No nest is opened. The forager expends no effort and risks no stings, but incurs an opportunity cost and a baseline energetic cost for not acquiring honey.",
+                                    "utility": -1.0
+                                },
+                                "Do not guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding, and the forager takes no action related to guiding. No interaction occurs, and the forager incurs a baseline energetic cost without specific foraging benefits.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition provided largely captures the essence of the Greater Honeyguide-Forager interaction with biological plausibility. The defined actions for each player are mutually exclusive, and the orders of preferences (utilities) generally make sense from an ecological and energetic perspective for both species. The game is not trivial as players are not indifferent to all their choices, and it aims for high fidelity to the natural world.\n\nHowever, there is a minor semantic issue in the outcome descriptions for specific scenarios where a player's chosen action cannot logically materialize due to the other player's choice. In a simultaneous-move game, all combinations of actions are considered, but in reality, some combinations might not make practical sense. The current outcomes for these cells correctly acknowledge the practical impossibility, but the phrasing can be slightly refined for semantic clarity without changing the utilities, which are already biologically plausible for a \"no gain/no loss beyond baseline\" situation.\n\nHere are the specific changes to improve semantic correctness:\n\n**1. For the Honeyguide's utility when it chooses \"Do not guide\" and the Forager chooses \"Follow guide and open nest\":**\n*   **Current outcome:** \"The Greater Honeyguide does not initiate guiding. The forager cannot follow a guide that is not present, thus no honey acquisition interaction occurs. The Honeyguide incurs a baseline energetic cost without specific guiding benefits.\"\n*   **Proposed change:** \"The Greater Honeyguide does not initiate guiding. As no guide is present, the forager's choice to engage in a guided honey acquisition cannot materialize, and thus no honey acquisition interaction occurs. The Honeyguide incurs a baseline energetic cost without specific guiding benefits.\"\n*   **Reasoning:** The original phrasing \"The forager cannot follow a guide that is not present\" correctly identifies the logical impossibility from the Forager's side, but it's part of the Honeyguide's outcome description. Rewording clarifies that the Forager's *attempt* to follow is simply unfulfilled because the guide isn't there, making the description more precise from the perspective of both actions leading to a null interaction. The utility of -1.0 for the Honeyguide remains appropriate, representing a baseline energetic cost without cooperative benefits.\n\n**2. For the Forager's utility when it chooses \"Follow guide and open nest\" and the Honeyguide chooses \"Do not guide\":**\n*   **Current outcome:** \"The Greater Honeyguide does not initiate guiding. The forager cannot follow a guide that is not present, thus no honey acquisition interaction occurs. The Forager incurs a baseline energetic cost without specific foraging benefits.\"\n*   **Proposed change:** \"The Greater Honeyguide does not initiate guiding. The forager's choice to attempt to follow a guide and open a nest is therefore unfulfilled, as no guide is present. No honey acquisition interaction occurs, and the Forager incurs a baseline energetic cost without specific foraging benefits.\"\n*   **Reasoning:** Similar to the previous point, this rephrasing more accurately describes the situation. The Forager makes a choice (\"Follow guide and open nest\") that implicitly relies on a guide. When the guide isn't there, that choice cannot lead to the intended outcome. The utility of -1.0 remains appropriate, signifying a baseline state where no honey is acquired, and only standard energetic costs are incurred.\n\nThese changes refine the language to better represent the logical implications of simultaneous actions in the given context, without altering the well-justified utility values or the core structure of the game.",
+                "OldGame": [
+                    {
+                        "name": "Greater Honeyguide",
+                        "actions": [
+                            "Guide to nest",
+                            "Do not guide"
+                        ],
+                        "utilities": {
+                            "Guide to nest": {
+                                "Follow guide and open nest": {
+                                    "outcome": "The Greater Honeyguide successfully guides the forager to a wild bee nest. The forager opens the nest, and the Honeyguide feeds on the leftover wax and larvae, gaining a significant food source. The Honeyguide expends energy and takes a risk of predation.",
+                                    "utility": 5.0
+                                },
+                                "Ignore guide": {
+                                    "outcome": "The Greater Honeyguide expends energy and risks predation by attempting to guide, but the forager ignores its calls and flight patterns. The nest is not opened, and the Honeyguide receives no food reward, incurring a net negative outcome.",
+                                    "utility": -5.0
+                                }
+                            },
+                            "Do not guide": {
+                                "Follow guide and open nest": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding. The forager cannot follow a guide that is not present, thus no honey acquisition interaction occurs. The Honeyguide incurs a baseline energetic cost without specific guiding benefits.",
+                                    "utility": -1.0
+                                },
+                                "Ignore guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding, and the forager takes no action related to guiding. No interaction occurs, and the Honeyguide incurs a baseline energetic cost without specific guiding benefits.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Forager (Human or Honey Badger)",
+                        "actions": [
+                            "Follow guide and open nest",
+                            "Ignore guide"
+                        ],
+                        "utilities": {
+                            "Follow guide and open nest": {
+                                "Guide to nest": {
+                                    "outcome": "The Greater Honeyguide successfully guides the forager to a wild bee nest. The forager expends effort and risks stings to open the nest, but successfully acquires honey, gaining a significant food source.",
+                                    "utility": 5.0
+                                },
+                                "Do not guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding. The forager cannot follow a guide that is not present, thus no honey acquisition interaction occurs. The Forager incurs a baseline energetic cost without specific foraging benefits.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Ignore guide": {
+                                "Guide to nest": {
+                                    "outcome": "The Greater Honeyguide attempts to guide the forager, but the forager ignores its calls and flight patterns. No nest is opened. The forager expends no effort and risks no stings, but incurs an opportunity cost and a baseline energetic cost for not acquiring honey.",
+                                    "utility": -1.0
+                                },
+                                "Do not guide": {
+                                    "outcome": "The Greater Honeyguide does not initiate guiding, and the forager takes no action related to guiding. No interaction occurs, and the forager incurs a baseline energetic cost without specific foraging benefits.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "The game might be degenerate. Check if one or both players are indifferent to their strategies. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Greater Honeyguide": {
+                                "Guide to nest": 1.0,
+                                "Do not guide": 0.0
+                            },
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 1.0,
+                                "Ignore guide": 0.0
+                            }
+                        },
+                        {
+                            "Greater Honeyguide": {
+                                "Guide to nest": 0.0,
+                                "Do not guide": 1.0
+                            },
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 0.0,
+                                "Ignore guide": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Greater Honeyguide": {
+                                "Guide to nest": 1.0,
+                                "Do not guide": 0.0
+                            },
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 1.0,
+                                "Ignore guide": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Forager (Human or Honey Badger)": {
+                                "Follow guide and open nest": 1.0,
+                                "Ignore guide": 0.0
+                            },
+                            "Greater Honeyguide": {
+                                "Do not guide": 0.0,
+                                "Guide to nest": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "Equilibria in Support and Vertex not equivalent. 2 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Greater Honeyguide": "Guide to nest",
+            "Forager (Human or Honey Badger)": "Follow guide and open nest"
+        }
+    },
+    {
+        "Species": [
+            "Suricata suricatta"
+        ],
+        "Description": "Meerkats live in cooperative groups where individuals take turns acting as sentinels, standing on elevated positions to watch for predators while others forage. The sentinel foregoes feeding time and exposes itself to greater risk. The dilemma is the inherent tension between individual self-preservation/foraging success and contributing to group safety. While kin selection often explains such altruistic acts, the choice to stand guard involves a real-time assessment of risk vs. reward, potential for free-riding by others, and the implicit expectation of reciprocity within the group, making it a classic case of cooperation with clear individual costs.",
+        "Query": "meerkat sentinel behavior altruism kin selection predator vigilance",
+        "Article": "Error"
+    },
+    {
+        "Species": [
+            "Desmodus rotundus"
+        ],
+        "Description": "Common Vampire Bats are unique in their practice of reciprocal altruism: individuals who fail to find a blood meal will be regurgitated food by successful roost mates. This is critical for survival as bats can starve within 2-3 days without food. The dilemma for the donor bat is the immediate cost of giving up a vital resource it needs for its own metabolism and survival. This act is theorized to be maintained by reciprocity, where bats remember who has helped them and are more likely to share with those who have shared with them, creating a social contract to mitigate the risk of starvation across the colony.",
+        "Query": "vampire bat reciprocal altruism blood sharing food regurgitation starvation",
+        "Article": "*   Vampire bats, members of the subfamily Desmodontinae, are leaf-nosed bats currently found in Central and South America.\n*   Their food source is the blood of other animals, a dietary trait called hematophagy.\n*   Three extant bat species feed solely on blood: the common vampire bat (Desmodus rotundus), the hairy-legged vampire bat (Diphylla ecaudata), and the white-winged vampire bat (Diaemus youngi).\n*   Vampire bats tend to live in colonies in almost completely dark places, such as caves, old wells, hollow trees, and buildings.\n*   Vampire bats form strong bonds with other members of the colony.\n*   A related unique adaptation of vampire bats is the sharing of food.\n*   A vampire bat can only survive about two days without feeding, yet they cannot be guaranteed of finding food every night.\n*   This poses a problem, so when a bat fails to find food, it will often \"beg\" another bat for food.\n*   A \"donor\" bat may regurgitate a small amount of blood to sustain the other member of the colony.\n*   These findings contradict the harassment hypothesis\u2014which claims that individuals share food in order to limit harassment by begging individuals.\n*   In a 2024 study published in Biology Letters, researchers explored how vampire bats generate energy from their blood meals, hypothesizing that they metabolize amino acids due to their low-carbohydrate and low-fat diet.\n*   To counteract this vulnerability, vampire bats engage in reciprocal altruism, regurgitating blood to assist conspecifics in need.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Donor Bat",
+                        "actions": [
+                            "Regurgitate blood",
+                            "Refuse to regurgitate blood"
+                        ],
+                        "utilities": {
+                            "Regurgitate blood": {
+                                "Beg for food": {
+                                    "outcome": "The Donor Bat gives up vital resources, incurring an immediate metabolic cost. It sustains the Begging Bat, upholding the social contract and reinforcing reciprocal ties for future aid.",
+                                    "utility": -0.5
+                                },
+                                "Not beg for food": {
+                                    "outcome": "The Donor Bat gives up vital resources despite no explicit request. This incurs an immediate metabolic cost with less clear reciprocal benefit, potentially a wasted resource if the Begging Bat was not truly in need.",
+                                    "utility": -0.8
+                                }
+                            },
+                            "Refuse to regurgitate blood": {
+                                "Beg for food": {
+                                    "outcome": "The Donor Bat retains its vital resources, avoiding immediate cost. However, it fails to uphold the social contract, leading to the Begging Bat's starvation risk and a breakdown of reciprocal trust, which jeopardizes the Donor Bat's own future survival prospects.",
+                                    "utility": -1.0
+                                },
+                                "Not beg for food": {
+                                    "outcome": "The Donor Bat retains its vital resources. The Begging Bat does not require food (or does not request it). No cost is incurred, and no social contract is broken, representing an optimal outcome for the Donor Bat.",
+                                    "utility": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Begging Bat",
+                        "actions": [
+                            "Beg for food",
+                            "Not beg for food"
+                        ],
+                        "utilities": {
+                            "Beg for food": {
+                                "Regurgitate blood": {
+                                    "outcome": "The Begging Bat receives critical nourishment, averting starvation, and reinforcing the social contract, ensuring its immediate survival.",
+                                    "utility": 1.0
+                                },
+                                "Refuse to regurgitate blood": {
+                                    "outcome": "The Begging Bat does not receive food, faces immediate starvation risk due to the failure of the social contract, potentially leading to death.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Not beg for food": {
+                                "Regurgitate blood": {
+                                    "outcome": "The Begging Bat receives unsolicited nourishment. If it needed it, it avoids starvation. If it didn't, it's a bonus, and the bat benefits without actively engaging in the reciprocal transaction.",
+                                    "utility": 0.9
+                                },
+                                "Refuse to regurgitate blood": {
+                                    "outcome": "The Begging Bat does not receive food. If it required nourishment, it continues to face starvation risk without direct support from the colony.",
+                                    "utility": -0.7
+                                }
+                            }
+                        }
+                    }
+                ],
+                "PrevGame": [
+                    {
+                        "name": "Donor Bat",
+                        "actions": [
+                            "Regurgitate blood",
+                            "Refuse to regurgitate blood"
+                        ],
+                        "utilities": {
+                            "Regurgitate blood": {
+                                "Beg for food": {
+                                    "outcome": "The Donor Bat gives up vital resources, incurring an immediate metabolic cost. It sustains the Begging Bat, upholding the social contract and reinforcing reciprocal ties for future aid.",
+                                    "utility": -0.5
+                                },
+                                "Not beg for food": {
+                                    "outcome": "The Donor Bat gives up vital resources despite no explicit request. This incurs an immediate metabolic cost with less clear reciprocal benefit, potentially a wasted resource if the Begging Bat was not truly in need.",
+                                    "utility": -0.8
+                                }
+                            },
+                            "Refuse to regurgitate blood": {
+                                "Beg for food": {
+                                    "outcome": "The Donor Bat retains its vital resources, avoiding immediate cost. However, it fails to uphold the social contract, leading to the Begging Bat's starvation risk and a breakdown of reciprocal trust, which jeopardizes the Donor Bat's own future survival prospects.",
+                                    "utility": -1.0
+                                },
+                                "Not beg for food": {
+                                    "outcome": "The Donor Bat retains its vital resources. The Begging Bat does not require food (or does not request it). No cost is incurred, and no social contract is broken, representing an optimal outcome for the Donor Bat.",
+                                    "utility": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Begging Bat",
+                        "actions": [
+                            "Beg for food",
+                            "Not beg for food"
+                        ],
+                        "utilities": {
+                            "Beg for food": {
+                                "Regurgitate blood": {
+                                    "outcome": "The Begging Bat receives critical nourishment, averting starvation, and reinforcing the social contract, ensuring its immediate survival.",
+                                    "utility": 1.0
+                                },
+                                "Refuse to regurgitate blood": {
+                                    "outcome": "The Begging Bat does not receive food, faces immediate starvation risk due to the failure of the social contract, potentially leading to death.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Not beg for food": {
+                                "Regurgitate blood": {
+                                    "outcome": "The Begging Bat receives unsolicited nourishment. If it needed it, it avoids starvation. If it didn't, it's a bonus, and the bat benefits without actively engaging in the reciprocal transaction.",
+                                    "utility": 0.9
+                                },
+                                "Refuse to regurgitate blood": {
+                                    "outcome": "The Begging Bat does not receive food. If it required nourishment, it continues to face starvation risk without direct support from the colony.",
+                                    "utility": -0.2
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The utility value for the 'Begging Bat' when it chooses 'Not beg for food' and the 'Donor Bat' chooses 'Refuse to regurgitate blood' is set to -0.2. The outcome description states: 'The Begging Bat does not receive food. If it required nourishment, it continues to face starvation risk without direct support from the colony.' For a common vampire bat, which can starve within 2-3 days, facing a continued starvation risk is an extremely severe outcome, comparable to the direct failure of the social contract when begging and being refused. A utility of -0.2 is too high for such a dire situation; it suggests only a mild inconvenience. To accurately reflect the biological severity of potential starvation, this utility should be significantly lower, closer to the other negative outcomes (e.g., -1.0 for immediate starvation/death). I have adjusted it to -0.7 to better align with the critical threat to survival, while still being slightly 'better' than actively begging and being refused (-1.0), perhaps due to less direct social cost or a slightly less immediate critical state.",
+                "Validated": true,
+                "Feedback": "The game has multiple equilibria. A game with a more definite outcome would be better. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 1.0,
+                                "Refuse to regurgitate blood": 0.0
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 1.0,
+                                "Not beg for food": 0.0
+                            }
+                        },
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 0.0,
+                                "Refuse to regurgitate blood": 1.0
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 0.0,
+                                "Not beg for food": 1.0
+                            }
+                        },
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 0.75,
+                                "Refuse to regurgitate blood": 0.25
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 0.78,
+                                "Not beg for food": 0.22
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 0.0,
+                                "Refuse to regurgitate blood": 1.0
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 0.0,
+                                "Not beg for food": 1.0
+                            }
+                        },
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 0.75,
+                                "Refuse to regurgitate blood": 0.25
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 0.78,
+                                "Not beg for food": 0.22
+                            }
+                        },
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 1.0,
+                                "Refuse to regurgitate blood": 0.0
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 1.0,
+                                "Not beg for food": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Begging Bat": {
+                                "Beg for food": 1.0,
+                                "Not beg for food": 0.0
+                            },
+                            "Donor Bat": {
+                                "Refuse to regurgitate blood": 0.0,
+                                "Regurgitate blood": 1.0
+                            }
+                        },
+                        {
+                            "Begging Bat": {
+                                "Beg for food": 0.0,
+                                "Not beg for food": 1.0
+                            },
+                            "Donor Bat": {
+                                "Refuse to regurgitate blood": 1.0,
+                                "Regurgitate blood": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "3 equilibria found in Support. 3 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Donor Bat",
+                        "actions": [
+                            "Regurgitate blood",
+                            "Refuse to regurgitate blood"
+                        ],
+                        "utilities": {
+                            "Regurgitate blood": {
+                                "Beg for food": {
+                                    "outcome": "The Donor Bat gives up vital resources, incurring an immediate metabolic cost. It sustains the Begging Bat, upholding the social contract and reinforcing reciprocal ties for future aid.",
+                                    "utility": -0.5
+                                },
+                                "Not beg for food": {
+                                    "outcome": "The Donor Bat gives up vital resources despite no explicit request. This incurs an immediate metabolic cost with less clear reciprocal benefit, potentially a wasted resource if the Begging Bat was not truly in need.",
+                                    "utility": -0.8
+                                }
+                            },
+                            "Refuse to regurgitate blood": {
+                                "Beg for food": {
+                                    "outcome": "The Donor Bat retains its vital resources, avoiding immediate cost. However, it fails to uphold the social contract, leading to the Begging Bat's starvation risk and a breakdown of reciprocal trust, which jeopardizes the Donor Bat's own future survival prospects.",
+                                    "utility": -1.0
+                                },
+                                "Not beg for food": {
+                                    "outcome": "The Donor Bat retains its vital resources. The Begging Bat does not require food (or does not request it). No cost is incurred, and no social contract is broken, representing an optimal outcome for the Donor Bat.",
+                                    "utility": 1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Begging Bat",
+                        "actions": [
+                            "Beg for food",
+                            "Not beg for food"
+                        ],
+                        "utilities": {
+                            "Beg for food": {
+                                "Regurgitate blood": {
+                                    "outcome": "The Begging Bat receives critical nourishment, averting starvation, and reinforcing the social contract, ensuring its immediate survival.",
+                                    "utility": 1.0
+                                },
+                                "Refuse to regurgitate blood": {
+                                    "outcome": "The Begging Bat does not receive food, faces immediate starvation risk due to the failure of the social contract, potentially leading to death.",
+                                    "utility": -1.0
+                                }
+                            },
+                            "Not beg for food": {
+                                "Regurgitate blood": {
+                                    "outcome": "The Begging Bat receives unsolicited nourishment. If it needed it, it avoids starvation. If it didn't, it's a bonus, and the bat benefits without actively engaging in the reciprocal transaction.",
+                                    "utility": 0.9
+                                },
+                                "Refuse to regurgitate blood": {
+                                    "outcome": "The Begging Bat does not receive food. If it required nourishment, it continues to face starvation risk without direct support from the colony.",
+                                    "utility": -1.1
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 1.0,
+                                "Refuse to regurgitate blood": 0.0
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 1.0,
+                                "Not beg for food": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Donor Bat": {
+                                "Regurgitate blood": 1.0,
+                                "Refuse to regurgitate blood": 0.0
+                            },
+                            "Begging Bat": {
+                                "Beg for food": 1.0,
+                                "Not beg for food": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Begging Bat": {
+                                "Beg for food": 1.0,
+                                "Not beg for food": 0.0
+                            },
+                            "Donor Bat": {
+                                "Refuse to regurgitate blood": 0.0,
+                                "Regurgitate blood": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Donor Bat": "Regurgitate blood",
+            "Begging Bat": "Beg for food"
+        }
+    },
+    {
+        "Species": [
+            "Scleractinian corals",
+            "Symbiodinium spp."
+        ],
+        "Description": "Scleractinian corals host symbiotic dinoflagellates (zooxanthellae) within their tissues. The algae perform photosynthesis, providing the coral with energy-rich compounds, while the coral offers a protected environment and metabolic waste products (CO2, nitrogen, phosphorus) for the algae. The non-trivial dilemma arises under environmental stress, particularly high temperatures. The coral may expel its zooxanthellae (coral bleaching), which allows it to survive the immediate stress but removes its primary food source, potentially leading to starvation. This 'decision' represents a critical trade-off between short-term survival (expelling harmful symbionts) and long-term vitality (maintaining the symbiosis) in the face of environmental change.",
+        "Query": "coral zooxanthellae symbiosis mutualism bleaching stress response adaptive capacity",
+        "Article": "*   Examples of photosymbiotic relationships include those in lichens, plankton, ciliates, and many marine organisms including corals, fire corals, giant clams, and jellyfish.\n*   Photosymbiosis is important in the development, maintenance, and evolution of terrestrial and aquatic ecosystems, for example in biological soil crusts, soil formation, supporting highly diverse microbial populations in soil and water, and coral reef growth and maintenance.\n*   When one organism lives within another symbiotically it's called endosymbiosis. Photosymbiotic relationships where microalgae and/or cyanobacteria live within a heterotrophic host organism, are believed to have led to eukaryotes acquiring photosynthesis and to the evolution of plants.\n*   Members of certain classes in phylum Cnidaria are known for photosymbiotic partnerships. Members of corals (Class Anthozoa) in the orders Hexacorallia and Octocorallia form well-characterized partnerships with the dinoflagellate genus Symbiodinium. Some jellyfish (class Scyphozoa) in the genus Cassiopea (upside-down jellyfish) also possess Symbiodinium.\n*   The evolution of photosymbiosis in corals was likely critical for the global establishment of coral reefs. Corals are likewise adapted to eject damaged photosymbionts that generate high levels of toxic reactive oxygen species, a process known as bleaching.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Coral",
+                        "actions": [
+                            "Expel Zooxanthellae",
+                            "Retain Zooxanthellae"
+                        ],
+                        "utilities": {
+                            "Expel Zooxanthellae": {
+                                "Provide Energy": {
+                                    "outcome": "Coral expels healthy zooxanthellae, losing its primary food source and facing long-term starvation, despite no immediate threat from toxins.",
+                                    "utility": -5.0
+                                },
+                                "Generate Toxins": {
+                                    "outcome": "Coral expels harmful zooxanthellae, surviving immediate toxic stress but losing its primary food source and facing long-term starvation.",
+                                    "utility": 0.0
+                                }
+                            },
+                            "Retain Zooxanthellae": {
+                                "Provide Energy": {
+                                    "outcome": "Coral maintains healthy symbiosis, benefiting from energy-rich compounds provided by zooxanthellae and thriving.",
+                                    "utility": 10.0
+                                },
+                                "Generate Toxins": {
+                                    "outcome": "Coral retains harmful zooxanthellae, suffering severe damage from toxic reactive oxygen species, leading to bleaching or potential death.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Zooxanthellae",
+                        "actions": [
+                            "Provide Energy",
+                            "Generate Toxins"
+                        ],
+                        "utilities": {
+                            "Provide Energy": {
+                                "Expel Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are expelled from the coral despite providing energy, losing their protected habitat and nutrient source.",
+                                    "utility": -8.0
+                                },
+                                "Retain Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are retained by the coral, continuing to thrive in the protected environment and provide essential services, ensuring their own well-being.",
+                                    "utility": 10.0
+                                }
+                            },
+                            "Generate Toxins": {
+                                "Expel Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are expelled from the coral due to generating harmful toxins, losing their habitat. This may be an inevitable outcome if they are damaged beyond repair.",
+                                    "utility": -5.0
+                                },
+                                "Retain Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are retained by the coral despite generating toxins, leading to severe damage or death of the coral host, which ultimately results in the death of the zooxanthellae themselves.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The utility values for the Zooxanthellae player require adjustment to maintain biological plausibility. Specifically, the utility for 'Generate Toxins' followed by 'Expel Zooxanthellae' is currently -5.0, which is higher than the utility for 'Provide Energy' followed by 'Expel Zooxanthellae' (-8.0). Biologically, if zooxanthellae are already stressed and generating toxins, they are in a compromised state. Being expelled in this state, losing their protected habitat while already weakened, should represent an equally or even more detrimental outcome than being expelled when healthy. Therefore, the utility for being expelled when generating toxins should be lower than being expelled when providing energy, reflecting their already diminished state and the loss of a crucial environment. I've adjusted 'Generate Toxins' -> 'Expel Zooxanthellae' utility from -5.0 to -9.0.\nNew game suggested was not formally valid: Invalid game data structure: must be a list.",
+                "Validated": true,
+                "Feedback": "The game has multiple equilibria. A game with a more definite outcome would be better. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 1.0,
+                                "Retain Zooxanthellae": 0.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.0,
+                                "Generate Toxins": 1.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.0,
+                                "Retain Zooxanthellae": 1.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 1.0,
+                                "Generate Toxins": 0.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.87,
+                                "Retain Zooxanthellae": 0.13
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.4,
+                                "Generate Toxins": 0.6
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 1.0,
+                                "Retain Zooxanthellae": 0.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.0,
+                                "Generate Toxins": 1.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.0,
+                                "Retain Zooxanthellae": 1.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 1.0,
+                                "Generate Toxins": 0.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.87,
+                                "Retain Zooxanthellae": 0.13
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.4,
+                                "Generate Toxins": 0.6
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.0,
+                                "Retain Zooxanthellae": 1.0
+                            },
+                            "Zooxanthellae": {
+                                "Generate Toxins": 0.0,
+                                "Provide Energy": 1.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 1.0,
+                                "Retain Zooxanthellae": 0.0
+                            },
+                            "Zooxanthellae": {
+                                "Generate Toxins": 1.0,
+                                "Provide Energy": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "3 equilibria found in Support. 3 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Coral",
+                        "actions": [
+                            "Expel Zooxanthellae",
+                            "Retain Zooxanthellae"
+                        ],
+                        "utilities": {
+                            "Expel Zooxanthellae": {
+                                "Provide Energy": {
+                                    "outcome": "Coral expels healthy zooxanthellae, losing its primary food source and facing long-term starvation, despite no immediate threat from toxins. This is an irrational choice under normal conditions.",
+                                    "utility": -5.0
+                                },
+                                "Generate Toxins": {
+                                    "outcome": "Coral expels harmful zooxanthellae, surviving immediate toxic stress but losing its primary food source and facing long-term starvation.",
+                                    "utility": 0.0
+                                }
+                            },
+                            "Retain Zooxanthellae": {
+                                "Provide Energy": {
+                                    "outcome": "Coral maintains healthy symbiosis, benefiting from energy-rich compounds provided by zooxanthellae and thriving.",
+                                    "utility": 10.0
+                                },
+                                "Generate Toxins": {
+                                    "outcome": "Coral retains harmful zooxanthellae, suffering severe damage from toxic reactive oxygen species, leading to bleaching or potential death.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Zooxanthellae",
+                        "actions": [
+                            "Provide Energy",
+                            "Generate Toxins"
+                        ],
+                        "utilities": {
+                            "Provide Energy": {
+                                "Expel Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are expelled from the coral despite attempting to provide energy, losing their protected habitat and nutrient source. Under stress, attempting to provide energy may be highly detrimental.",
+                                    "utility": -11.0
+                                },
+                                "Retain Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are retained by the coral. However, under stress, attempting to provide energy further damages them, leading to severe self-harm or inability to function.",
+                                    "utility": -9.0
+                                }
+                            },
+                            "Generate Toxins": {
+                                "Expel Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are expelled from the coral due to generating harmful toxins, losing their habitat. This may be an inevitable outcome if they are damaged beyond repair, but may allow them to survive outside the host.",
+                                    "utility": -7.0
+                                },
+                                "Retain Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are retained by the coral despite generating toxins, leading to severe damage or death of the coral host, which ultimately results in the death of the zooxanthellae themselves.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition presents an interesting model for coral-algae symbiosis under stress, but it has several biological plausibility issues, particularly concerning the zooxanthellae's \"actions\" and their associated utilities.\n\nHere are the detailed comments on what to change and why:\n\n1.  **Semantic Misrepresentation of Zooxanthellae \"Actions\":**\n    *   **Issue:** The actions \"Provide Energy\" and \"Generate Toxins\" for Zooxanthellae are problematic as genuine \"choices\" made by the organism. \"Provide Energy\" is their fundamental metabolic function, not a strategic choice, especially under stress. More critically, \"Generate Toxins\" (referring to Reactive Oxygen Species, ROS) is a **passive physiological consequence** of stress and photosynthetic dysfunction, not an active, deliberate action or strategy chosen by the zooxanthellae. Zooxanthellae do not *decide* to become toxic; they *become* toxic when their photosynthetic machinery is overwhelmed by environmental stress. This violates the principle of \"high fidelity to the natural world\" and that \"made-up behaviors that don't exist in the description or in nature\" should be avoided.\n    *   Furthermore, if the game is set under environmental stress (as implied by the \"dilemma\" description), then \"Provide Energy\" (i.e., continuing photosynthesis) often *leads* to \"Generate Toxins\" (i.e., ROS production). This means the two \"actions\" are not mutually exclusive in the context of stress, which violates the rule that actions should be mutually exclusive.\n    *   **Proposed Change:** This is a fundamental flaw. To address it, the game would either need to:\n        *   **Redefine Zooxanthellae \"Actions\"**: Instead of states of being/consequences, they should represent genuine active responses, e.g., \"Maintain Photosynthesis (risking ROS production)\" vs. \"Reduce Photosynthesis (reducing ROS but also energy transfer)\". This would require a significant rewrite of the zooxanthellae's part of the game.\n        *   **Reframe the Game Context**: If \"Generate Toxins\" is treated as a *state* the zooxanthellae are forced into under stress, then the game is less about the zooxanthellae's choice and more about the coral's response to this (potentially unavoidable) state. However, the current structure requires two active players making choices.\n    *   **Recommendation for this specific game:** State clearly that \"Generate Toxins\" is not a choice, making the Zooxanthellae player's actions biologically inaccurate in a choice-based game.\n\n2.  **Inconsistent Utility Ordering for Zooxanthellae:**\n    *   **Issue:** The numerical utilities for Zooxanthellae do not consistently reflect the severity of the biological outcomes:\n        *   When Coral \"Retain Zooxanthellae\":\n            *   \"Generate Toxins\" leads to \"death of the zooxanthellae themselves\" (utility: -10.0).\n            *   \"Provide Energy\" leads to \"severe self-harm or inability to function\" (utility: -11.0).\n        *   Biologically, \"death\" should represent the absolute worst outcome. However, a utility of -11.0 (self-harm) is numerically worse than -10.0 (death). This is illogical; \"severe self-harm\" should not be worse than \"death.\"\n    *   **Proposed Change:** Re-evaluate the utilities to reflect the correct order of severity. For instance, if -10.0 represents death, then \"severe self-harm\" should be assigned a less negative utility, e.g., -8.0 or -9.0.\n\n3.  **Plausibility of Zooxanthellae Utility for \"Expel Zooxanthellae\" when \"Generate Toxins\":**\n    *   **Issue:** When Coral \"Expels Zooxanthellae\" and Zooxanthellae \"Generate Toxins\", the utility for Zooxanthellae is -5.0, with the outcome \"may allow them to survive outside the host.\"\n    *   Expulsion leads to the loss of a protected habitat and essential nutrients. While some free-living dinoflagellates exist, symbiotic zooxanthellae are highly adapted to the host environment, and their survival rate post-expulsion is generally considered very low. A utility of -5.0 (which is significantly higher than other negative utilities like -10.0 or -11.0) seems overly optimistic for an organism that has lost its highly specialized habitat and is already in a stressed/toxic state. This value implies it's a relatively good outcome compared to other very bad outcomes, which is biologically questionable for the zooxanthellae's long-term viability.\n    *   **Proposed Change:** The utility of -5.0 should be lowered to reflect a more dire, though not immediately fatal, outcome. A value like -7.0 or -8.0 would be more biologically plausible to represent significant harm and low survival probability outside the host, while still being better than death.",
+                "OldGame": [
+                    {
+                        "name": "Coral",
+                        "actions": [
+                            "Expel Zooxanthellae",
+                            "Retain Zooxanthellae"
+                        ],
+                        "utilities": {
+                            "Expel Zooxanthellae": {
+                                "Provide Energy": {
+                                    "outcome": "Coral expels healthy zooxanthellae, losing its primary food source and facing long-term starvation, despite no immediate threat from toxins. This is an irrational choice under normal conditions.",
+                                    "utility": -5.0
+                                },
+                                "Generate Toxins": {
+                                    "outcome": "Coral expels harmful zooxanthellae, surviving immediate toxic stress but losing its primary food source and facing long-term starvation.",
+                                    "utility": 0.0
+                                }
+                            },
+                            "Retain Zooxanthellae": {
+                                "Provide Energy": {
+                                    "outcome": "Coral maintains healthy symbiosis, benefiting from energy-rich compounds provided by zooxanthellae and thriving.",
+                                    "utility": 10.0
+                                },
+                                "Generate Toxins": {
+                                    "outcome": "Coral retains harmful zooxanthellae, suffering severe damage from toxic reactive oxygen species, leading to bleaching or potential death.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Zooxanthellae",
+                        "actions": [
+                            "Provide Energy",
+                            "Generate Toxins"
+                        ],
+                        "utilities": {
+                            "Provide Energy": {
+                                "Expel Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are expelled from the coral despite attempting to provide energy, losing their protected habitat and nutrient source. Under stress, attempting to provide energy may be highly detrimental.",
+                                    "utility": -11.0
+                                },
+                                "Retain Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are retained by the coral. However, under stress, attempting to provide energy further damages them, leading to severe self-harm or inability to function.",
+                                    "utility": -11.0
+                                }
+                            },
+                            "Generate Toxins": {
+                                "Expel Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are expelled from the coral due to generating harmful toxins, losing their habitat. This may be an inevitable outcome if they are damaged beyond repair, but may allow them to survive outside the host.",
+                                    "utility": -5.0
+                                },
+                                "Retain Zooxanthellae": {
+                                    "outcome": "Zooxanthellae are retained by the coral despite generating toxins, leading to severe damage or death of the coral host, which ultimately results in the death of the zooxanthellae themselves.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "The game has multiple equilibria. A game with a more definite outcome would be better. ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 1.0,
+                                "Retain Zooxanthellae": 0.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.0,
+                                "Generate Toxins": 1.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.0,
+                                "Retain Zooxanthellae": 1.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 1.0,
+                                "Generate Toxins": 0.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.2,
+                                "Retain Zooxanthellae": 0.8
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.4,
+                                "Generate Toxins": 0.6
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 1.0,
+                                "Retain Zooxanthellae": 0.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.0,
+                                "Generate Toxins": 1.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.0,
+                                "Retain Zooxanthellae": 1.0
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 1.0,
+                                "Generate Toxins": 0.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.2,
+                                "Retain Zooxanthellae": 0.8
+                            },
+                            "Zooxanthellae": {
+                                "Provide Energy": 0.4,
+                                "Generate Toxins": 0.6
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 0.0,
+                                "Retain Zooxanthellae": 1.0
+                            },
+                            "Zooxanthellae": {
+                                "Generate Toxins": 0.0,
+                                "Provide Energy": 1.0
+                            }
+                        },
+                        {
+                            "Coral": {
+                                "Expel Zooxanthellae": 1.0,
+                                "Retain Zooxanthellae": 0.0
+                            },
+                            "Zooxanthellae": {
+                                "Generate Toxins": 1.0,
+                                "Provide Energy": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "3 equilibria found in Support. 3 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Coral": "Expel Zooxanthellae",
+            "Zooxanthellae": "Generate Toxins"
+        }
+    }
+]

@@ -1,0 +1,2066 @@
+[
+    {
+        "Species": [
+            "Ficedula hypoleuca",
+            "Parus major"
+        ],
+        "Description": "Pied Flycatchers (migratory) and Great Tits (resident) compete intensely for limited tree cavities, which are crucial nesting sites. Pied Flycatchers arrive later in the breeding season and often find prime cavities already occupied by Great Tits, forcing them to select less optimal sites, delay breeding, or face reduced reproductive success. This creates a spatial and temporal dilemma in habitat acquisition for the flycatchers, impacting their reproductive fitness.",
+        "Query": "Pied Flycatcher Great Tit nest competition cavity selection interspecific",
+        "Article": "Here are the relevant passages from the article in plain text:\n\n*   Pied Flycatchers (<i>Ficedula hypoleuca</i>) were shown to be negatively impacted by the presence of Ural owls.\n\n*   In one case in Norway, a Ural owl utilized a hole in a common aspen (Populus tremula) in the same tree where common mergansers (Mergus merganser) were using a different hole.\n\n*   Despite their potential predation on smaller mesopredators, when nest boxes for European pied flycatchers (Ficedula hypoleuca) were experimentally placed in the area of Ural owl nests, productivity lowered, and it is possibly because mesopredators were often attracted to the corresponding food base of the owls.\n\n*   The Ural owl is also distributed through all five of the Japanese archipelago main islands (i.e. only absent from Okinawa/Ryukyu Islands to the south).\n\n*   In addition, Ural owls are known to have successfully have chased off actively nesting goshawks as well as European honey buzzards (Pernis apivorus), common buzzards (Buteo buteo) and black kites (Milvus migrans) in order to claim the nests for themselves.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Pied Flycatcher",
+                        "actions": [
+                            "SeekPrimeCavity",
+                            "SettleForSuboptimalCavity",
+                            "ForgoBreeding"
+                        ],
+                        "utilities": {
+                            "SeekPrimeCavity": {
+                                "OccupyPrimeCavity": {
+                                    "outcome": "Pied Flycatcher fails to secure a prime cavity, is forced to settle for a suboptimal site, delay breeding, or potentially forgo breeding. Represents a significant setback.",
+                                    "utility": -2.0
+                                },
+                                "OccupySuboptimalCavity": {
+                                    "outcome": "Pied Flycatcher successfully secures a prime cavity, achieving optimal nesting conditions and reproductive success.",
+                                    "utility": 10.0
+                                }
+                            },
+                            "SettleForSuboptimalCavity": {
+                                "OccupyPrimeCavity": {
+                                    "outcome": "Pied Flycatcher accepts a suboptimal cavity due to prime sites being occupied, leading to reduced reproductive success.",
+                                    "utility": 5.0
+                                },
+                                "OccupySuboptimalCavity": {
+                                    "outcome": "Pied Flycatcher settles for a suboptimal cavity, leading to reduced reproductive success.",
+                                    "utility": 5.0
+                                }
+                            },
+                            "ForgoBreeding": {
+                                "OccupyPrimeCavity": {
+                                    "outcome": "Pied Flycatcher completely fails to breed this season due to intense competition and lack of suitable nesting sites.",
+                                    "utility": -10.0
+                                },
+                                "OccupySuboptimalCavity": {
+                                    "outcome": "Pied Flycatcher completely fails to breed this season, despite Great Tit not occupying a prime cavity.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Great Tit",
+                        "actions": [
+                            "OccupyPrimeCavity",
+                            "OccupySuboptimalCavity"
+                        ],
+                        "utilities": {
+                            "OccupyPrimeCavity": {
+                                "SeekPrimeCavity": {
+                                    "outcome": "Great Tit successfully occupies the prime cavity, preventing Pied Flycatcher from securing it.",
+                                    "utility": 10.0
+                                },
+                                "SettleForSuboptimalCavity": {
+                                    "outcome": "Great Tit successfully occupies the prime cavity, forcing Pied Flycatcher to settle for a suboptimal site.",
+                                    "utility": 10.0
+                                },
+                                "ForgoBreeding": {
+                                    "outcome": "Great Tit successfully occupies the prime cavity, and the Pied Flycatcher completely forgoes breeding, eliminating seasonal competition.",
+                                    "utility": 10.0
+                                }
+                            },
+                            "OccupySuboptimalCavity": {
+                                "SeekPrimeCavity": {
+                                    "outcome": "Great Tit occupies a suboptimal cavity, allowing the Pied Flycatcher to attempt to secure the prime cavity it passed up, leading to a significant missed opportunity for the Great Tit.",
+                                    "utility": 0.0
+                                },
+                                "SettleForSuboptimalCavity": {
+                                    "outcome": "Great Tit occupies a suboptimal cavity, and the Pied Flycatcher also settles for a suboptimal cavity, indicating neither secured a prime nesting site.",
+                                    "utility": 5.0
+                                },
+                                "ForgoBreeding": {
+                                    "outcome": "Great Tit occupies a suboptimal cavity, but the Pied Flycatcher completely forgoes breeding, removing competition but leaving Great Tit with a less ideal nest.",
+                                    "utility": 5.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The provided game definition largely captures the competitive dynamics between Pied Flycatchers and Great Tits for nesting cavities. However, upon closer biological scrutiny, some utility assignments and implied rationalities require adjustment for higher fidelity to natural behavior and ecological outcomes.\n\nSpecific issues and proposed adjustments:\n\n1.  **Pied Flycatcher's Utility for 'SettleForSuboptimalCavity' when Great Tit 'OccupySuboptimalCavity':**\n    *   **Original Utility:** 5.0\n    *   **Problem:** If the Great Tit occupies a suboptimal cavity, it implies a prime cavity is available. For the Pied Flycatcher to then *choose* to 'SettleForSuboptimalCavity' when a prime site is available represents a significant missed opportunity or a sub-optimal decision. The original utility of 5.0 (which is the same as settling for suboptimal when prime is *unavailable*) does not adequately penalize this strategic error.\n    *   **Biologically Plausible Adjustment:** The utility for the Pied Flycatcher in this scenario should be lower, reflecting the poor outcome of not utilizing an available prime cavity. We've adjusted it to 2.0, indicating a less favorable outcome than securing a suboptimal site out of necessity (when prime is taken), but still better than completely forgoing breeding.\n\n2.  **Great Tit's Utility for 'OccupySuboptimalCavity' when Pied Flycatcher 'ForgoBreeding':**\n    *   **Original Utility:** 5.0\n    *   **Problem:** If the Great Tit chooses to 'OccupySuboptimalCavity' and the Pied Flycatcher subsequently 'ForgoBreeding', it means the prime cavity was left unoccupied by both species. For the Great Tit, failing to secure the prime cavity when it was available (and not even taken by the competitor) is a significant strategic blunder and a missed opportunity for optimal reproductive success. A utility of 5.0, which is the same as settling for suboptimal when the Flycatcher also settles for suboptimal, does not adequately reflect this severe error.\n    *   **Biologically Plausible Adjustment:** The utility for the Great Tit in this scenario should be significantly lower, reflecting the cost of this missed opportunity. We've adjusted it to -2.0, which is worse than losing the prime cavity to the Flycatcher (0.0), because in this case, the Great Tit *chose* not to take the prime cavity when it was free, indicating an irrational or poorly informed decision from the perspective of maximizing fitness.\n\n3.  **Pied Flycatcher's Choice to 'ForgoBreeding' when Great Tit 'OccupySuboptimalCavity':**\n    *   **Original Utility:** -10.0\n    *   **Problem:** If the Great Tit occupies a suboptimal cavity, it means the prime cavity is available. For a migratory species under strong selective pressure to reproduce, choosing to 'ForgoBreeding' when an ideal nesting site is freely available is biologically implausible for a rational actor. While the utility of -10.0 correctly reflects a disastrous outcome for the Pied Flycatcher's fitness, the very premise of this action choice in the context of an available prime cavity is questionable for a strictly rational biological agent. This suggests an implicit assumption not fully captured by the game, such as the Pied Flycatcher arriving too late for *any* breeding, even if an empty prime cavity exists. However, given the game structure, the utility for such a choice must be consistent with the dire outcome of not breeding at all, which it is. We have only slightly clarified the outcome description.\nNew game suggested was not formally valid: Invalid game data structure: must be a list.",
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Pied Flycatcher": {
+                                "SeekPrimeCavity": 0.0,
+                                "SettleForSuboptimalCavity": 1.0,
+                                "ForgoBreeding": 0.0
+                            },
+                            "Great Tit": {
+                                "OccupyPrimeCavity": 1.0,
+                                "OccupySuboptimalCavity": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Pied Flycatcher": {
+                                "SeekPrimeCavity": 0.0,
+                                "SettleForSuboptimalCavity": 1.0,
+                                "ForgoBreeding": 0.0
+                            },
+                            "Great Tit": {
+                                "OccupyPrimeCavity": 1.0,
+                                "OccupySuboptimalCavity": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Great Tit": {
+                                "OccupyPrimeCavity": 1.0,
+                                "OccupySuboptimalCavity": 0.0
+                            },
+                            "Pied Flycatcher": {
+                                "ForgoBreeding": 0.0,
+                                "SeekPrimeCavity": 0.0,
+                                "SettleForSuboptimalCavity": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Pied Flycatcher": "SettleForSuboptimalCavity",
+            "Great Tit": "OccupyPrimeCavity"
+        }
+    },
+    {
+        "Species": [
+            "Cervus canadensis",
+            "Canis lupus"
+        ],
+        "Description": "In Yellowstone National Park, the reintroduction of Grey Wolves has profoundly altered elk habitat selection. Elk now exhibit 'risk-sensitive foraging,' avoiding historically prime foraging areas like riparian zones where wolf predation risk is high, even if it means utilizing less nutritious upland areas. This represents a critical trade-off between maximizing food intake and minimizing mortality risk, shaping their spatial distribution and broader ecosystem dynamics.",
+        "Query": "Yellowstone elk wolf habitat selection predation risk riparian trophic cascade",
+        "Article": "Here are the relevant passages from the article, in plain text:\n\n**Ecology**\n**Interspecific competition**\n\nThe relationship between grizzly bears and other predators is mostly one-sided; grizzly bears will approach feeding predators to steal their kill. In general, the other species will leave the carcasses for the bear to avoid competition or predation.\n**Wolves**\n\nWith the reintroduction of gray wolves to Yellowstone, many visitors have witnessed a once common struggle between a keystone species, the grizzly bear, and its historic rival, the gray wolf. The interactions of grizzly bears with the wolves of Yellowstone have been under considerable study. Typically, the conflict will be in the defence of young or over a carcass, which is commonly an elk killed by wolves.\n\nThe grizzly bear uses its keen sense of smell to locate the kill. As the wolves and grizzly compete for the kill, one wolf may try to distract the bear while the others feed. The bear then may retaliate by chasing the wolves. If the wolves become aggressive with the bear, it is normally in the form of quick nips at its hind legs. Thus, the bear will sit down and use its ability to protect itself in a full circle. Rarely do interactions such as these end in death or serious injury to either animal. One carcass simply is not usually worth the risk to the wolves (if the bear has the upper hand due to strength and size) or to the bear (if the wolves are too numerous or persistent).\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Elk",
+                        "actions": [
+                            "ForageInRiparianZone",
+                            "ForageInUplandArea"
+                        ],
+                        "utilities": {
+                            "ForageInRiparianZone": {
+                                "PatrolRiparianZone": {
+                                    "outcome": "Elk forages in the historically prime, but high-risk riparian zone, and wolves are actively patrolling this same area. This results in a very high risk of predation and potential mortality, which elk typically avoid.",
+                                    "utility": -10.0
+                                },
+                                "PatrolUplandArea": {
+                                    "outcome": "Elk forages in the historically prime, but high-risk riparian zone, while wolves patrol the less risky upland area. Elk obtains high nutrition but remains in an environment with high inherent predation risk, going against its risk-sensitive foraging strategy.",
+                                    "utility": -2.0
+                                }
+                            },
+                            "ForageInUplandArea": {
+                                "PatrolRiparianZone": {
+                                    "outcome": "Elk forages in the less nutritious upland area, while wolves patrol the high-risk riparian zone. This allows the Elk to successfully minimize its mortality risk, aligning with its risk-sensitive foraging behavior.",
+                                    "utility": 10.0
+                                },
+                                "PatrolUplandArea": {
+                                    "outcome": "Elk forages in the less nutritious upland area, and wolves are also patrolling this area. While upland areas are generally safer, the presence of wolves increases the immediate mortality risk for the Elk, compromising its primary goal of minimizing risk.",
+                                    "utility": 3.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Grey Wolf",
+                        "actions": [
+                            "PatrolRiparianZone",
+                            "PatrolUplandArea"
+                        ],
+                        "utilities": {
+                            "PatrolRiparianZone": {
+                                "ForageInRiparianZone": {
+                                    "outcome": "Wolves actively patrol the historically prime riparian zone, and the Elk forages there. This represents a direct, high-risk encounter for the Elk, leading to a very high chance of successful predation for the wolves in a key area.",
+                                    "utility": 10.0
+                                },
+                                "ForageInUplandArea": {
+                                    "outcome": "Wolves patrol the high-risk riparian zone, while the Elk avoids it by foraging in the less nutritious upland area. This demonstrates the wolves' success in influencing Elk habitat selection and forcing them into less ideal foraging grounds, even if it doesn't lead to an immediate kill in the riparian zone.",
+                                    "utility": 5.0
+                                }
+                            },
+                            "PatrolUplandArea": {
+                                "ForageInRiparianZone": {
+                                    "outcome": "Wolves patrol the less risky upland area, but the Elk chooses to forage in the high-risk riparian zone. This indicates a failure for the wolves to deter Elk from prime areas, and they are also not positioned for a kill where the Elk currently is, resulting in a missed opportunity and ineffective patrolling.",
+                                    "utility": -8.0
+                                },
+                                "ForageInUplandArea": {
+                                    "outcome": "Wolves patrol the upland area, and the Elk forages there due to its risk-sensitive behavior. This leads to a direct encounter and a high chance of predation for the wolves in the area where Elk are most likely to be found, capitalizing on the Elk's altered foraging patterns.",
+                                    "utility": 8.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Elk": {
+                                "ForageInRiparianZone": 0.0,
+                                "ForageInUplandArea": 1.0
+                            },
+                            "Grey Wolf": {
+                                "PatrolRiparianZone": 0.0,
+                                "PatrolUplandArea": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Elk": {
+                                "ForageInRiparianZone": 0.0,
+                                "ForageInUplandArea": 1.0
+                            },
+                            "Grey Wolf": {
+                                "PatrolRiparianZone": 0.0,
+                                "PatrolUplandArea": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Elk": {
+                                "ForageInRiparianZone": 0.0,
+                                "ForageInUplandArea": 1.0
+                            },
+                            "Grey Wolf": {
+                                "PatrolRiparianZone": 0.0,
+                                "PatrolUplandArea": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Elk",
+                        "actions": [
+                            "ForageInRiparianZone",
+                            "ForageInUplandArea"
+                        ],
+                        "utilities": {
+                            "ForageInRiparianZone": {
+                                "PatrolRiparianZone": {
+                                    "outcome": "Elk forages in the historically prime, but high-risk riparian zone, and wolves are actively patrolling this same area. This results in a very high risk of predation and potential mortality, which elk typically avoid.",
+                                    "utility": -10.0
+                                },
+                                "PatrolUplandArea": {
+                                    "outcome": "Elk forages in the historically prime, but high-risk riparian zone, while wolves patrol the less risky upland area. Elk obtains high nutrition but remains in an environment with high inherent predation risk, going against its risk-sensitive foraging strategy.",
+                                    "utility": -2.0
+                                }
+                            },
+                            "ForageInUplandArea": {
+                                "PatrolRiparianZone": {
+                                    "outcome": "Elk forages in the less nutritious upland area, while wolves patrol the high-risk riparian zone. This allows the Elk to successfully minimize its mortality risk, aligning with its risk-sensitive foraging behavior.",
+                                    "utility": 10.0
+                                },
+                                "PatrolUplandArea": {
+                                    "outcome": "Elk forages in the less nutritious upland area, and wolves are also patrolling this area. While upland areas are generally safer, the presence of wolves increases the immediate mortality risk for the Elk, compromising its primary goal of minimizing risk.",
+                                    "utility": 3.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Grey Wolf",
+                        "actions": [
+                            "PatrolRiparianZone",
+                            "PatrolUplandArea"
+                        ],
+                        "utilities": {
+                            "PatrolRiparianZone": {
+                                "ForageInRiparianZone": {
+                                    "outcome": "Wolves actively patrol the historically prime riparian zone, and the Elk forages there. This represents a direct, high-risk encounter for the Elk, leading to a very high chance of successful predation for the wolves in a key area.",
+                                    "utility": 10.0
+                                },
+                                "ForageInUplandArea": {
+                                    "outcome": "Wolves patrol the high-risk riparian zone, while the Elk avoids it by foraging in the less nutritious upland area. This represents a significant long-term success for the wolves, demonstrating their ability to influence Elk habitat selection and force them into less ideal foraging grounds. This strategic control of the ecosystem is highly beneficial, even without an immediate kill.",
+                                    "utility": 9.0
+                                }
+                            },
+                            "PatrolUplandArea": {
+                                "ForageInRiparianZone": {
+                                    "outcome": "Wolves patrol the less risky upland area, but the Elk chooses to forage in the high-risk riparian zone. This indicates a failure for the wolves to deter Elk from prime areas, and they are also not positioned for a kill where the Elk currently is, resulting in a missed opportunity and ineffective patrolling.",
+                                    "utility": -8.0
+                                },
+                                "ForageInUplandArea": {
+                                    "outcome": "Wolves patrol the upland area, and the Elk forages there due to its risk-sensitive behavior. This leads to a direct encounter and a good chance of predation for the wolves, capitalizing on the Elk's altered foraging patterns. While providing immediate benefits, this strategy might be less optimal for achieving broader habitat control compared to consistently deterring Elk from prime zones.",
+                                    "utility": 7.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Elk": {
+                                "ForageInRiparianZone": 0.0,
+                                "ForageInUplandArea": 1.0
+                            },
+                            "Grey Wolf": {
+                                "PatrolRiparianZone": 1.0,
+                                "PatrolUplandArea": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Elk": {
+                                "ForageInRiparianZone": 0.0,
+                                "ForageInUplandArea": 1.0
+                            },
+                            "Grey Wolf": {
+                                "PatrolRiparianZone": 1.0,
+                                "PatrolUplandArea": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Elk": {
+                                "ForageInRiparianZone": 0.0,
+                                "ForageInUplandArea": 1.0
+                            },
+                            "Grey Wolf": {
+                                "PatrolRiparianZone": 1.0,
+                                "PatrolUplandArea": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Elk": "ForageInUplandArea",
+            "Grey Wolf": "PatrolRiparianZone"
+        }
+    },
+    {
+        "Species": [
+            "Vulpes vulpes",
+            "Meles meles"
+        ],
+        "Description": "Red Foxes and Eurasian Badgers often co-exist and utilize similar resources and habitats, including shared den sites (earths). Badgers, being larger and more dominant, can exert interference competition on foxes, displacing them from preferred foraging grounds or even taking over fox dens. Foxes face the dilemma of navigating spatial overlap with a dominant competitor, often leading to their exclusion from optimal territories or increased reliance on marginal areas.",
+        "Query": "Red Fox Eurasian Badger interspecific competition habitat overlap den sharing",
+        "Article": "*   Red Foxes and Eurasian Badgers\n*   Badgers, being larger and more dominant, can exert interference competition on foxes, displacing them from preferred foraging grounds or even taking over fox dens.\n*   Foxes face the dilemma of navigating spatial overlap with a dominant competitor, often leading to their exclusion from optimal territories or increased reliance on marginal areas.\n*   Red foxes are usually found in pairs or small groups consisting of families, such as a mated pair and their young, or a male with several females having kinship ties.\n*   They may share their dens with woodchucks or badgers.\n*   Compared to burrows constructed by Arctic foxes, badgers, marmots and corsac foxes, red fox dens are not overly complex.\n*   The red fox primarily feeds on small rodents...Although the red fox tends to kill smaller predators, including other fox species, it is vulnerable to attack from larger predators, such as wolves...\n*   Urban red foxes are most active at dusk and dawn, doing most of their hunting and scavenging at these times.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Eurasian Badger",
+                        "actions": [
+                            "Exert Dominance",
+                            "Allow Coexistence"
+                        ],
+                        "utilities": {
+                            "Exert Dominance": {
+                                "Attempt Coexistence": {
+                                    "outcome": "The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.",
+                                    "utility": 1.0
+                                },
+                                "Relocate": {
+                                    "outcome": "The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Allow Coexistence": {
+                                "Attempt Coexistence": {
+                                    "outcome": "The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.",
+                                    "utility": 0.5
+                                },
+                                "Relocate": {
+                                    "outcome": "The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.",
+                                    "utility": 0.9
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Red Fox",
+                        "actions": [
+                            "Attempt Coexistence",
+                            "Relocate"
+                        ],
+                        "utilities": {
+                            "Attempt Coexistence": {
+                                "Exert Dominance": {
+                                    "outcome": "The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.",
+                                    "utility": 0.1
+                                },
+                                "Allow Coexistence": {
+                                    "outcome": "The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.",
+                                    "utility": 0.9
+                                }
+                            },
+                            "Relocate": {
+                                "Exert Dominance": {
+                                    "outcome": "The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.",
+                                    "utility": 0.3
+                                },
+                                "Allow Coexistence": {
+                                    "outcome": "The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.",
+                                    "utility": 0.7
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Eurasian Badger": {
+                                "Exert Dominance": 1.0,
+                                "Allow Coexistence": 0.0
+                            },
+                            "Red Fox": {
+                                "Attempt Coexistence": 0.0,
+                                "Relocate": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Eurasian Badger": {
+                                "Exert Dominance": 1.0,
+                                "Allow Coexistence": 0.0
+                            },
+                            "Red Fox": {
+                                "Attempt Coexistence": 0.0,
+                                "Relocate": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Eurasian Badger": {
+                                "Allow Coexistence": 0.0,
+                                "Exert Dominance": 1.0
+                            },
+                            "Red Fox": {
+                                "Attempt Coexistence": 0.0,
+                                "Relocate": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Eurasian Badger",
+                        "actions": [
+                            "Exert Dominance",
+                            "Allow Coexistence"
+                        ],
+                        "utilities": {
+                            "Exert Dominance": {
+                                "Attempt Coexistence": {
+                                    "outcome": "The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.",
+                                    "utility": 1.0
+                                },
+                                "Relocate": {
+                                    "outcome": "The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Allow Coexistence": {
+                                "Attempt Coexistence": {
+                                    "outcome": "The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.",
+                                    "utility": 0.5
+                                },
+                                "Relocate": {
+                                    "outcome": "The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.",
+                                    "utility": 0.9
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Red Fox",
+                        "actions": [
+                            "Attempt Coexistence",
+                            "Relocate"
+                        ],
+                        "utilities": {
+                            "Attempt Coexistence": {
+                                "Exert Dominance": {
+                                    "outcome": "The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.",
+                                    "utility": 0.1
+                                },
+                                "Allow Coexistence": {
+                                    "outcome": "The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.",
+                                    "utility": 0.9
+                                }
+                            },
+                            "Relocate": {
+                                "Exert Dominance": {
+                                    "outcome": "The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.",
+                                    "utility": 0.3
+                                },
+                                "Allow Coexistence": {
+                                    "outcome": "The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.",
+                                    "utility": 0.7
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "Here's a biological validation of the game definition:\n\nThe game definition largely captures the essence of the Red Fox and Eurasian Badger interaction as described, particularly the badger's dominance and the fox's dilemma regarding spatial overlap. However, there is one significant semantic inconsistency in the utility values for the Red Fox that needs addressing to ensure biological plausibility.\n\n**Issue to Address:**\n\n1.  **Red Fox Utility for a Failed Coexistence Attempt:**\n    *   **Current State:** When the Red Fox chooses \"Attempt Coexistence\" and the Eurasian Badger chooses \"Exert Dominance\", the outcome is described as: \"The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.\" The assigned utility for the Red Fox in this scenario is **0.6**.\n    *   **Biological Inconsistency:** This utility value is too high. If the fox is \"displaced\" and \"excluded from optimal territory\" after *attempting* coexistence (which might imply a struggle or conflict), this is a highly negative outcome. Currently, this outcome (0.6) is assigned a *higher* utility than when the fox chooses to \"Relocate\" due to badger dominance (0.3). Biologically, being forcibly displaced after a failed attempt, possibly incurring injury or wasted energy, should be a very poor outcome for the fox, likely the lowest or second-lowest utility. It should be worse than or equal to simply relocating immediately to avoid conflict.\n    *   **Proposed Change:** The utility for the Red Fox in this specific scenario (Fox: \"Attempt Coexistence\", Badger: \"Exert Dominance\") should be significantly lowered. A value around **0.1 or 0.2** would be more biologically plausible, reflecting the severe negative impact of being ousted from optimal territory after a failed resistance. This would make it clearly one of the least desirable outcomes for the fox, consistent with being excluded and forced into marginal areas.\n\n**Rationale for other points:**\n\n*   **Badger Utilities:** The badger's preferences are logically sound: exclusive control (1.0) is best, followed by exclusive control without effort (0.9), and then sharing (0.5).\n*   **Red Fox Utility for Voluntary Relocation:** When the Badger chooses \"Allow Coexistence\" and the Fox chooses \"Relocate\", the utility is 0.7. While the fox's best outcome is 0.9 (successful coexistence), choosing to relocate for 0.7 utility (even when allowed to coexist) is plausible. It implies a fox might prioritize avoiding *any* potential competition or conflict by seeking an undisputed, albeit possibly less optimal, territory. This aligns with \"increased reliance on marginal areas\" in the description.\n*   **Mutually Exclusive Actions:** The actions defined for each player are indeed mutually exclusive.\n*   **Non-trivial/Non-degenerate:** The utilities are not identical, meaning both animals have preferences and are not indifferent to their choices, ensuring the game is not trivial.\n*   **High Fidelity:** Apart from the noted utility value, the actions and outcomes generally align well with the described natural interaction. No extra players were added.\n\n**Conclusion:**\n\nThe only necessary change is to adjust the Red Fox's utility for the outcome where it attempts coexistence but is displaced by the badger.\n\n```json\n[\n    {\n        \"name\": \"Eurasian Badger\",\n        \"actions\": [\"Exert Dominance\", \"Allow Coexistence\"],\n        \"utilities\": {\n            \"Exert Dominance\": {\n                \"Attempt Coexistence\": {\n                    \"outcome\": \"The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.\",\n                    \"utility\": 1.0\n                },\n                \"Relocate\": {\n                    \"outcome\": \"The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.\",\n                    \"utility\": 1.0\n                }\n            },\n            \"Allow Coexistence\": {\n                \"Attempt Coexistence\": {\n                    \"outcome\": \"The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.\",\n                    \"utility\": 0.5\n                },\n                \"Relocate\": {\n                    \"outcome\": \"The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.\",\n                    \"utility\": 0.9\n                }\n            }\n        }\n    },\n    {\n        \"name\": \"Red Fox\",\n        \"actions\": [\"Attempt Coexistence\", \"Relocate\"],\n        \"utilities\": {\n            \"Attempt Coexistence\": {\n                \"Exert Dominance\": {\n                    \"outcome\": \"The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.\",\n                    \"utility\": 0.1  // Changed from 0.6 to 0.1 for biological plausibility\n                },\n                \"Allow Coexistence\": {\n                    \"outcome\": \"The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.\",\n                    \"utility\": 0.9\n                }\n            },\n            \"Relocate\": {\n                \"Exert Dominance\": {\n                    \"outcome\": \"The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.\",\n                    \"utility\": 0.3\n                },\n                \"Allow Coexistence\": {\n                    \"outcome\": \"The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.\",\n                    \"utility\": 0.7\n                }\n            }\n        }\n    }\n]\n```",
+                "OldGame": [
+                    {
+                        "name": "Eurasian Badger",
+                        "actions": [
+                            "Exert Dominance",
+                            "Allow Coexistence"
+                        ],
+                        "utilities": {
+                            "Exert Dominance": {
+                                "Attempt Coexistence": {
+                                    "outcome": "The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.",
+                                    "utility": 1.0
+                                },
+                                "Relocate": {
+                                    "outcome": "The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Allow Coexistence": {
+                                "Attempt Coexistence": {
+                                    "outcome": "The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.",
+                                    "utility": 0.5
+                                },
+                                "Relocate": {
+                                    "outcome": "The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.",
+                                    "utility": 0.9
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Red Fox",
+                        "actions": [
+                            "Attempt Coexistence",
+                            "Relocate"
+                        ],
+                        "utilities": {
+                            "Attempt Coexistence": {
+                                "Exert Dominance": {
+                                    "outcome": "The Eurasian Badger successfully asserts its dominance, displacing the Red Fox from preferred foraging grounds or taking over the shared den site. The Red Fox is excluded from optimal territory.",
+                                    "utility": 0.6
+                                },
+                                "Allow Coexistence": {
+                                    "outcome": "The Eurasian Badger and Red Fox successfully co-exist, sharing resources and den sites. Competition is minimized, but the Badger does not gain exclusive control.",
+                                    "utility": 0.9
+                                }
+                            },
+                            "Relocate": {
+                                "Exert Dominance": {
+                                    "outcome": "The Eurasian Badger exerts dominance, leading the Red Fox to relocate to a different area. The Badger gains exclusive control over the territory and resources without ongoing competition.",
+                                    "utility": 0.3
+                                },
+                                "Allow Coexistence": {
+                                    "outcome": "The Eurasian Badger allows for coexistence, but the Red Fox chooses to relocate to a different area regardless. The Badger gains exclusive use of the territory and resources without conflict or effort to displace the fox.",
+                                    "utility": 0.7
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Eurasian Badger": {
+                                "Exert Dominance": 1.0,
+                                "Allow Coexistence": 0.0
+                            },
+                            "Red Fox": {
+                                "Attempt Coexistence": 0.0,
+                                "Relocate": 1.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Eurasian Badger": {
+                                "Exert Dominance": 1.0,
+                                "Allow Coexistence": 0.0
+                            },
+                            "Red Fox": {
+                                "Attempt Coexistence": 0.0,
+                                "Relocate": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Eurasian Badger": {
+                                "Allow Coexistence": 0.0,
+                                "Exert Dominance": 1.0
+                            },
+                            "Red Fox": {
+                                "Attempt Coexistence": 0.0,
+                                "Relocate": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Eurasian Badger": "Exert Dominance",
+            "Red Fox": "Attempt Coexistence"
+        }
+    },
+    {
+        "Species": [
+            "Parus major"
+        ],
+        "Description": "Within Great Tit populations, strong intraspecific competition for territories exists, particularly for high-quality nesting sites (tree cavities) and food resources. Dominant individuals secure prime habitats, forcing subordinate or younger birds into marginal areas that may offer less food, fewer safe nesting cavities, or higher predation pressure. This creates a dilemma for subordinates who must choose between challenging dominant individuals or settling for poorer quality, higher-risk habitat.",
+        "Query": "Great Tit intraspecific competition dominance habitat quality territory selection",
+        "Article": "Here are the relevant passages from the article, without HTML formatting:\n\n*   \"Sexual selection in birds concerns how birds have evolved a variety of mating behaviors, with the peacock tail being perhaps the most famous example of sexual selection and the Fisherian runaway. Commonly occurring sexual dimorphisms such as size and color differences are energetically costly attributes that signal competitive breeding situations.\"\n\n*   \"intrasexual competition, where individuals of the more abundant sex compete with each other for the privilege to mate.\"\n\n*   \"Bird species often demonstrate intersexual selection, perhaps because \u2013 due to their lightweight body structures \u2013 fights between males may be ineffective or impractical.\"\n\n*   \"Before and after social pairing and mating occurs, bird song is mainly dedicated to territorial defense. This behavior is a sexually selected trait because it ensures defense of the female who is rearing her offspring.\"\n\n*   \"There is also some evidence that vocal amplitude effects male-male competition in such species as the great tit. Most courtship songs were performed at relatively low amplitudes, whereas territorial songs or \u201cbroadcast songs\u201d were performed at high amplitudes. This suggests an environment where it is necessary to devote more energy to territory defense than to attracting a mate.\"",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Subordinate Great Tit",
+                        "actions": [
+                            "Challenge Dominant for Prime Habitat",
+                            "Seek Marginal Habitat"
+                        ],
+                        "utilities": {
+                            "Challenge Dominant for Prime Habitat": {
+                                "Defend Prime Habitat": {
+                                    "outcome": "The Subordinate Great Tit is defeated in the challenge, expends significant energy in a vocal or physical confrontation, and is ultimately forced into marginal habitat. This outcome includes high risk and resource expenditure with no gain.",
+                                    "utility": -0.8
+                                },
+                                "Relinquish Prime Habitat": {
+                                    "outcome": "The Subordinate Great Tit successfully gains prime habitat. This is the optimal outcome, providing superior resources and safety without direct conflict, as the Dominant opts to avoid confrontation or move on.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Seek Marginal Habitat": {
+                                "Defend Prime Habitat": {
+                                    "outcome": "The Subordinate Great Tit avoids direct conflict with the Dominant, but settles for marginal habitat. This habitat offers less food, fewer safe nesting cavities, or higher predation pressure, representing a guaranteed but poor quality outcome.",
+                                    "utility": -0.2
+                                },
+                                "Relinquish Prime Habitat": {
+                                    "outcome": "The Subordinate Great Tit avoids direct conflict and settles for marginal habitat. Although the prime habitat was unexpectedly relinquished and thus available, the Subordinate's decision to seek marginal habitat means they miss this opportunity, resulting in a poor quality outcome.",
+                                    "utility": -0.2
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Dominant Great Tit",
+                        "actions": [
+                            "Defend Prime Habitat",
+                            "Relinquish Prime Habitat"
+                        ],
+                        "utilities": {
+                            "Defend Prime Habitat": {
+                                "Challenge Dominant for Prime Habitat": {
+                                    "outcome": "The Dominant Great Tit successfully defends its prime habitat against the Subordinate's challenge, forcing the Subordinate into marginal areas. The Dominant maintains control but expends energy in the confrontation.",
+                                    "utility": 0.7
+                                },
+                                "Seek Marginal Habitat": {
+                                    "outcome": "The Dominant Great Tit maintains full control of its prime habitat without any challenge or energy expenditure, as the Subordinate opts to avoid conflict and settles for marginal habitat.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Relinquish Prime Habitat": {
+                                "Challenge Dominant for Prime Habitat": {
+                                    "outcome": "The Dominant Great Tit cedes its prime habitat to the challenging Subordinate, choosing to avoid direct confrontation. This results in the complete loss of the highest quality territory for the Dominant.",
+                                    "utility": -1.0
+                                },
+                                "Seek Marginal Habitat": {
+                                    "outcome": "The Dominant Great Tit unilaterally abandons its prime habitat. Although the Subordinate was not challenging for it and instead sought marginal habitat, the Dominant still incurs the significant loss of its highest quality territory.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Subordinate Great Tit": {
+                                "Challenge Dominant for Prime Habitat": 0.0,
+                                "Seek Marginal Habitat": 1.0
+                            },
+                            "Dominant Great Tit": {
+                                "Defend Prime Habitat": 1.0,
+                                "Relinquish Prime Habitat": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Subordinate Great Tit": {
+                                "Challenge Dominant for Prime Habitat": 0.0,
+                                "Seek Marginal Habitat": 1.0
+                            },
+                            "Dominant Great Tit": {
+                                "Defend Prime Habitat": 1.0,
+                                "Relinquish Prime Habitat": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Dominant Great Tit": {
+                                "Defend Prime Habitat": 1.0,
+                                "Relinquish Prime Habitat": 0.0
+                            },
+                            "Subordinate Great Tit": {
+                                "Challenge Dominant for Prime Habitat": 0.0,
+                                "Seek Marginal Habitat": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Subordinate Great Tit": "Seek Marginal Habitat",
+            "Dominant Great Tit": "Defend Prime Habitat"
+        }
+    },
+    {
+        "Species": [
+            "Amphiprioninae spp.",
+            "Actiniaria spp."
+        ],
+        "Description": "Anemonefish have an obligate mutualistic relationship with sea anemones, relying on them for protection from predators due to their immunity to the anemone's stinging cells. However, suitable host anemones are a limited resource, leading to intense intra- and interspecific competition for possession. This forces individual fish to either defend a prime anemone or settle for less ideal, smaller, or less protective hosts, directly impacting their survival and reproductive success.",
+        "Query": "Anemonefish sea anemone mutualism habitat dependence competition limited resource",
+        "Article": "*   In a cleaning symbiosis, the clownfish feeds on small invertebrates, that otherwise have potential to harm the sea anemone, and the fecal matter from the clownfish provides nutrients to the sea anemone. The clownfish is protected from predators by the anemone's stinging cells, to which the clownfish is immune. The relationship is therefore classified as mutualistic.\n*   An example of mutualism is the relationship between the ocellaris clownfish that dwell among the tentacles of Ritteri sea anemones. The territorial fish protects the anemone from anemone-eating fish, and in turn, the anemone stinging tentacles protect the clownfish from its predators. A special mucus on the clownfish protects it from the stinging tentacles.\n*   Likewise the symbiotic relationship of clown fish and sea anemones emerged from a commensalist relationship.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Anemonefish A",
+                        "actions": [
+                            "Compete for Prime Anemone",
+                            "Settle for Suboptimal Anemone"
+                        ],
+                        "utilities": {
+                            "Compete for Prime Anemone": {
+                                "Compete for Prime Anemone": {
+                                    "outcome": "Both Anemonefish A and B intensely compete for the prime anemone. Anemonefish A faces significant risk and effort with an uncertain outcome regarding securing the prime host, but potentially succeeds.",
+                                    "utility": 3
+                                },
+                                "Settle for Suboptimal Anemone": {
+                                    "outcome": "Anemonefish A competes for the prime anemone while Anemonefish B settles for a suboptimal one. Anemonefish A successfully secures the prime, highly protective anemone without intense competition.",
+                                    "utility": 5
+                                }
+                            },
+                            "Settle for Suboptimal Anemone": {
+                                "Compete for Prime Anemone": {
+                                    "outcome": "Anemonefish A settles for a less ideal, smaller, or less protective host, while Anemonefish B competes for the prime anemone. Anemonefish A's survival and reproductive success are directly impacted negatively.",
+                                    "utility": 1
+                                },
+                                "Settle for Suboptimal Anemone": {
+                                    "outcome": "Both Anemonefish A and B settle for suboptimal hosts. Anemonefish A avoids competition but must accept a less ideal, smaller, or less protective host, directly impacting its survival and reproductive success.",
+                                    "utility": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Anemonefish B",
+                        "actions": [
+                            "Compete for Prime Anemone",
+                            "Settle for Suboptimal Anemone"
+                        ],
+                        "utilities": {
+                            "Compete for Prime Anemone": {
+                                "Compete for Prime Anemone": {
+                                    "outcome": "Both Anemonefish A and B intensely compete for the prime anemone. Anemonefish B faces significant risk and effort with an uncertain outcome regarding securing the prime host, but potentially succeeds.",
+                                    "utility": 3
+                                },
+                                "Settle for Suboptimal Anemone": {
+                                    "outcome": "Anemonefish B competes for the prime anemone while Anemonefish A settles for a suboptimal one. Anemonefish B successfully secures the prime, highly protective anemone without intense competition.",
+                                    "utility": 5
+                                }
+                            },
+                            "Settle for Suboptimal Anemone": {
+                                "Compete for Prime Anemone": {
+                                    "outcome": "Anemonefish B settles for a less ideal, smaller, or less protective host, while Anemonefish A competes for the prime anemone. Anemonefish B's survival and reproductive success are directly impacted negatively.",
+                                    "utility": 1
+                                },
+                                "Settle for Suboptimal Anemone": {
+                                    "outcome": "Both Anemonefish A and B settle for suboptimal hosts. Anemonefish B avoids competition but must accept a less ideal, smaller, or less protective host, directly impacting its survival and reproductive success.",
+                                    "utility": 1
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Anemonefish A": {
+                                "Compete for Prime Anemone": 1.0,
+                                "Settle for Suboptimal Anemone": 0.0
+                            },
+                            "Anemonefish B": {
+                                "Compete for Prime Anemone": 1.0,
+                                "Settle for Suboptimal Anemone": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Anemonefish A": {
+                                "Compete for Prime Anemone": 1.0,
+                                "Settle for Suboptimal Anemone": 0.0
+                            },
+                            "Anemonefish B": {
+                                "Compete for Prime Anemone": 1.0,
+                                "Settle for Suboptimal Anemone": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Anemonefish A": {
+                                "Compete for Prime Anemone": 1.0,
+                                "Settle for Suboptimal Anemone": 0.0
+                            },
+                            "Anemonefish B": {
+                                "Compete for Prime Anemone": 1.0,
+                                "Settle for Suboptimal Anemone": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Anemonefish A": "Compete for Prime Anemone",
+            "Anemonefish B": "Compete for Prime Anemone"
+        }
+    },
+    {
+        "Species": [
+            "Vulpes vulpes"
+        ],
+        "Description": "Urban Red Foxes demonstrate a complex habitat selection dilemma. While urban environments offer abundant, readily available food sources (e.g., refuse), they also present significant risks such as traffic mortality, human persecution, and conflicts with domestic animals. Foxes must balance these opportunities and threats, often selecting territories that provide cover, proximity to food, and safe travel routes, adapting their behavior to anthropogenic landscapes.",
+        "Query": "Urban fox habitat selection anthropogenic disturbance risk management city ecology",
+        "Article": "Here are the relevant passages extracted from the article, in plain text:\n\nUrban\nMany animals and plants have taken up residence in urban environments. They tend to be adaptable generalists and use the town's features to make their homes. Rats and mice have followed man around the globe, pigeons, peregrines, sparrows, swallows and house martins use the buildings for nesting, bats use roof space for roosting, foxes visit the garbage bins and squirrels, coyotes, raccoons and skunks roam the streets. About 2,000 coyotes are thought to live in and around Chicago. A survey of dwelling houses in northern European cities in the twentieth century found about 175 species of invertebrate inside them, including 53 species of beetle, 21 flies, 13 butterflies and moths, 13 mites, 9 lice, 7 bees, 5 wasps, 5 cockroaches, 5 spiders, 4 ants and a number of other groups. In warmer climates, termites are serious pests in the urban habitat; 183 species are known to affect buildings and 83 species cause serious structural damage.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Urban Red Fox",
+                        "actions": [
+                            "Select territory prioritizing abundant food sources",
+                            "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)",
+                            "Select territory balancing food access and safety"
+                        ],
+                        "utilities": {
+                            "Select territory prioritizing abundant food sources": {
+                                "Urban Territory: High Risk, High Food": {
+                                    "outcome": "The fox prioritizes food and finds abundance, but faces significant cumulative urban risks (traffic, persecution, domestic animals), leading to high danger.",
+                                    "utility": -0.6
+                                },
+                                "Urban Territory: High Risk, Low Food": {
+                                    "outcome": "The fox prioritizes food but finds little, while facing significant cumulative urban risks, leading to severe disadvantage.",
+                                    "utility": -0.9
+                                },
+                                "Urban Territory: Low Risk, High Food": {
+                                    "outcome": "The fox prioritizes food and successfully finds an abundant, low-risk territory, achieving its primary goal effectively.",
+                                    "utility": 0.8
+                                },
+                                "Urban Territory: Low Risk, Low Food": {
+                                    "outcome": "The fox prioritizes food but finds little, though it remains relatively safe from urban risks. Its primary food goal is not met.",
+                                    "utility": 0.1
+                                },
+                                "Urban Territory: Moderate Risk, Good Food": {
+                                    "outcome": "The fox prioritizes food and finds good access, while encountering moderate but manageable urban risks. Its primary goal is largely met with some safety considerations.",
+                                    "utility": 0.6
+                                }
+                            },
+                            "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                "Urban Territory: High Risk, High Food": {
+                                    "outcome": "The fox prioritizes safety in a high-risk, high-food territory. It attempts to mitigate risks but the inherent danger of the environment reduces the effectiveness of its safety focus.",
+                                    "utility": 0.1
+                                },
+                                "Urban Territory: High Risk, Low Food": {
+                                    "outcome": "The fox prioritizes safety in a high-risk, low-food territory. It manages to significantly reduce exposure to urban risks, but the scarcity of food remains a challenge.",
+                                    "utility": 0.3
+                                },
+                                "Urban Territory: Low Risk, High Food": {
+                                    "outcome": "The fox prioritizes safety and finds a low-risk, high-food territory, achieving optimal safety while surprisingly benefiting from food abundance.",
+                                    "utility": 0.9
+                                },
+                                "Urban Territory: Low Risk, Low Food": {
+                                    "outcome": "The fox prioritizes safety and finds a low-risk, low-food territory, ensuring its well-being but at the cost of limited food resources.",
+                                    "utility": 0.7
+                                },
+                                "Urban Territory: Moderate Risk, Good Food": {
+                                    "outcome": "The fox prioritizes safety in a balanced territory. It effectively navigates moderate risks, ensuring its safety while still having reasonable food access.",
+                                    "utility": 0.8
+                                }
+                            },
+                            "Select territory balancing food access and safety": {
+                                "Urban Territory: High Risk, High Food": {
+                                    "outcome": "The fox attempts to balance food and safety in a high-risk, high-food territory. It gains food but struggles to mitigate the combined dangers, leading to a precarious balance.",
+                                    "utility": 0.2
+                                },
+                                "Urban Territory: High Risk, Low Food": {
+                                    "outcome": "The fox attempts to balance food and safety in a high-risk, low-food territory. It finds this extremely challenging, failing to secure either sufficient food or adequate safety.",
+                                    "utility": -0.8
+                                },
+                                "Urban Territory: Low Risk, High Food": {
+                                    "outcome": "The fox attempts to balance food and safety in a low-risk, high-food territory. This environment allows it to achieve an optimal blend of safety and food access, greatly exceeding expectations.",
+                                    "utility": 1.0
+                                },
+                                "Urban Territory: Low Risk, Low Food": {
+                                    "outcome": "The fox attempts to balance food and safety in a low-risk, low-food territory. While largely safe, it struggles to find enough food, making the balance difficult.",
+                                    "utility": 0.3
+                                },
+                                "Urban Territory: Moderate Risk, Good Food": {
+                                    "outcome": "The fox successfully finds a territory that provides both good food and sufficient safety, achieving an optimal balance in a moderately challenging environment.",
+                                    "utility": 0.9
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Urban Environment",
+                        "actions": [
+                            "Urban Territory: High Risk, High Food",
+                            "Urban Territory: High Risk, Low Food",
+                            "Urban Territory: Low Risk, High Food",
+                            "Urban Territory: Low Risk, Low Food",
+                            "Urban Territory: Moderate Risk, Good Food"
+                        ],
+                        "utilities": {
+                            "Urban Territory: High Risk, High Food": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The high-risk, high-food environment successfully challenges the fox prioritizing food, demonstrating its dual nature of opportunity and danger.",
+                                    "utility": 0.7
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The high-risk, high-food environment's inherent dangers are partially mitigated by the fox's safety focus, reducing its impact despite the prevailing risks.",
+                                    "utility": 0.3
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The high-risk, high-food environment's dual nature is acknowledged by the fox's balancing act; its opportunities are used, and dangers partially navigated.",
+                                    "utility": 0.5
+                                }
+                            },
+                            "Urban Territory: High Risk, Low Food": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The high-risk, low-food environment significantly hinders the fox prioritizing food, showcasing its harsh and unrewarding nature.",
+                                    "utility": 0.9
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The high-risk, low-food environment's dangers are evident, even if the fox attempts to mitigate them through safety prioritization, reinforcing its challenging nature.",
+                                    "utility": 0.6
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The high-risk, low-food environment's overall difficulty is highlighted as the fox struggles to balance food and safety, demonstrating its inherent limitations.",
+                                    "utility": 0.8
+                                }
+                            },
+                            "Urban Territory: Low Risk, High Food": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The low-risk, high-food environment successfully provides abundant food, which the fox fully utilizes, affirming its role as a rich and accessible habitat.",
+                                    "utility": 0.8
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The low-risk, high-food environment's safety is affirmed by the fox's prioritization, demonstrating its inherent security and lack of significant challenge.",
+                                    "utility": 0.2
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The low-risk, high-food environment's ideal conditions are capitalized upon by the fox's balanced strategy, showcasing its ease of use and beneficial nature.",
+                                    "utility": 0.7
+                                }
+                            },
+                            "Urban Territory: Low Risk, Low Food": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The low-risk, low-food environment proves challenging for the fox prioritizing food, highlighting its scarcity despite the relative safety.",
+                                    "utility": 0.6
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The low-risk, low-food environment's safety is confirmed by the fox's choice, but its lack of resources becomes apparent, limiting its overall appeal.",
+                                    "utility": 0.3
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The low-risk, low-food environment forces the fox to compromise on food access while ensuring safety, demonstrating its limited resource capacity.",
+                                    "utility": 0.5
+                                }
+                            },
+                            "Urban Territory: Moderate Risk, Good Food": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The balanced environment's good food access is utilized by the fox, while its moderate risks are still present, validating its multi-faceted nature.",
+                                    "utility": 0.6
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The balanced environment's moderate risks are navigated by the fox's safety focus, affirming its complex but manageable nature.",
+                                    "utility": 0.4
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The balanced environment's characteristics are optimally aligned with the fox's balancing strategy, affirming its designed equilibrium of risk and reward.",
+                                    "utility": 0.9
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The formal game definition has a significant semantic issue concerning the \"Urban Environment\" player.\n\n**Detailed Comments on What to Change and Why:**\n\n1.  **Mutual Exclusivity of \"Urban Environment\" Actions:**\n    The most critical semantic flaw lies in the definition of the \"actions\" for the \"Urban Environment\" player. Actions such as `\"Present high traffic mortality risk\"` and `\"Present abundant readily available food sources\"` are not mutually exclusive choices that the environment makes. In a real urban setting, a single territory or area can simultaneously present *both* high traffic mortality risk *and* abundant, readily available food sources. The current game structure implies that the \"Urban Environment\" chooses *only one* of these conditions at a time (e.g., it either presents high traffic risk OR abundant food, but not both in the same \"move\"). This fundamentally misrepresents the multi-faceted nature of an urban habitat. An urban red fox assesses a territory that is a *combination* of these risks and opportunities, not a territory that *only* has one.\n\n    *   **Proposed Change:** The \"actions\" of the \"Urban Environment\" player should be redefined to represent mutually exclusive *types* of urban territories or composite scenarios. Each \"action\" for the environment should encapsulate a specific combination of risks and food availability that a fox might encounter. This would make the environment's \"choices\" semantically correct as distinct, mutually exclusive types of environments the fox might choose a territory within.\n    *   **Example of revised \"actions\" for \"Urban Environment\":**\n        *   `\"Urban Territory: High Risk (Traffic, Persecution, Domestic Animals) & High Food\"`\n        *   `\"Urban Territory: High Risk & Low Food\"`\n        *   `\"Urban Territory: Low Risk & High Food\"`\n        *   `\"Urban Territory: Low Risk & Low Food\"`\n        *   `\"Urban Territory: Balanced Risk & Food (e.g., moderate risk, good food access)\"`\n    *   This redefinition would require a corresponding re-evaluation and adjustment of the utility values for both the \"Urban Red Fox\" and the \"Urban Environment\" against these new composite environmental \"actions.\" For instance, a fox prioritizing food in a \"High Risk & High Food\" territory would have different utilities than prioritizing food in a \"Low Risk & High Food\" territory.\n\n2.  **Biological Plausibility of Utilities (Minor Refinement):**\n    While the overall ranking of utilities for the \"Urban Red Fox\" is biologically plausible (e.g., getting eaten or facing high risk is very negative, balancing is often optimal), the specific values and very small differences between the various dangers (traffic -0.8, persecution -0.7, domestic animal conflict -0.6 when prioritizing food) are somewhat arbitrary. While traffic mortality can be the most immediate and lethal, the precise ranking with such small increments might imply a level of fine-grained differentiation that is hard to justify without specific empirical data. However, this is a minor point compared to the structural issue of the environment's \"actions.\" The overall magnitudes and signs of the utilities are reasonable given the description.\n\nIn summary, the core strategies for the fox are well-defined and biologically plausible, but the \"Urban Environment\" player's actions need to be fundamentally re-conceived to accurately reflect the reality of urban habitats as complex, multi-faceted entities rather than mutually exclusive single-condition choices.",
+                "OldGame": [
+                    {
+                        "name": "Urban Red Fox",
+                        "actions": [
+                            "Select territory prioritizing abundant food sources",
+                            "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)",
+                            "Select territory balancing food access and safety"
+                        ],
+                        "utilities": {
+                            "Select territory prioritizing abundant food sources": {
+                                "Present high traffic mortality risk": {
+                                    "outcome": "The fox prioritizes food but faces significant traffic mortality risk, leading to high danger.",
+                                    "utility": -0.8
+                                },
+                                "Present high human persecution risk": {
+                                    "outcome": "The fox prioritizes food but faces significant human persecution risk, leading to high danger.",
+                                    "utility": -0.7
+                                },
+                                "Present high domestic animal conflict risk": {
+                                    "outcome": "The fox prioritizes food but faces significant domestic animal conflict risk, leading to high danger.",
+                                    "utility": -0.6
+                                },
+                                "Present abundant readily available food sources": {
+                                    "outcome": "The fox successfully finds a territory with abundant food, achieving its primary goal but potentially at a cost to safety.",
+                                    "utility": 0.7
+                                }
+                            },
+                            "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                "Present high traffic mortality risk": {
+                                    "outcome": "The fox prioritizes safety, actively avoiding high traffic areas and significantly reducing mortality risk.",
+                                    "utility": 0.5
+                                },
+                                "Present high human persecution risk": {
+                                    "outcome": "The fox prioritizes safety, actively avoiding areas of high human persecution and significantly reducing risk.",
+                                    "utility": 0.5
+                                },
+                                "Present high domestic animal conflict risk": {
+                                    "outcome": "The fox prioritizes safety, actively avoiding areas of high domestic animal conflict and significantly reducing risk.",
+                                    "utility": 0.5
+                                },
+                                "Present abundant readily available food sources": {
+                                    "outcome": "The fox prioritizes safety, potentially foregoing the most abundant food sources in favor of safer, but less food-rich, areas.",
+                                    "utility": 0.2
+                                }
+                            },
+                            "Select territory balancing food access and safety": {
+                                "Present high traffic mortality risk": {
+                                    "outcome": "The fox attempts to balance food access and safety, seeking cover and safe routes to mitigate traffic risk while still accessing some food.",
+                                    "utility": 0.6
+                                },
+                                "Present high human persecution risk": {
+                                    "outcome": "The fox attempts to balance food access and safety, seeking cover and safe routes to mitigate human persecution risk while still accessing some food.",
+                                    "utility": 0.6
+                                },
+                                "Present high domestic animal conflict risk": {
+                                    "outcome": "The fox attempts to balance food access and safety, seeking cover and safe routes to mitigate domestic animal conflict risk while still accessing some food.",
+                                    "utility": 0.6
+                                },
+                                "Present abundant readily available food sources": {
+                                    "outcome": "The fox successfully finds a territory that provides both abundant food and sufficient safety, achieving an optimal outcome.",
+                                    "utility": 0.9
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Urban Environment",
+                        "actions": [
+                            "Present high traffic mortality risk",
+                            "Present high human persecution risk",
+                            "Present high domestic animal conflict risk",
+                            "Present abundant readily available food sources"
+                        ],
+                        "utilities": {
+                            "Present high traffic mortality risk": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The urban environment's traffic risk successfully impacts the fox, demonstrating its inherent danger.",
+                                    "utility": 0.7
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The urban environment's traffic risk is largely mitigated by the fox's cautious selection, reducing its impact.",
+                                    "utility": 0.1
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The urban environment's traffic risk is partially acknowledged and mitigated by the fox, but still present.",
+                                    "utility": 0.4
+                                }
+                            },
+                            "Present high human persecution risk": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The urban environment's persecution risk successfully impacts the fox, demonstrating its inherent danger.",
+                                    "utility": 0.7
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The urban environment's persecution risk is largely mitigated by the fox's cautious selection, reducing its impact.",
+                                    "utility": 0.1
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The urban environment's persecution risk is partially acknowledged and mitigated by the fox, but still present.",
+                                    "utility": 0.4
+                                }
+                            },
+                            "Present high domestic animal conflict risk": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The urban environment's domestic animal conflict risk successfully impacts the fox, demonstrating its inherent danger.",
+                                    "utility": 0.7
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The urban environment's domestic animal conflict risk is largely mitigated by the fox's cautious selection, reducing its impact.",
+                                    "utility": 0.1
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The urban environment's domestic animal conflict risk is partially acknowledged and mitigated by the fox, but still present.",
+                                    "utility": 0.4
+                                }
+                            },
+                            "Present abundant readily available food sources": {
+                                "Select territory prioritizing abundant food sources": {
+                                    "outcome": "The urban environment successfully provides abundant food, which the fox fully utilizes, affirming its role as a rich habitat.",
+                                    "utility": 0.8
+                                },
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": {
+                                    "outcome": "The urban environment's abundant food sources are largely ignored by the fox in favor of safety, reducing their effective contribution to the habitat.",
+                                    "utility": 0.2
+                                },
+                                "Select territory balancing food access and safety": {
+                                    "outcome": "The urban environment's abundant food sources are utilized by the fox as part of a balanced strategy, affirming its role as a resource.",
+                                    "utility": 0.6
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Urban Red Fox": {
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 1.0,
+                                "Select territory balancing food access and safety": 0.0
+                            },
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 1.0,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 0.0
+                            }
+                        },
+                        {
+                            "Urban Red Fox": {
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 0.0,
+                                "Select territory balancing food access and safety": 1.0
+                            },
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 0.0,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 1.0
+                            }
+                        },
+                        {
+                            "Urban Red Fox": {
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 0.33,
+                                "Select territory balancing food access and safety": 0.67
+                            },
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 0.08,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 0.92
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Urban Red Fox": {
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 1.0,
+                                "Select territory balancing food access and safety": 0.0
+                            },
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 1.0,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 0.0
+                            }
+                        },
+                        {
+                            "Urban Red Fox": {
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 0.33,
+                                "Select territory balancing food access and safety": 0.67
+                            },
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 0.08,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 0.92
+                            }
+                        },
+                        {
+                            "Urban Red Fox": {
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 0.0,
+                                "Select territory balancing food access and safety": 1.0
+                            },
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 0.0,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 1.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 0.0,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 1.0
+                            },
+                            "Urban Red Fox": {
+                                "Select territory balancing food access and safety": 1.0,
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 0.0
+                            }
+                        },
+                        {
+                            "Urban Environment": {
+                                "Urban Territory: High Risk, High Food": 0.0,
+                                "Urban Territory: High Risk, Low Food": 1.0,
+                                "Urban Territory: Low Risk, High Food": 0.0,
+                                "Urban Territory: Low Risk, Low Food": 0.0,
+                                "Urban Territory: Moderate Risk, Good Food": 0.0
+                            },
+                            "Urban Red Fox": {
+                                "Select territory balancing food access and safety": 0.0,
+                                "Select territory prioritizing abundant food sources": 0.0,
+                                "Select territory prioritizing safety from urban risks (traffic, persecution, domestic animals)": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "3 equilibria found in Support. 3 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Urban Red Fox": "Select territory balancing food access and safety",
+            "Urban Environment": "Present abundant readily available food sources"
+        }
+    },
+    {
+        "Species": [
+            "Cynomys spp.",
+            "Athene cunicularia"
+        ],
+        "Description": "Burrowing Owls are heavily dependent on the burrows dug by prairie dogs for nesting, roosting, and shelter. As prairie dog populations decline due to disease, habitat loss, and human eradication efforts, Burrowing Owls face a severe habitat dilemma, struggling to find suitable burrow systems. This obligate reliance forces them to either adapt to other burrow providers or face displacement and population decline, highlighting a complex interspecific dependency.",
+        "Query": "Burrowing Owl Prairie Dog habitat dependence obligate association colony decline conservation",
+        "Article": "*   The black-footed ferret (Mustela nigripes), also known as the American polecat or prairie dog hunter, is a species of mustelid native to central North America.\n*   Up to 90% of its diet is composed of prairie dogs.\n*   The species declined throughout the 20th century, primarily as a result of decreases in prairie dog populations and sylvatic plague.\n*   For a time, the black-footed ferret was harvested for the fur trade, with the American Fur Company having received 86 ferret skins from Pratt, Chouteau, and Company of St. Louis in the late 1830s.\n*   The large drop in black-footed ferret numbers began during the 1800s through to the 1900s, as prairie dog numbers declined because of control programs and the conversion of prairies to croplands.\n*   Sylvatic plague, a disease caused by Yersinia pestis introduced into North America, also contributed to the prairie dog die-off, though ferret numbers declined proportionately more than their prey, thus indicating other factors may have been responsible.\n*   Given an obligate dependence of black-footed ferrets on prairie dogs, black-footed ferrets are extremely vulnerable to prairie dog habitat loss.\n*   Primary causes of mortality include habitat loss, human-introduced diseases, and indirect poisoning from prairie dog control measures.\n*   In 2005, the U.S. Forest Service began poisoning prairie dogs in private land buffer zones of the Conata Basin of Buffalo Gap National Grassland.\n*   Because 10\u201315 ranchers complained the measure was inadequate, the forest service advised by Mark Rey, then Undersecretary of Agriculture, expanded its \"prairie-dog management\" in September 2006 to all of South Dakota's Buffalo Gap and the Fort Pierre National Grassland, and also to the Oglala National Grassland in Nebraska, against opinions of biologists in the U.S. Fish and Wildlife Service.\n*   Following exposure by conservation groups including the Climate, Community &amp; Biodiversity Alliance and national media public outcry and a lawsuit mobilized federal officials, and the poisoning plan was revoked.\n*   The contradictory mandates of the two federal agencies involved, the USFWS and the U.S. Forest Service, are exemplified in what the Rosebud Sioux tribe experienced: The ferret was reintroduced by the USFWS, which according to the tribe promised to pay more than $1 million a year through 2010.\n*   On the other hand, the tribe was also contracted for the U.S. Forest Service prairie dog poisoning program.\n*   The increasing numbers of ferrets led to conflicts between the tribe's Cheyenne River Sioux Tribe Game, Fish and Parks Department and the Tribal Land Enterprise Organization.\n*   When the federal government started an investigation of the tribe's prairie dog management program, threatening to prosecute tribal employees or agents carrying out the management plan in the ferret reintroduction area, the tribal council passed a resolution in 2008, asking the two federal agencies to remove ferrets, and reimburse the tribe for its expenses for the ferret recovery program.\n*   In 2020, black-footed ferrets were used to test an experimental COVID-19 vaccine in Colorado.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Burrowing Owl",
+                        "actions": [
+                            "Seek alternative burrow providers",
+                            "Maintain obligate reliance on prairie dog burrows"
+                        ],
+                        "utilities": {
+                            "Seek alternative burrow providers": {
+                                "Sustain existing burrow network": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows while prairie dog burrows remain available, leading to high habitat security and potentially increased population stability.",
+                                    "utility": 0.8
+                                },
+                                "Yield to population pressures": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows, mitigating the negative impact of declining prairie dog populations and ensuring continued access to suitable habitat.",
+                                    "utility": 0.6
+                                }
+                            },
+                            "Maintain obligate reliance on prairie dog burrows": {
+                                "Sustain existing burrow network": {
+                                    "outcome": "Burrowing Owls continue to thrive with ample prairie dog burrows, maintaining their obligate relationship and enjoying stable habitat.",
+                                    "utility": 1.0
+                                },
+                                "Yield to population pressures": {
+                                    "outcome": "Burrowing Owls face severe habitat dilemma and population decline due to their obligate reliance on dwindling prairie dog burrows.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prairie Dog Population",
+                        "actions": [
+                            "Sustain existing burrow network",
+                            "Yield to population pressures"
+                        ],
+                        "utilities": {
+                            "Sustain existing burrow network": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population successfully maintains sufficient burrows, and Burrowing Owls diversify their habitat sources, reducing sole reliance on prairie dogs and contributing to ecosystem stability.",
+                                    "utility": 0.8
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population maintains sufficient burrows, supporting Burrowing Owls in their traditional obligate relationship, signifying a healthy and stable ecosystem.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Yield to population pressures": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population declines, but Burrowing Owls mitigate their habitat loss by successfully seeking alternative burrow providers, limiting the cascading negative effects on the ecosystem.",
+                                    "utility": -0.6
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population declines severely, leading to a direct and severe habitat crisis for Burrowing Owls who remain obligately reliant, indicating a significant ecosystem disturbance.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "PrevGame": [
+                    {
+                        "name": "Burrowing Owl",
+                        "actions": [
+                            "Seek alternative burrow providers",
+                            "Maintain obligate reliance on prairie dog burrows"
+                        ],
+                        "utilities": {
+                            "Seek alternative burrow providers": {
+                                "Maintain sufficient burrow availability": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows while prairie dog burrows remain available, leading to high habitat security and potentially increased population stability.",
+                                    "utility": 0.8
+                                },
+                                "Experience population decline": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows, mitigating the negative impact of declining prairie dog populations and ensuring continued access to suitable habitat.",
+                                    "utility": 0.6
+                                }
+                            },
+                            "Maintain obligate reliance on prairie dog burrows": {
+                                "Maintain sufficient burrow availability": {
+                                    "outcome": "Burrowing Owls continue to thrive with ample prairie dog burrows, maintaining their obligate relationship and enjoying stable habitat.",
+                                    "utility": 1.0
+                                },
+                                "Experience population decline": {
+                                    "outcome": "Burrowing Owls face severe habitat dilemma and population decline due to their obligate reliance on dwindling prairie dog burrows.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prairie Dog Population",
+                        "actions": [
+                            "Maintain sufficient burrow availability",
+                            "Experience population decline"
+                        ],
+                        "utilities": {
+                            "Maintain sufficient burrow availability": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population successfully maintains sufficient burrows, and Burrowing Owls diversify their habitat sources, reducing sole reliance on prairie dogs and contributing to ecosystem stability.",
+                                    "utility": 0.8
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population maintains sufficient burrows, supporting Burrowing Owls in their traditional obligate relationship, signifying a healthy and stable ecosystem.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Experience population decline": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population declines, but Burrowing Owls mitigate their habitat loss by successfully seeking alternative burrow providers, limiting the cascading negative effects on the ecosystem.",
+                                    "utility": -0.6
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population declines severely, leading to a direct and severe habitat crisis for Burrowing Owls who remain obligately reliant, indicating a significant ecosystem disturbance.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The primary semantic issue lies with the \"actions\" defined for the \"Prairie Dog Population\" player. In game theory, \"actions\" typically imply a choice or a strategic behavior from the player. However, the provided text clearly states that prairie dog populations \"decline due to disease, habitat loss, and human eradication efforts.\" This indicates that \"Experience population decline\" is a state or an outcome imposed by external factors, rather than a chosen action by the population itself. Similarly, \"Maintain sufficient burrow availability\" describes a characteristic of a healthy and stable population, not a deliberate, strategic action it chooses to perform in the context of a game. While acknowledging the constraint of maintaining two players, these definitions lack biological plausibility for player \"actions\" in a strategic game. To improve fidelity to the natural world and semantic correctness, the actions for \"Prairie Dog Population\" should be rephrased to represent a more active or intrinsic capacity/response of the population. The revised actions, \"Sustain existing burrow network\" and \"Yield to population pressures,\" better reflect the ongoing biological processes or responses of a population to its environment, making them more semantically aligned with 'actions' that can be modeled in a biological context. The utilities and outcomes associated with these rephrased actions remain biologically plausible in their relative values and descriptions.",
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Burrowing Owl": {
+                                "Seek alternative burrow providers": 0.0,
+                                "Maintain obligate reliance on prairie dog burrows": 1.0
+                            },
+                            "Prairie Dog Population": {
+                                "Sustain existing burrow network": 1.0,
+                                "Yield to population pressures": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Burrowing Owl": {
+                                "Seek alternative burrow providers": 0.0,
+                                "Maintain obligate reliance on prairie dog burrows": 1.0
+                            },
+                            "Prairie Dog Population": {
+                                "Sustain existing burrow network": 1.0,
+                                "Yield to population pressures": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Burrowing Owl": {
+                                "Maintain obligate reliance on prairie dog burrows": 1.0,
+                                "Seek alternative burrow providers": 0.0
+                            },
+                            "Prairie Dog Population": {
+                                "Sustain existing burrow network": 1.0,
+                                "Yield to population pressures": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Burrowing Owl",
+                        "actions": [
+                            "Seek alternative burrow providers",
+                            "Maintain obligate reliance on prairie dog burrows"
+                        ],
+                        "utilities": {
+                            "Seek alternative burrow providers": {
+                                "Sustain existing burrow network": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows while prairie dog burrows remain available, leading to high habitat security and potentially increased population stability.",
+                                    "utility": 0.8
+                                },
+                                "Yield to population pressures": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows, mitigating the negative impact of declining prairie dog populations and ensuring continued access to suitable habitat.",
+                                    "utility": 0.6
+                                }
+                            },
+                            "Maintain obligate reliance on prairie dog burrows": {
+                                "Sustain existing burrow network": {
+                                    "outcome": "Burrowing Owls continue to thrive with ample prairie dog burrows, maintaining their obligate relationship and enjoying stable habitat.",
+                                    "utility": 1.0
+                                },
+                                "Yield to population pressures": {
+                                    "outcome": "Burrowing Owls face severe habitat dilemma and population decline due to their obligate reliance on dwindling prairie dog burrows.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prairie Dog Population",
+                        "actions": [
+                            "Sustain existing burrow network",
+                            "Yield to population pressures"
+                        ],
+                        "utilities": {
+                            "Sustain existing burrow network": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population successfully maintains sufficient burrows, ensuring its own thriving existence and contributing to a stable ecosystem. Burrowing Owls diversify their habitat sources, reducing sole reliance on prairie dogs.",
+                                    "utility": 1.0
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population successfully maintains sufficient burrows, ensuring its own thriving existence and supporting the traditional obligate relationship with Burrowing Owls, signifying a healthy and stable ecosystem.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Yield to population pressures": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population declines significantly due to external pressures, leading to a critical loss of burrows. While Burrowing Owls successfully seek alternatives, this decline still represents a severe negative state for the prairie dog population itself.",
+                                    "utility": -1.0
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population declines severely due to external pressures, leading to a critical loss of burrows. This is a severe negative state for the prairie dog population itself, irrespective of the owl's fate.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition has significant semantic issues regarding the Prairie Dog Population's utilities, which do not accurately reflect the biological interaction described.\n\nHere's a detailed breakdown of what to change and why:\n\n**1. Semantic Discrepancy in Prairie Dog Population Utilities:**\n\n*   **Issue:** The core problem lies in how the Prairie Dog Population's utility changes based on the Burrowing Owl's actions. The text explicitly states, \"Burrowing Owls are heavily dependent on the burrows dug by prairie dogs,\" implying a **unidirectional dependency**. Prairie dogs are not stated to be dependent on owls for their burrows or population health. Therefore, the Prairie Dog Population's utility for *itself* should primarily be determined by its own action (sustaining its network vs. yielding to pressures) and **not** by whether the owls choose to seek alternative burrows or maintain reliance.\n    *   For example, if the Prairie Dog Population manages to \"Sustain existing burrow network,\" this is an optimal outcome for *them*, regardless of the owl's choice. Its utility should be consistently high (e.g., 1.0). The current model shows it as 0.5 if owls seek alternatives and 1.0 if owls maintain reliance, implying that owls maintaining reliance is *better for the prairie dog population*, which is biologically unsound for burrow provision.\n    *   Similarly, if the Prairie Dog Population \"Yields to population pressures,\" this is a negative outcome for *them*. Its utility should be consistently low (e.g., -1.0). The current model shows it as 0.6 if owls seek alternatives and -1.0 if owls maintain reliance, suggesting that owls seeking alternatives somehow *benefits* the declining prairie dog population directly in terms of their own utility, which is implausible. The owls' mitigation of their own habitat loss doesn't make the prairie dog's decline any less severe for the prairie dog itself.\n\n*   **Biological Plausibility:** A prairie dog population's health (reflected by its ability to sustain its burrow network or its decline) is driven by factors like disease, habitat availability, predator pressure, and human eradication efforts, as mentioned in the text. The presence or specific actions of an obligate commensal like the Burrowing Owl does not significantly impact the prairie dog's intrinsic utility regarding its own population health or burrow maintenance. While the owl's fate might reflect broader ecosystem health, the *prairie dog's own utility* should be decoupled from the owl's specific choices.\n\n*   **Proposed Change:** The Prairie Dog Population's utility should remain constant for each of its own actions, irrespective of the Burrowing Owl's action. The outcome descriptions can still reflect the broader ecological context, but the utility value for the Prairie Dog should reflect its own status.\n\n    *   **For \"Prairie Dog Population\":**\n        *   **Action: \"Sustain existing burrow network\"**\n            *   For **Burrowing Owl's action \"Seek alternative burrow providers\"**:\n                *   Current utility: 0.5\n                *   **Proposed utility: 1.0** (This is the best outcome for the prairie dog population)\n                *   **Proposed outcome:** \"Prairie Dog Population successfully maintains sufficient burrows, ensuring its own thriving existence and contributing to a stable ecosystem. Burrowing Owls diversify their habitat sources, reducing sole reliance on prairie dogs.\"\n            *   For **Burrowing Owl's action \"Maintain obligate reliance on prairie dog burrows\"**:\n                *   Current utility: 1.0\n                *   **Proposed utility: 1.0** (This is the best outcome for the prairie dog population)\n                *   **Proposed outcome:** \"Prairie Dog Population successfully maintains sufficient burrows, ensuring its own thriving existence and supporting the traditional obligate relationship with Burrowing Owls, signifying a healthy and stable ecosystem.\"\n\n        *   **Action: \"Yield to population pressures\"**\n            *   For **Burrowing Owl's action \"Seek alternative burrow providers\"**:\n                *   Current utility: 0.6\n                *   **Proposed utility: -1.0** (This is the worst outcome for the prairie dog population)\n                *   **Proposed outcome:** \"Prairie Dog Population declines significantly due to external pressures, leading to a critical loss of burrows. While Burrowing Owls successfully seek alternatives, this decline still represents a severe negative state for the prairie dog population itself.\"\n            *   For **Burrowing Owl's action \"Maintain obligate reliance on prairie dog burrows\"**:\n                *   Current utility: -1.0\n                *   **Proposed utility: -1.0** (This is the worst outcome for the prairie dog population)\n                *   **Proposed outcome:** \"Prairie Dog Population declines severely due to external pressures, leading to a critical loss of burrows. This is a severe negative state for the prairie dog population itself, irrespective of the owl's fate.\"\n\n**2. Minor Utility Order Consideration for Burrowing Owl (Accepted as Is):**\n\n*   **Observation:** For the Burrowing Owl, \"Maintain obligate reliance on prairie dog burrows\" when Prairie Dogs \"Sustain existing burrow network\" yields 1.0 utility (optimal current state). \"Seek alternative burrow providers\" when Prairie Dogs \"Sustain existing burrow network\" yields 0.8 utility.\n*   **Biological Nuance:** From a long-term evolutionary fitness perspective, diversifying resource use (seeking alternatives) can enhance resilience and reduce risk, even if the primary resource is currently abundant. This might suggest that `0.8` (adapt when PDs are abundant) could arguably be *equal to or slightly better* than `1.0` (maintain reliance when PDs are abundant) in a long-term view.\n*   **Rationale for Acceptance (as is):** However, the current values are still plausible. If \"obligate reliance\" with abundant resources represents the *peak* current thriving state with minimal energy expenditure for adaptation, then adapting (even if beneficial long-term) might incur some immediate costs or inefficiencies, making it slightly less desirable than the already perfect status quo. Given the framing of the interaction as a \"dilemma\" when populations decline, it suggests adaptation is a response to negative pressure rather than a proactively superior strategy when conditions are ideal. Therefore, the current utility order for the owl is acceptable based on a short-to-medium term perspective reflected in the dilemma.\n\n**Conclusion:**\n\nThe primary and most critical change needed is to adjust the Prairie Dog Population's utilities to reflect its own well-being independently of the Burrowing Owl's actions. The owl's choices do not directly improve or worsen the prairie dog's ability to sustain its burrows or its population health.\n\nHere is the corrected JSON:\n\n```json\n[\n  {\n    \"name\": \"Burrowing Owl\",\n    \"actions\": [\"Seek alternative burrow providers\", \"Maintain obligate reliance on prairie dog burrows\"],\n    \"utilities\": {\n      \"Seek alternative burrow providers\": {\n        \"Sustain existing burrow network\": {\n          \"outcome\": \"Burrowing Owls successfully adapt by seeking alternative burrows while prairie dog burrows remain available, leading to high habitat security and potentially increased population stability.\",\n          \"utility\": 0.8\n        },\n        \"Yield to population pressures\": {\n          \"outcome\": \"Burrowing Owls successfully adapt by seeking alternative burrows, mitigating the negative impact of declining prairie dog populations and ensuring continued access to suitable habitat.\",\n          \"utility\": 0.6\n        }\n      },\n      \"Maintain obligate reliance on prairie dog burrows\": {\n        \"Sustain existing burrow network\": {\n          \"outcome\": \"Burrowing Owls continue to thrive with ample prairie dog burrows, maintaining their obligate relationship and enjoying stable habitat.\",\n          \"utility\": 1.0\n        },\n        \"Yield to population pressures\": {\n          \"outcome\": \"Burrowing Owls face severe habitat dilemma and population decline due to their obligate reliance on dwindling prairie dog burrows.\",\n          \"utility\": -1.0\n        }\n      }\n    }\n  },\n  {\n    \"name\": \"Prairie Dog Population\",\n    \"actions\": [\"Sustain existing burrow network\", \"Yield to population pressures\"],\n    \"utilities\": {\n      \"Sustain existing burrow network\": {\n        \"Seek alternative burrow providers\": {\n          \"outcome\": \"Prairie Dog Population successfully maintains sufficient burrows, ensuring its own thriving existence and contributing to a stable ecosystem. Burrowing Owls diversify their habitat sources, reducing sole reliance on prairie dogs.\",\n          \"utility\": 1.0\n        },\n        \"Maintain obligate reliance on prairie dog burrows\": {\n          \"outcome\": \"Prairie Dog Population successfully maintains sufficient burrows, ensuring its own thriving existence and supporting the traditional obligate relationship with Burrowing Owls, signifying a healthy and stable ecosystem.\",\n          \"utility\": 1.0\n        }\n      },\n      \"Yield to population pressures\": {\n        \"Seek alternative burrow providers\": {\n          \"outcome\": \"Prairie Dog Population declines significantly due to external pressures, leading to a critical loss of burrows. While Burrowing Owls successfully seek alternatives, this decline still represents a severe negative state for the prairie dog population itself.\",\n          \"utility\": -1.0\n        },\n        \"Maintain obligate reliance on prairie dog burrows\": {\n          \"outcome\": \"Prairie Dog Population declines severely due to external pressures, leading to a critical loss of burrows. This is a severe negative state for the prairie dog population itself, irrespective of the owl's fate.\",\n          \"utility\": -1.0\n        }\n      }\n    }\n  }\n]\n```",
+                "OldGame": [
+                    {
+                        "name": "Burrowing Owl",
+                        "actions": [
+                            "Seek alternative burrow providers",
+                            "Maintain obligate reliance on prairie dog burrows"
+                        ],
+                        "utilities": {
+                            "Seek alternative burrow providers": {
+                                "Sustain existing burrow network": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows while prairie dog burrows remain available, leading to high habitat security and potentially increased population stability.",
+                                    "utility": 0.8
+                                },
+                                "Yield to population pressures": {
+                                    "outcome": "Burrowing Owls successfully adapt by seeking alternative burrows, mitigating the negative impact of declining prairie dog populations and ensuring continued access to suitable habitat.",
+                                    "utility": 0.6
+                                }
+                            },
+                            "Maintain obligate reliance on prairie dog burrows": {
+                                "Sustain existing burrow network": {
+                                    "outcome": "Burrowing Owls continue to thrive with ample prairie dog burrows, maintaining their obligate relationship and enjoying stable habitat.",
+                                    "utility": 1.0
+                                },
+                                "Yield to population pressures": {
+                                    "outcome": "Burrowing Owls face severe habitat dilemma and population decline due to their obligate reliance on dwindling prairie dog burrows.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Prairie Dog Population",
+                        "actions": [
+                            "Sustain existing burrow network",
+                            "Yield to population pressures"
+                        ],
+                        "utilities": {
+                            "Sustain existing burrow network": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population successfully maintains sufficient burrows, and Burrowing Owls diversify their habitat sources, reducing sole reliance on prairie dogs and contributing to ecosystem stability.",
+                                    "utility": 0.5
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population maintains sufficient burrows, supporting Burrowing Owls in their traditional obligate relationship, signifying a healthy and stable ecosystem.",
+                                    "utility": 1.0
+                                }
+                            },
+                            "Yield to population pressures": {
+                                "Seek alternative burrow providers": {
+                                    "outcome": "Prairie Dog Population declines, but Burrowing Owls mitigate their habitat loss by successfully seeking alternative burrow providers, limiting the cascading negative effects on the ecosystem.",
+                                    "utility": 0.6
+                                },
+                                "Maintain obligate reliance on prairie dog burrows": {
+                                    "outcome": "Prairie Dog Population declines severely, leading to a direct and severe habitat crisis for Burrowing Owls who remain obligately reliant, indicating a significant ecosystem disturbance.",
+                                    "utility": -1.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Burrowing Owl": {
+                                "Seek alternative burrow providers": 0.0,
+                                "Maintain obligate reliance on prairie dog burrows": 1.0
+                            },
+                            "Prairie Dog Population": {
+                                "Sustain existing burrow network": 1.0,
+                                "Yield to population pressures": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Burrowing Owl": {
+                                "Seek alternative burrow providers": 0.0,
+                                "Maintain obligate reliance on prairie dog burrows": 1.0
+                            },
+                            "Prairie Dog Population": {
+                                "Sustain existing burrow network": 1.0,
+                                "Yield to population pressures": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Burrowing Owl": {
+                                "Maintain obligate reliance on prairie dog burrows": 1.0,
+                                "Seek alternative burrow providers": 0.0
+                            },
+                            "Prairie Dog Population": {
+                                "Sustain existing burrow network": 1.0,
+                                "Yield to population pressures": 0.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Burrowing Owl": "Seek alternative burrow providers",
+            "Prairie Dog Population": "Experience population decline"
+        }
+    },
+    {
+        "Species": [
+            "Lepus americanus",
+            "Lynx canadensis"
+        ],
+        "Description": "Snowshoe Hares face a critical habitat selection dilemma driven by predation risk from Canada Lynx. To minimize their chances of being caught, hares often select denser forest stands, even if these areas offer poorer quality or less abundant forage. This forces a trade-off between maximizing energy intake through optimal foraging and minimizing mortality risk, directly influencing their spatial distribution and survival.",
+        "Query": "Snowshoe Hare Lynx predation risk habitat selection foraging trade-off dense cover",
+        "Article": "The primary diet is rabbits and hares, rats and mice, and voles, although it freely hunts any animal it can overtake, including rodents and other small mammals, larger mid-sized mammals, birds, reptiles, amphibians, and invertebrates.\nIn the boreal forest, especially in years where the snowshoe hare experiences population decreases, great horned owls prey fairly heavily (approximately 25% of biomass) on ruffed grouse and spruce grouse, enough so in the earlier bird to possibly contribute to population reductions.\nAccording to one author, \"Almost any living creature that walks, crawls, flies, or swims, except the large mammals, is the great horned owl's legitimate prey\".\nIn fact, the great horned owl has the most diverse prey profile of any raptor in the Americas.\nGreat horned owls are some of the earliest-breeding birds in North America, seemingly in part because of the lengthy nightfall at this time of year and additionally the competitive advantage it gives the owl over other raptors.\nMost mortality in modern times is human-related, caused by owls flying into man-made objects, including buildings, cars, power lines, or barbed wire.\nThe great horned owl is both the most prolific and diverse predator in America of other birds of prey, with other accomplished raptor-hunters such as the goshawk and the golden eagle being more restricted in range, habitat and number in North America and thus having a more minor impact.\nGreat horned owls are frequently mobbed by other birds.\nIn the boreal forests, both the northern hawk owl and great grey owl appear to be in greater danger of great horned owl predation in years where the snowshoe hare have low populations.\nThe great horned owl gains an advantage by nesting earlier than any other raptor in its range (indeed any bird), as it is able to exploit the other raptors as food while in a more vulnerable state as their own nestlings have become well developed.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Snowshoe Hare",
+                        "actions": [
+                            "Select Dense Forest (High Cover)",
+                            "Select Open Forest (High Forage)"
+                        ],
+                        "utilities": {
+                            "Select Dense Forest (High Cover)": {
+                                "Hunt in Dense Forest": {
+                                    "outcome": "Hare selects dense forest for cover; Lynx hunts in the same dense forest. This provides some protection but still carries a significant predation risk, while forage quality is low.",
+                                    "utility": -3.0
+                                },
+                                "Hunt in Open Forest": {
+                                    "outcome": "Hare selects dense forest for cover; Lynx hunts in the open forest, away from the hare. This provides high safety from immediate predation, but forage quality remains low.",
+                                    "utility": 5.0
+                                }
+                            },
+                            "Select Open Forest (High Forage)": {
+                                "Hunt in Dense Forest": {
+                                    "outcome": "Hare selects open forest for high forage; Lynx hunts in the dense forest, away from the hare. This provides high foraging opportunity, but the hare is in a less secure, inherently riskier habitat.",
+                                    "utility": 3.0
+                                },
+                                "Hunt in Open Forest": {
+                                    "outcome": "Hare selects open forest for high forage; Lynx hunts in the same open forest. This results in very high predation risk and likely mortality.",
+                                    "utility": -10.0
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Canada Lynx",
+                        "actions": [
+                            "Hunt in Dense Forest",
+                            "Hunt in Open Forest"
+                        ],
+                        "utilities": {
+                            "Hunt in Dense Forest": {
+                                "Select Dense Forest (High Cover)": {
+                                    "outcome": "Lynx hunts in dense forest; Hare selects dense forest for cover. This results in a high chance of the Lynx locating and preying on the Hare, despite the Hare's attempts at cover.",
+                                    "utility": 10.0
+                                },
+                                "Select Open Forest (High Forage)": {
+                                    "outcome": "Lynx hunts in dense forest; Hare selects open forest for high forage. The Lynx misses the Hare, resulting in an unsuccessful hunt.",
+                                    "utility": -5.0
+                                }
+                            },
+                            "Hunt in Open Forest": {
+                                "Select Dense Forest (High Cover)": {
+                                    "outcome": "Lynx hunts in open forest; Hare selects dense forest for cover. The Lynx misses the Hare, resulting in an unsuccessful hunt.",
+                                    "utility": -5.0
+                                },
+                                "Select Open Forest (High Forage)": {
+                                    "outcome": "Lynx hunts in open forest; Hare selects open forest for high forage. This results in a very high chance of the Lynx locating and preying on the Hare, as the Hare is in a less secure habitat.",
+                                    "utility": 15.0
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": true,
+                "Feedback": "None",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Snowshoe Hare": {
+                                "Select Dense Forest (High Cover)": 0.57,
+                                "Select Open Forest (High Forage)": 0.43
+                            },
+                            "Canada Lynx": {
+                                "Hunt in Dense Forest": 0.71,
+                                "Hunt in Open Forest": 0.29
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Snowshoe Hare": {
+                                "Select Dense Forest (High Cover)": 0.57,
+                                "Select Open Forest (High Forage)": 0.43
+                            },
+                            "Canada Lynx": {
+                                "Hunt in Dense Forest": 0.71,
+                                "Hunt in Open Forest": 0.29
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Canada Lynx": {
+                                "Hunt in Dense Forest": 0.71,
+                                "Hunt in Open Forest": 0.29
+                            },
+                            "Snowshoe Hare": {
+                                "Select Dense Forest (High Cover)": 0.57,
+                                "Select Open Forest (High Forage)": 0.43
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Snowshoe Hare": "Select Dense Forest (High Cover)",
+            "Canada Lynx": "Hunt in Dense Forest"
+        }
+    },
+    {
+        "Species": [
+            "Ursus maritimus",
+            "Ursus arctos horribilis"
+        ],
+        "Description": "Due to climate change and the receding Arctic sea ice, Polar Bears are spending more time on land, leading to increased overlap and interaction with Grizzly Bears. This forces a dilemma for Polar Bears, who must adapt to terrestrial resource acquisition and face interspecific competition for food and space with the larger, more generalized Grizzly Bears. For grizzlies, it presents new competitive pressures and potential hybridization, altering established habitat use patterns.",
+        "Query": "Polar Bear Grizzly Bear range overlap climate change interspecific competition habitat adaptation",
+        "Article": "*   Due to climate change and the receding Arctic sea ice, Polar Bears are spending more time on land, leading to increased overlap and interaction with Grizzly Bears.\n*   In the case of *A. pristinus*, this was likely due to climate change and competition with other ursids, such as the black bear.\n*   The cause behind these extinctions is unclear, but in the case of *A. pristinus*, this was likely due to climate change and competition with other ursids, such as the black bear and *Tremarctos floridanus*.\n*   Both brown bears and *Arctodus simus* exhibit a high degree of dietary variability, and while largely herbivorous, meat can be an important dietary element to certain populations of both species.\n*   While suggested by Bj\u00f6rn Kurt\u00e9n in the past, there is no evidence for subspecies in A. simus, such as distinctive genetic diversity or phylogeographic structure.\n*   In the Late Pleistocene, three <i>Arctodus simus specimens have been recovered, alongside Tremarctos floridanus.</i>\n*   Even though <i>Arctodus simus</i> was not restricted to open areas and could inhabit in different environments, the timing of the regional shift from an open pine woodland habitat to a densely forested vegetation implies that these vegetation changes contributed to the local extinction of <i>Arctodus simus</i>, along with many other megafauna.\n",
+        "Game": [
+            {
+                "GameDef": [
+                    {
+                        "name": "Polar Bear",
+                        "actions": [
+                            "ForageOnLand",
+                            "CompeteForFoodAndSpace"
+                        ],
+                        "utilities": {
+                            "ForageOnLand": {
+                                "DefendFoodAndSpace": {
+                                    "outcome": "Polar Bear attempts to forage on land but faces active defense from the larger Grizzly Bear, hindering resource acquisition and potentially leading to conflict.",
+                                    "utility": -0.5
+                                },
+                                "AdjustHabitatUse": {
+                                    "outcome": "Polar Bear successfully forages on land as the Grizzly Bear shifts its habitat use, reducing direct competition and allowing for adaptation to terrestrial resources.",
+                                    "utility": 0.7
+                                }
+                            },
+                            "CompeteForFoodAndSpace": {
+                                "DefendFoodAndSpace": {
+                                    "outcome": "Polar Bear directly competes for food and space, leading to a confrontation with the larger, more generalized Grizzly Bear, resulting in a likely unfavorable outcome for the Polar Bear.",
+                                    "utility": -0.8
+                                },
+                                "AdjustHabitatUse": {
+                                    "outcome": "Polar Bear attempts to compete for resources, but the Grizzly Bear adjusts its habitat use, potentially yielding some space or resources, allowing the Polar Bear to gain an advantage without direct conflict.",
+                                    "utility": 0.6
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Grizzly Bear",
+                        "actions": [
+                            "DefendFoodAndSpace",
+                            "AdjustHabitatUse"
+                        ],
+                        "utilities": {
+                            "DefendFoodAndSpace": {
+                                "ForageOnLand": {
+                                    "outcome": "Grizzly Bear actively defends its food and space, hindering the Polar Bear's ability to forage and establish itself on land, maintaining its resource dominance.",
+                                    "utility": 0.8
+                                },
+                                "CompeteForFoodAndSpace": {
+                                    "outcome": "Grizzly Bear successfully defends against the Polar Bear's direct competition, reaffirming its larger size and competitive advantage, securing its resources and territory.",
+                                    "utility": 0.9
+                                }
+                            },
+                            "AdjustHabitatUse": {
+                                "ForageOnLand": {
+                                    "outcome": "Grizzly Bear adjusts its habitat use, allowing the Polar Bear to forage on land without direct confrontation, but potentially leading to a less optimal distribution of resources for the Grizzly Bear.",
+                                    "utility": -0.3
+                                },
+                                "CompeteForFoodAndSpace": {
+                                    "outcome": "Grizzly Bear adjusts its habitat use in response to the Polar Bear's competition, avoiding direct conflict but ceding some resources or territory, which could lead to altered established patterns.",
+                                    "utility": -0.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Polar Bear": {
+                                "ForageOnLand": 1.0,
+                                "CompeteForFoodAndSpace": 0.0
+                            },
+                            "Grizzly Bear": {
+                                "DefendFoodAndSpace": 1.0,
+                                "AdjustHabitatUse": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Polar Bear": {
+                                "ForageOnLand": 1.0,
+                                "CompeteForFoodAndSpace": 0.0
+                            },
+                            "Grizzly Bear": {
+                                "DefendFoodAndSpace": 1.0,
+                                "AdjustHabitatUse": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Grizzly Bear": {
+                                "AdjustHabitatUse": 0.0,
+                                "DefendFoodAndSpace": 1.0
+                            },
+                            "Polar Bear": {
+                                "CompeteForFoodAndSpace": 0.0,
+                                "ForageOnLand": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            },
+            {
+                "GameDef": [
+                    {
+                        "name": "Polar Bear",
+                        "actions": [
+                            "ForageOnLand",
+                            "CompeteForFoodAndSpace"
+                        ],
+                        "utilities": {
+                            "ForageOnLand": {
+                                "DefendFoodAndSpace": {
+                                    "outcome": "Polar Bear attempts to forage on land but faces active defense from the larger Grizzly Bear, hindering resource acquisition and potentially leading to conflict.",
+                                    "utility": -0.5
+                                },
+                                "AdjustHabitatUse": {
+                                    "outcome": "Polar Bear successfully forages on land as the Grizzly Bear shifts its habitat use, reducing direct competition and allowing for adaptation to terrestrial resources.",
+                                    "utility": 0.7
+                                }
+                            },
+                            "CompeteForFoodAndSpace": {
+                                "DefendFoodAndSpace": {
+                                    "outcome": "Polar Bear directly competes for food and space, leading to a confrontation with the larger, more generalized Grizzly Bear, resulting in a likely unfavorable outcome for the Polar Bear.",
+                                    "utility": -0.8
+                                },
+                                "AdjustHabitatUse": {
+                                    "outcome": "Polar Bear attempts to compete for resources, but the Grizzly Bear adjusts its habitat use, potentially yielding some space or resources, allowing the Polar Bear to gain an advantage without direct conflict.",
+                                    "utility": 0.6
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Grizzly Bear",
+                        "actions": [
+                            "DefendFoodAndSpace",
+                            "AdjustHabitatUse"
+                        ],
+                        "utilities": {
+                            "DefendFoodAndSpace": {
+                                "ForageOnLand": {
+                                    "outcome": "Grizzly Bear actively defends its food and space, hindering the Polar Bear's ability to forage and establish itself on land, maintaining its resource dominance.",
+                                    "utility": 0.8
+                                },
+                                "CompeteForFoodAndSpace": {
+                                    "outcome": "Grizzly Bear successfully defends against the Polar Bear's direct competition, reaffirming its larger size and competitive advantage, securing its resources and territory.",
+                                    "utility": 0.9
+                                }
+                            },
+                            "AdjustHabitatUse": {
+                                "ForageOnLand": {
+                                    "outcome": "Grizzly Bear adjusts its habitat use, allowing the Polar Bear to forage on land without direct confrontation, but potentially leading to a less optimal distribution of resources for the Grizzly Bear.",
+                                    "utility": 0.6
+                                },
+                                "CompeteForFoodAndSpace": {
+                                    "outcome": "Grizzly Bear adjusts its habitat use in response to the Polar Bear's competition, avoiding direct conflict but ceding some resources or territory, which could lead to altered established patterns.",
+                                    "utility": -0.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "SemanticFeedback": "The game definition is largely well-structured and captures many aspects of the interaction described. However, there is one key area concerning the Grizzly Bear's utility assignments that requires adjustment to ensure full biological plausibility and semantic consistency.\n\n**Issue:**\n\n1.  **Grizzly Bear's Indifference to Habitat Use Adjustment vs. Defense:**\n    *   **Current State:** When the Polar Bear chooses `ForageOnLand`, the Grizzly Bear has two possible responses with the same utility:\n        *   `DefendFoodAndSpace`: Outcome: \"Grizzly Bear actively defends its food and space, hindering the Polar Bear's ability to forage and establish itself on land, maintaining its resource dominance.\" Utility: `0.8`\n        *   `AdjustHabitatUse`: Outcome: \"Grizzly Bear adjusts its habitat use, allowing the Polar Bear to forage on land without direct confrontation, but potentially leading to a less optimal distribution of resources for the Grizzly Bear.\" Utility: `0.8`\n\n    *   **Biological Plausibility Concern:** As an experienced biologist, it's highly implausible for a dominant, territorial animal like a Grizzly Bear to derive the *same* utility from successfully defending its prime habitat and maintaining \"resource dominance\" as it does from \"adjusting its habitat use\" which \"potentially lead[s] to a less optimal distribution of resources.\" Maintaining optimal resource distribution and dominance is inherently more beneficial for a large, generalized predator than ceding ground and accepting a sub-optimal distribution, even if it avoids direct conflict. While avoiding conflict has benefits (e.g., saving energy, avoiding injury), the cost of a less optimal resource distribution should be reflected in a lower utility. The current equal utilities imply an indifference that does not align with the described outcomes. This also makes the game slightly degenerate in this specific scenario for the Grizzly Bear.\n\n**Proposed Change:**\n\n*   **Change:** Decrease the utility for the Grizzly Bear's action `AdjustHabitatUse` when the Polar Bear chooses `ForageOnLand`.\n*   **Reasoning:** To reflect that accepting a \"less optimal distribution\" is a less favorable outcome than successfully defending and maintaining \"resource dominance.\" For example, changing it from `0.8` to `0.5` or `0.6` would make it positive (as avoiding conflict might still be better than an arduous fight) but clearly less desirable than actively defending and maintaining dominance. A value of `0.6` seems appropriate, as it is still positive, acknowledging the benefit of avoiding conflict, but lower than `0.8` (successful defense) and higher than `-0.5` (yielding to direct competition).\n\n**Modified JSON Snippet (Grizzly Bear):**\n\n```json\n{\n    \"name\": \"Grizzly Bear\",\n    \"actions\": [\"DefendFoodAndSpace\", \"AdjustHabitatUse\"],\n    \"utilities\": {\n        \"DefendFoodAndSpace\": {\n            \"ForageOnLand\": {\n                \"outcome\": \"Grizzly Bear actively defends its food and space, hindering the Polar Bear's ability to forage and establish itself on land, maintaining its resource dominance.\",\n                \"utility\": 0.8\n            },\n            \"CompeteForFoodAndSpace\": {\n                \"outcome\": \"Grizzly Bear successfully defends against the Polar Bear's direct competition, reaffirming its larger size and competitive advantage, securing its resources and territory.\",\n                \"utility\": 0.9\n            }\n        },\n        \"AdjustHabitatUse\": {\n            \"ForageOnLand\": {\n                \"outcome\": \"Grizzly Bear adjusts its habitat use, allowing the Polar Bear to forage on land without direct confrontation, but potentially leading to a less optimal distribution of resources for the Grizzly Bear.\",\n                \"utility\": 0.6  // Changed from 0.8 to 0.6\n            },\n            \"CompeteForFoodAndSpace\": {\n                \"outcome\": \"Grizzly Bear adjusts its habitat use in response to the Polar Bear's competition, avoiding direct conflict but ceding some resources or territory, which could lead to altered established patterns.\",\n                \"utility\": -0.5\n            }\n        }\n    }\n}\n```",
+                "OldGame": [
+                    {
+                        "name": "Polar Bear",
+                        "actions": [
+                            "ForageOnLand",
+                            "CompeteForFoodAndSpace"
+                        ],
+                        "utilities": {
+                            "ForageOnLand": {
+                                "DefendFoodAndSpace": {
+                                    "outcome": "Polar Bear attempts to forage on land but faces active defense from the larger Grizzly Bear, hindering resource acquisition and potentially leading to conflict.",
+                                    "utility": -0.5
+                                },
+                                "AdjustHabitatUse": {
+                                    "outcome": "Polar Bear successfully forages on land as the Grizzly Bear shifts its habitat use, reducing direct competition and allowing for adaptation to terrestrial resources.",
+                                    "utility": 0.7
+                                }
+                            },
+                            "CompeteForFoodAndSpace": {
+                                "DefendFoodAndSpace": {
+                                    "outcome": "Polar Bear directly competes for food and space, leading to a confrontation with the larger, more generalized Grizzly Bear, resulting in a likely unfavorable outcome for the Polar Bear.",
+                                    "utility": -0.8
+                                },
+                                "AdjustHabitatUse": {
+                                    "outcome": "Polar Bear attempts to compete for resources, but the Grizzly Bear adjusts its habitat use, potentially yielding some space or resources, allowing the Polar Bear to gain an advantage without direct conflict.",
+                                    "utility": 0.6
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "Grizzly Bear",
+                        "actions": [
+                            "DefendFoodAndSpace",
+                            "AdjustHabitatUse"
+                        ],
+                        "utilities": {
+                            "DefendFoodAndSpace": {
+                                "ForageOnLand": {
+                                    "outcome": "Grizzly Bear actively defends its food and space, hindering the Polar Bear's ability to forage and establish itself on land, maintaining its resource dominance.",
+                                    "utility": 0.8
+                                },
+                                "CompeteForFoodAndSpace": {
+                                    "outcome": "Grizzly Bear successfully defends against the Polar Bear's direct competition, reaffirming its larger size and competitive advantage, securing its resources and territory.",
+                                    "utility": 0.9
+                                }
+                            },
+                            "AdjustHabitatUse": {
+                                "ForageOnLand": {
+                                    "outcome": "Grizzly Bear adjusts its habitat use, allowing the Polar Bear to forage on land without direct confrontation, but potentially leading to a less optimal distribution of resources for the Grizzly Bear.",
+                                    "utility": 0.8
+                                },
+                                "CompeteForFoodAndSpace": {
+                                    "outcome": "Grizzly Bear adjusts its habitat use in response to the Polar Bear's competition, avoiding direct conflict but ceding some resources or territory, which could lead to altered established patterns.",
+                                    "utility": -0.5
+                                }
+                            }
+                        }
+                    }
+                ],
+                "Validated": false,
+                "Feedback": "The naturally observed outcome of the interaction is not an equilibrium in the game! ",
+                "Equilibria": {
+                    "Support": [
+                        {
+                            "Polar Bear": {
+                                "ForageOnLand": 1.0,
+                                "CompeteForFoodAndSpace": 0.0
+                            },
+                            "Grizzly Bear": {
+                                "DefendFoodAndSpace": 1.0,
+                                "AdjustHabitatUse": 0.0
+                            }
+                        }
+                    ],
+                    "Vertex": [
+                        {
+                            "Polar Bear": {
+                                "ForageOnLand": 1.0,
+                                "CompeteForFoodAndSpace": 0.0
+                            },
+                            "Grizzly Bear": {
+                                "DefendFoodAndSpace": 1.0,
+                                "AdjustHabitatUse": 0.0
+                            }
+                        }
+                    ],
+                    "LemkeHawson": [
+                        {
+                            "Grizzly Bear": {
+                                "AdjustHabitatUse": 0.0,
+                                "DefendFoodAndSpace": 1.0
+                            },
+                            "Polar Bear": {
+                                "CompeteForFoodAndSpace": 0.0,
+                                "ForageOnLand": 1.0
+                            }
+                        }
+                    ],
+                    "Comments": "1 equilibria found in Support. 1 equilibria found in Vertex. "
+                }
+            }
+        ],
+        "Outcome": {
+            "Polar Bear": "ForageOnLand",
+            "Grizzly Bear": "AdjustHabitatUse"
+        }
+    },
+    {
+        "Species": [
+            "Sciurus carolinensis",
+            "Sciurus vulgaris"
+        ],
+        "Description": "The introduced Grey Squirrel outcompetes the native Red Squirrel in many parts of Europe, posing a severe habitat selection dilemma for reds. Greys are larger, more efficient foragers (especially for broadleaf tree seeds), and carry a squirrel pox virus fatal to reds. Red squirrels are often displaced from prime broadleaf woodlands to less optimal, often conifer-dominated habitats where their competitive disadvantage is reduced, but resource availability may be lower.",
+        "Query": "Grey Squirrel Red Squirrel interspecific competition habitat displacement invasive species competitive exclusion",
+        "Article": "Error"
+    }
+]
