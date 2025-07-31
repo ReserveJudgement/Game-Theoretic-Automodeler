@@ -1,7 +1,8 @@
 # Game-Theoretic-Automodeler
 
-<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/460d8741-fc08-441c-a5a0-c3295a132e09" />
+<img width="640" height="360" alt="image" src="https://github.com/user-attachments/assets/460d8741-fc08-441c-a5a0-c3295a132e09" />
 
+## Puropose
 Automatically and scalably producing qunatitative models for qualitatively described phenomena with LLM agents presents potential for new avenues in scientific research.
 This work makes a preliminary exploration of an LLM Agent for automating game-theoretical modeling of animal interactions.
 
